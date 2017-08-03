@@ -11,8 +11,10 @@
     "meteor-node-stubs": "~0.2.4",
     "prop-types": "^15.5.10",
     "react-gravatar": "^2.6.3",
+    "react-redux": "^5.0.5",
     "react-redux-meteor": "^4.5.1",
     "react-router": "^4.1.2",
+    "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
