@@ -1,3 +1,7 @@
-Top with some keks for lunch stuff.
+# Lunch Buddies
+This app uses Meteor, react and some random libs.
 
-Gonna use Meteor, react and some random libs
+## Technologies Used
+- Meteor
+- MongoDB
+- React
