@@ -4,8 +4,3 @@
 - Meteor
 - MongoDB
 - React
-
-## Team
-Jess
-Sonia
-Valentin
