@@ -1,0 +1,61 @@
+.signup {
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.signup .cardContainer {
+    width: 420px;
+    max-width: 95%;
+    min-width: 320px;
+}
+
+.signup .formContainer {
+    padding: 1rem 4rem 3.25rem 4rem;
+}
+
+.signup .logo {
+    margin-bottom: 1rem;
+    margin-top: -97px;
+    position: relative;
+    z-index: 1000;
+}
+
+.signup .enterButton {
+    margin: 2.25rem 0 0 0;
+}
+
+.signup .loginFormError {
+    position: absolute;
+    bottom: 1rem;
+    text-align: center;
+    padding: 1rem 0;
+    color: red;
+    width: 290px;
+    font-size: 12px;
+}
+
+.signup .unknownEmailMessage {
+    padding: 0 1rem;
+    line-height: 1.42rem;
+    max-width: 480px;
+}
+
+.signup .join-dialog {
+    padding: 1rem;
+}
+
+.signup .bottomLeft {
+    bottom: 0;
+    left: 0;
+    margin-bottom: -10px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.signup .topRight {
+    animation: parallax-clouds 60s infinite alternate ease-in-out;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
