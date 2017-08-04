@@ -16,16 +16,17 @@ import './App.css';
 import SignUp from '../../components/SignUp/SignUp';
 import FilterList from '../../components/FilterList/FilterList';
 import BuddyListItem from '../../components/BuddyListItem/BuddyListItem';
+import muiTheme from '../../config/theme';
 import '../../../../client/main.html';
 
 
 injectTapEventPlugin();
 const LunchBuddies = () => (
     
-<MuiThemeProvider>
-  <Layout>
-  </Layout>
-  <BuddListItem />
+<MuiThemeProvider muiTheme={muiTheme}>
+  {/* <Layout>
+  </Layout> */}
+  <BuddyListItem />
         {/* <SignUp /> */}
 
 </MuiThemeProvider>
