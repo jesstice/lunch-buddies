@@ -13,6 +13,7 @@ import ReactDOM from 'react-dom';
 import Login from '../../containers/Login/Login.js'
 import './App.css';
 import SignUp from '../../components/SignUp/SignUp';
+import FilterList from '../../components/FilterList/FilterList';
 import '../../../../client/main.html';
 
 
@@ -21,7 +22,8 @@ const LunchBuddies = () => (
     
 <MuiThemeProvider>
 
-        <SignUp />
+  <FilterList />
+        {/* <SignUp /> */}
 
 </MuiThemeProvider>
 );
