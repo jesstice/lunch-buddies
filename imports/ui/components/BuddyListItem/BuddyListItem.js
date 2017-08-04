@@ -7,7 +7,8 @@ import Paper from 'material-ui/Paper';
 
 const BuddyListItem = () => {
   return (
-      <li className="buddyListItemWrapper">
+    <div className="buddyListItemWrapper">
+      <li className="buddyListItem">
         <Paper zDepth={3}>
           <div className="buddyListInfo">
             <Gravatar email="testemail@gmail.com" className="gravatarImage" />
@@ -22,6 +23,7 @@ const BuddyListItem = () => {
           </div>
         </Paper>
       </li>
+    </div>
   )
 };
 
