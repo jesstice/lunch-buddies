@@ -4,7 +4,7 @@ export const SHOW_INVITES_MODAL = 'SHOW_INVITES_MODAL'
 // ACTION CREATORS
 export function showInvitesModal(showInvites) {
   return {
-    type: EDIT_PROFILE,
+    type: SHOW_INVITES_MODAL,
     payload: showInvites
   };
 }

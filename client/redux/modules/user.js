@@ -1,4 +1,5 @@
 // ACTION CONSTANT
+<<<<<<< HEAD
 export const USER_AVAILABILITY = 'USER_AVAILABILITY'
 
 // ACTION CREATORS
@@ -27,3 +28,9 @@ export function userAvailabilityReducer(state = initialState, action) {
       return state;
   }
 }
+=======
+
+// ACTION CREATORS
+
+// REDUCERS
+>>>>>>> Start to create redux actions
