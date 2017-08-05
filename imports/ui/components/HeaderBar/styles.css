@@ -1,0 +1,16 @@
+.header-bar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon {
+  height: 100%;
+  width: 100%;
+}
+
+.header-button div div {
+  margin: 12;
+  display: flex;
+  justify-content: center;
+}

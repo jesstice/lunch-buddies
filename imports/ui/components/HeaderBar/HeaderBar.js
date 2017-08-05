@@ -1,33 +1,32 @@
+import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-
-const style = {
-  margin: 12,
-};
+import './styles.css';
 
 const HeaderBar = () => (
-  <AppBar>
+  <AppBar
+    className="header-bar"
+    iconElementLeft={<img className="header-icon" src={'images/sushi.svg'}/>}
+  >
     <RaisedButton
+      className="header-button"
+      label="Invites"
+      labelPosition="before"
       backgroundColor="#a4c639"
-      icon={<FontIcon className="material-icons" />}
-      style={style}
+      icon={<img className="header-icon" src={'images/taco.svg'}/>}
     />
     <RaisedButton
-      backgroundColor="#a4c639"
-      icon={<FontIcon className="material-icons" />}
-      style={style}
-    />
-    <RaisedButton
+      className="header-button"
       label="Profile"
+      labelPosition="before"
       backgroundColor="#a4c639"
-      icon={<FontIcon className="material-icons" />}
-      style={style}
+      icon={<img className="header-icon" src={'images/pizza.svg'}/>}
     />
     <RaisedButton
+      className="header-button"
       label="Logout"
       backgroundColor="#a4c639"
-      style={style}
     />
   </AppBar>
 );
