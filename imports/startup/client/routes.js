@@ -10,8 +10,8 @@ import {
 } from 'react-router-dom';
 import Login from '../../ui/containers/Login/index';
 import SignUp from '../../ui/containers/SignUp/index';
+import Home from '../../ui/containers/Home/index';
 import NotFound from '../../ui/components/NotFound/index';
-
 
 
 const Routes = () => {
@@ -19,6 +19,7 @@ const Routes = () => {
         <Switch>  
           <Route exact path="/login" component={Login} /> 
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>
     );
