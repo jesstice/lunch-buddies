@@ -1,5 +1,25 @@
 .buddyListItemWrapper {
-    width: 600px;
+    width: 1100px;
     max-width: 95%;
     min-width: 320px;
+    margin: 0 auto;
+}
+
+.buddyListItem {
+  margin: 2rem 0;
+}
+
+.buddyListInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.buddyListInfo img {
+  border-radius: 50%;
+  margin: 2rem 0;
+}
+
+.buddyListInfo h1 {
+  text-transform: uppercase;
 }

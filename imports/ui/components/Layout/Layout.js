@@ -6,7 +6,7 @@ const Layout = ({ children }) => (
             {children}
         </div>
     <footer className="appFooter">
-      <p>© 2017 Boomtown Corp. All Rights Reserved</p>
+      <p>© 2017 Lunch Buddies</p>
     </footer>
     </div>
 );
