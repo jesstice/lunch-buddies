@@ -50,3 +50,7 @@ Users.schema = new SimpleSchema({
 
 // Publications
 
+// Methods to allow client to access/write to collection
+Meteor.methods({
+  // user methods
+});
