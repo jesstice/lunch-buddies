@@ -5,6 +5,9 @@ import FilterList from '../../components/FilterList/FilterList';
 const Home = () => {
   return (
     <div className="home">
+      <div className="homeFilter">
+        <FilterList />
+      </div>
       <BuddyList />
     </div>
 
