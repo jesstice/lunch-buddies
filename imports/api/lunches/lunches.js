@@ -19,10 +19,6 @@ lunchSchema = new SimpleSchema({
     type: String,
     label: "Budget"
   },
-  interests: {
-    type: { type: Array },
-    label: "Interests"
-  },
   'interests.$': { type: String },
   cuisines: {
     type: { type: Array },
