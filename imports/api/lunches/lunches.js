@@ -10,21 +10,23 @@ lunchSchema = new SimpleSchema({
   createdon: {type: Date},
   due: String,
   buddies: {
-    type: [userSchema],
+    type: { type: Array },
     min: 1,
     label: "Buddies"
   },
+  'buddies.$': { type: String },
   budget: {
     type: String,
     label: "Budget"
   },
   interests: {
-    type: [String],
+    type: { type: Array },
     label: "Interests"
   },
+  'interests.$': { type: String },
   cuisines: {
-    type: [String],
+    type: { type: Array },
     label: "Cuisines"
   },
-
+  'cuisines.$': { type: String }
 });
