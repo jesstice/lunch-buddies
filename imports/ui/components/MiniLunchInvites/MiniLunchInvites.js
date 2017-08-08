@@ -11,6 +11,8 @@ const styles = {
   },
 };
 
+// TO DO: Add fixed height and scroll
+
 const MiniLunchInvites = () => {
 
   return (<Paper style={style} zDepth={3}>
