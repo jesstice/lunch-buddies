@@ -1,21 +1,37 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+
 import './styles.css';
 
 const HeaderBar = () => (
   <AppBar
     className="header-bar"
-    iconElementLeft={<img className="header-icon" src={'images/sushi.svg'}/>}
+    iconElementLeft={<img className="header-icon home-icon" src={'images/sushi.svg'}/>}
+    iconStyleLeft={
+      {'margin-left': 0}
+    }
   >
-    <RaisedButton
-      className="header-button"
-      label="Invites"
-      labelPosition="before"
-      backgroundColor="#a4c639"
-      icon={<img className="header-icon" src={'images/taco.svg'}/>}
-    />
+    <Badge
+      badgeContent={1}
+      secondary={true}
+      badgeStyle={{
+        top: 30,
+        right: 20,
+        width: 20,
+        height: 20
+      }}
+    >
+      <IconButton
+        className="icon-button"
+        tooltip="New Invite"
+      >
+        <img className="badge-icon" src={'images/icecream.svg'}/>
+      </IconButton>
+    </Badge>
     <RaisedButton
       className="header-button"
       label="Profile"
