@@ -7,7 +7,8 @@ export const Lunches = new Mongo.Collection('lunches');
 
 //set up schema
 lunchSchema = new SimpleSchema({
-  createdon: {type: Date},
+  createdOn: {type: Date},
+  id: String,
   due: String,
   buddies: {
     type: { type: Array },
@@ -19,11 +20,6 @@ lunchSchema = new SimpleSchema({
     type: String,
     label: "Budget"
   },
-  interests: {
-    type: { type: Array },
-    label: "Interests"
-  },
-  'interests.$': { type: String },
   cuisines: {
     type: { type: Array },
     label: "Cuisines"
