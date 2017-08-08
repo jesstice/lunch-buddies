@@ -1,8 +1,17 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import {
+  editProfile,
+  sendInvite,
+  removeLunch
+} from './methods';
+import {
+  createLunch,
+  addLunchBuddy
+} from '../lunches/methods';
 
 // Create a users collection
-export const Users = new Mongo.Collection('buddies'); // would not allow us to create another users collection;
+// export const Users = new Mongo.Collection('buddies'); // would not allow us to create another users collection;
 
 // Schema
 const usersSchema = new SimpleSchema({  // should consider changing this as well;
@@ -10,22 +19,14 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
     type: String,
     label: "Full Name"
   },
-  registeredDate: {
-    type: String,
-    label: "Registered Date"
-  },
-  email: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Email,
-    label: "Email"
-  },
   phoneNumber: {
     type: String,
     label: "Phone Number"
   },
   available: {
     type: Boolean,
-    label: "Available"
+    label: "Available",
+    defaultValue: true
   },
   budget: {
     type: String,
@@ -47,7 +48,8 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
   },
   pendingLunches: {
     type: [Object],
-    label: "Pending Lunches"
+    label: "Pending Lunches",
+
   }
 });
 
@@ -55,5 +57,77 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
 
 // Methods to allow client to access/write to collection
 Meteor.methods({
-  // user methods
+
+  'users.editProfile'(profileEdits) {
+    if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.editProfile.not-authorized',
+        'You are not allowed to update another user\'s profile.'
+      )
+    }
+
+    if (usersSchema.validate(profileEdits)) {
+      editProfile(profileEdits);
+    } else {
+      console.log('Validation failed...');
+    }
+
+  },
+
+  'users.sendInvite'(user, inviteeId) {
+     if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.sentInvite.not-authorized',
+        'You must be logged in to send invite.'
+      )
+    }
+
+    sendInvite(user, inviteeId);
+  },
+
+  'users.inviteUser'(user, options) {
+     if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.inviteUser.not-authorized',
+        'You must be logged in to invite user.'
+      )
+    }
+
+    createLunch(user, options);
+    sendInvite(user, options.invitee);
+  },
+
+  'users.removeLunch'() {
+    if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.inviteUser.not-authorized',
+        'You must be logged in to invite user.'
+      )
+    }
+
+    removeLunch();
+  },
+
+  'users.removeInvite'(lunchId) {
+    if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.inviteUser.not-authorized',
+        'You must be logged in to invite user.'
+      )
+    }
+
+    removeInvite(lunchId);
+  },
+
+  'users.acceptInvite'(user, lunchId) {
+    if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.inviteUser.not-authorized',
+        'You must be logged in to invite user.'
+      )
+    }
+
+    acceptInvite(lunchId);
+    addLunchBuddy(user);
+  }
 });
