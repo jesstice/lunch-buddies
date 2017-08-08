@@ -1,6 +1,21 @@
-//import MiniLunchInvites from '../MiniLunchInvites/MiniLunchInvites';
 import React from 'react';
+import HeaderBar from '../HeaderBar/';
+//import MiniLunchInvites from '../MiniLunchInvites/MiniLunchInvites';
 
+<<<<<<< HEAD
+const Layout = ({children}) => {
+  return (
+    <div className="app-wrapper">
+      <div className="app-header">
+        <HeaderBar />
+      </div>
+      <div className="app-content">
+          {children}
+      </div>
+    </div>
+  )
+}
+=======
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
         <div className="appContent">
@@ -11,5 +26,6 @@ const Layout = ({ children }) => (
     </footer>
     </div>
 );
+>>>>>>> f93f251b42a987685258df9f1c541c47785df445
 
 export default Layout;

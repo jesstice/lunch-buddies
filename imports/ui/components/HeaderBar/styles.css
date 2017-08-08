@@ -1,0 +1,27 @@
+.header-bar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon {
+  height: 100%;
+}
+
+.home-icon {
+  width: 50%;
+}
+
+.header-button {
+  margin: 0 0.5rem;
+}
+
+.header-button div div {
+  margin: 12;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-button {
+  top: -5px;
+}
