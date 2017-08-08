@@ -2,10 +2,10 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 // Create a users collection
-export const Users = new Mongo.Collection('users');
+export const Users = new Mongo.Collection('buddies'); // would not allow us to create another users collection;
 
 // Schema
-const usersSchema = new SimpleSchema({
+const usersSchema = new SimpleSchema({  // should consider changing this as well;
   fullName: {
     type: String,
     label: "Full Name"
