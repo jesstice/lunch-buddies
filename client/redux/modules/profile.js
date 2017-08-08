@@ -1,5 +1,4 @@
 // ACTION CONSTANT
-<<<<<<< HEAD
 export const EDIT_PROFILE = 'EDIT_PROFILE'
 
 // ACTION CREATORS
@@ -28,9 +27,3 @@ export function profileReducer(state = initialState, action) {
       return state;
   }
 }
-=======
-
-// ACTION CREATORS
-
-// REDUCERS
->>>>>>> Start to create redux actions
