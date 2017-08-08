@@ -32,13 +32,15 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
     label: "Budget"
   },
   interests: {
-    type: [String],
+    type: { type: Array },
     label: "Interests"
   },
+  'interests.$': { type: String },
   cuisines: {
-    type: [String],
+    type: { type: Array },
     label: "Cuisines"
   },
+  'cuisines.$': { type: String },
   currentLunch: {
     type: [Object],
     label: "Current Lunch"
