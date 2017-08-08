@@ -1,10 +1,11 @@
 import { Mongo } from 'meteor/mongo';
+import SimpleSchema from 'simpl-schema';
 
 // Create a users collection
 export const Users = new Mongo.Collection('users');
 
 // Schema
-Users.schema = new SimpleSchema({
+const usersSchema = new SimpleSchema({
   fullName: {
     type: String,
     label: "Full Name"
