@@ -11,8 +11,8 @@ import {
 import Login from '../../ui/containers/Login/index';
 import SignUp from '../../ui/containers/SignUp/index';
 import Home from '../../ui/containers/Home/index';
+import Profile from '../../ui/containers/Profile/index';
 import NotFound from '../../ui/components/NotFound/index';
-
 
 const Routes = () => {
     return ( 
@@ -20,6 +20,7 @@ const Routes = () => {
           <Route exact path="/login" component={Login} /> 
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/" component={Home} />
+          <Route exact path="/profile" component={Profile} />
           <Route component={NotFound} />
         </Switch>
     );
