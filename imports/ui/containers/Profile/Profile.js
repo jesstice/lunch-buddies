@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SignUp from '../../components/SignUp/';
-import LunchInvites from '../../components/LunchInvites/';
+import SignUp from '../../components/SignUp/SignUp';
+import LunchInvites from '../../components/LunchInvites/LunchInvites';
 import BuddyListItem from '../../components/BuddyListItem/';
-import editProfile from '../../../../client/redux/modules/profile';
+import { editProfile } from '../../../../client/redux/modules/profile';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   margin: 12,
