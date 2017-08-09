@@ -12,7 +12,7 @@ const HeaderBar = () => (
     className="header-bar"
     iconElementLeft={<img className="header-icon home-icon" src={'images/sushi.svg'}/>}
     iconStyleLeft={
-      {'margin-left': 0}
+      {'marginLeft': 0}
     }
   >
     <Badge
