@@ -5,10 +5,6 @@ import { Accounts } from 'meteor/accounts-base';
 // import { Users } from '../../api/users/';
  import { Lunches } from '../../api/lunches/';
 
-Meteor.publish('users', function(){
-  return Meteor.users.find({}, { fields: {email: 1, profile: 1} });
-});
-
 Meteor.startup(() => {
   let user = {};
 
