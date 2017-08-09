@@ -33,7 +33,7 @@ const Lunch = () => {
             label="Leave this lunch"
             primary={true}
             style={styles.button}
-            onTouchTap={() => removeLunch()}
+            onTouchTap={() => }
           />
         </div>
       </Paper>
