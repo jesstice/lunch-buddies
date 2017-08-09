@@ -43,7 +43,7 @@ const LunchInvites = () => {
             label="Accept"
             secondary={true}
             style={styles.button}
-            icon={<i class="fa fa-check" aria-hidden="true"></i>}
+            icon={<i className="fa fa-check" aria-hidden="true"></i>}
           />
           <RaisedButton
             href=""
@@ -51,7 +51,7 @@ const LunchInvites = () => {
             label="Decline"
             secondary={true}
             style={styles.button}
-            icon={<i class="fa fa-times" aria-hidden="true"></i>}
+            icon={<i className="fa fa-times" aria-hidden="true"></i>}
           />
         </div>
       </li>
