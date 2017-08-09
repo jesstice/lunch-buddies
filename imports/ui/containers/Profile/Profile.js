@@ -10,7 +10,7 @@ const style = {
   margin: 12,
 };
 
-const Profile = ({ edit }) => (
+const Profile = ({ edit, dispatch }) => (
   <div className="profile-container">
     <div>
       {!edit ?
@@ -20,7 +20,7 @@ const Profile = ({ edit }) => (
       }
       <RaisedButton
         label="Edit Profile"
-        onTouchTap={() => editProfile(true)}
+        onTouchTap={() => dispatch(editProfile(true))}
         secondary={true}
         disabled={edit ? true : false} // disable button if editing profile
         style={style}
