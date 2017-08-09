@@ -2,10 +2,6 @@ import React from 'react';
 import HeaderBar from '../HeaderBar/';
 //import MiniLunchInvites from '../MiniLunchInvites/MiniLunchInvites';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Start to create redux actions
 const Layout = ({children}) => {
   return (
     <div className="app-wrapper">

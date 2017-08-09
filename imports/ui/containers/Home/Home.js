@@ -5,12 +5,9 @@ import FilterList from '../../components/FilterList/FilterList';
 const Home = () => {
   return (
     <div className="home">
-<<<<<<< HEAD
       <div className="homeFilter">
         <FilterList />
       </div>
-=======
->>>>>>> Start to create redux actions
       <BuddyList />
     </div>
 
