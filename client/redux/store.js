@@ -10,8 +10,7 @@ export default createStore(
   composeWithDevTools(
     applyMiddleware(
     thunk,
-    logger,
-    client.middleware()
+    logger
     )
   )
 );
