@@ -1,3 +1,4 @@
+import React from 'react';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -15,13 +16,13 @@ const ViewLunch = () => (
   <RaisedButton
     label="View Lunch"
     primary={true}
-    style={style}
+    style={styles.button}
   />
 )
 
 const LunchInvites = () => {
 
-  return (<Paper style={style} zDepth={3}>
+  return (<Paper zDepth={3}>
     <div>
       <h2>Availability: </h2>
       <Toggle
@@ -42,7 +43,7 @@ const LunchInvites = () => {
             label="Accept"
             secondary={true}
             style={styles.button}
-            icon={<i class="fa fa-check" aria-hidden="true"></i>}
+            icon={<i className="fa fa-check" aria-hidden="true"></i>}
           />
           <RaisedButton
             href=""
@@ -50,7 +51,7 @@ const LunchInvites = () => {
             label="Decline"
             secondary={true}
             style={styles.button}
-            icon={<i class="fa fa-times" aria-hidden="true"></i>}
+            icon={<i className="fa fa-times" aria-hidden="true"></i>}
           />
         </div>
       </li>

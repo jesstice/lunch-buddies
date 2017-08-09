@@ -7,6 +7,8 @@ import {
   NavLink
 } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Provider } from 'react-redux';
+import store from '../../../../client/redux/store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -20,11 +22,13 @@ injectTapEventPlugin();
 
 const LunchBuddies = () => (
   <MuiThemeProvider muiTheme={muiTheme}>
+    <Provider store={store}>
       <Router>
           <Layout>
             <Routes />
           </ Layout>
       </ Router>
+    </Provider>
   </MuiThemeProvider>
 );
 
