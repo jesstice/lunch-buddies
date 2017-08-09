@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import {
   editProfile,
@@ -43,14 +44,16 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
   },
   'cuisines.$': { type: String },
   currentLunch: {
-    type: [Object],
+    type: { type: Array },
     label: "Current Lunch"
   },
+  'currentLunch.$': { type: Object },
   pendingLunches: {
-    type: [Object],
+    type: { type: Array },
     label: "Pending Lunches",
+  },
+  'pendingLunches.$': { type: Object }
 
-  }
 });
 
 // Publications

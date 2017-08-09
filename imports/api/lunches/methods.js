@@ -1,4 +1,4 @@
-import { Lunches } from './lunches';
+import { Lunches } from './index';
 import { Random } from 'meteor/random';
 import moment from 'moment';
 
