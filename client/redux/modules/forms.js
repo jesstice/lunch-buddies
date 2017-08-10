@@ -6,6 +6,8 @@ export const UPDATE_BUDGET_FIELD = 'UPDATE_BUDGET_FIELD';
 export const UPDATE_CUISINES_FIELD = 'UPDATE_CUISINES_FIELD';
 export const UPDATE_INTERESTS_FIELD = 'UPDATE_INTERESTS_FIELD';
 export const UPDATE_PHONE_FIELD = 'UPDATE_PHONE_FIELD';
+export const SHOW_EMAIL_ERROR = 'SHOW_EMAIL_ERROR';
+export const SHOW_PASSWORD_ERROR = 'SHOW_PASSWORD_ERROR';
 
 // ACTION CREATORS
 export function updateEmailField(emailField) {
@@ -57,6 +59,20 @@ export function updatePhoneField(phoneField) {
     };
 }
 
+export function showEmailError(emailError) {
+    return {
+        type: SHOW_EMAIL_ERROR,
+        payload: emailError
+    };
+}
+
+export function showPasswordError(passwordError) {
+    return {
+        type: SHOW_PASSWORD_ERROR,
+        payload: passwordError
+    };
+}
+
 // REDUCERS
 const initialState = {
     emailField: '',
@@ -65,7 +81,9 @@ const initialState = {
     budgetField: '',
     cuisinesField: [],
     interestsField: [],
-    phoneField: ''
+    phoneField: '',
+    emailError: '',
+    passwordError: ''
 };
 
 export function formsReducer(state = initialState, action) {
@@ -118,6 +136,20 @@ export function formsReducer(state = initialState, action) {
           phoneField: action.payload
         };
         return phoneState;
+
+    case SHOW_EMAIL_ERROR:
+        const emailErrorState = {
+          ...state,
+          emailError: action.payload
+        };
+        return emailErrorState;
+
+    case SHOW_PASSWORD_ERROR:
+        const passwordErrorState = {
+          ...state,
+          passwordError: action.payload
+        };
+        return passwordErrorState;
 
     default:
         return state;
