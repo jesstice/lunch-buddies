@@ -137,7 +137,10 @@ const mapStateToProps = state => ({
     updateBudgetField: state.forms.budgetField,
     updateCuisinesField: state.forms.cuisinesField,
     updateInterestsField: state.forms.interestsField,
-    updatePhoneField: state.forms.phoneField
+    updatePhoneField: state.forms.phoneField,
+    interestsFilters: state.filters.interestsFilters,
+    cuisineFilters: state.filters.cuisineFilters,
+    budgetFilters: state.filters.budgetFilters
 });
 
 export default connect(mapStateToProps)(SignUpContainer);
