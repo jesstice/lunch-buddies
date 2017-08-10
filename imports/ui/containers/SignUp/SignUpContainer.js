@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accounts } from 'meteor/accounts-base';
-import SignUp from '../../components/SignUp/';
+import SignUp from '../../components/SignUp/SignUp';
 import { 
   updateEmailField, 
   updatePasswordField, 
@@ -15,7 +15,16 @@ import {
 
 class SignUpContainer extends Component {
 
-  handleSignUp = () => {
+  handleSignUp = ({ 
+  updateEmailField, 
+  updatePasswordField, 
+  updateFullnameField, 
+  updateBudgetField, 
+  updateCuisinesField,
+  updateInterestsField,
+  updatePhoneField,
+  dispatch
+  }) => {
     const email = this.props.updateEmailField,
           password = this.props.updatePasswordField,
           fullName = this.props.updateFullnameField,
@@ -83,7 +92,7 @@ class SignUpContainer extends Component {
             fullName: this.props.updateFullnameField,
             budget: this.props.updateBudgetField,
             cuisines: this.props.updateCuisinesField,
-            interests: this.props.updateCuisinesField,
+            interests: this.props.updateInterestsField,
             phoneNumber: this.props.updatePhoneField
           });
         }}
@@ -121,4 +130,14 @@ class SignUpContainer extends Component {
   }
 }
 
-export default SignUpContainer;
+const mapStateToProps = state => ({
+    updateEmailField: state.forms.emailField,
+    updatePasswordField: state.forms.passwordField,
+    updateFullnameField: state.forms.fullnameField,
+    updateBudgetField: state.forms.budgetField,
+    updateCuisinesField: state.forms.cuisinesField,
+    updateInterestsField: state.forms.interestsField,
+    updatePhoneField: state.forms.phoneField
+});
+
+export default connect(mapStateToProps)(SignUpContainer);
