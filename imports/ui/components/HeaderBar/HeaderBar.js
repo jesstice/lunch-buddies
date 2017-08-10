@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Badge from 'material-ui/Badge';
@@ -10,7 +12,7 @@ import './styles.css';
 const HeaderBar = () => (
   <AppBar
     className="header-bar"
-    iconElementLeft={<img className="header-icon home-icon" src={'images/sushi.svg'}/>}
+    iconElementLeft={<Link to={'/'}><img className="header-icon home-icon" src={'images/sushi.svg'}/></Link>}
     iconStyleLeft={
       {'marginLeft': 0}
     }
@@ -35,6 +37,7 @@ const HeaderBar = () => (
     <RaisedButton
       className="header-button"
       label="Profile"
+      containerElement={<Link to={`/profile/${this.userId}`} />}
       labelPosition="before"
       backgroundColor="#a4c639"
       icon={<img className="header-icon" src={'images/pizza.svg'}/>}
