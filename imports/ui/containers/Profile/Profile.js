@@ -9,8 +9,8 @@ import './styles.css';
 const Profile = ({ updateEditStatus, dispatch, editStatus, userData }) => (
   <div className="profileContainer">
     <div>
-      {!editStatus ?
-        <BuddyListItem userData={userData} />
+      {!editStatus && userData ?
+        <BuddyListItem userData={userData[0]} />
       :
         <SignUp />
       }

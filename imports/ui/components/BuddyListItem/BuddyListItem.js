@@ -16,25 +16,25 @@ const BuddyListItem = ({ userData }) => {
         <li className="buddyListItem">
           <Paper zDepth={3}>
             <div className="buddyListInfo">
-              <Link to={`/profile/${userData[0]._id}`}>
-                <Gravatar email={userData[0].emails[0].address} className="gravatarImage" size={150}/>
+              <Link to={`/profile/${userData._id}`}>
+                <Gravatar email={userData.emails[0].address} className="gravatarImage" size={150}/>
               </Link>
               <div className="buddyName">
                 <h1>Name</h1>
-                  <p>{userData[0].profile.fullName}</p>  
+                  <p>{userData.profile.fullName}</p>  
               </div>
               <div className="buddyNumber">
                 <h1>Phone Number</h1>
-                 <p>{userData[0].profile.phoneNumber}</p> 
+                 <p>{userData.profile.phoneNumber}</p> 
               </div>
               <div className="buddyBudget">
                 <h1>Budget</h1>
-                 <p>{userData[0].profile.budget}</p> 
+                 <p>{userData.profile.budget}</p> 
               </div>
               <div className="buddyInterests">
                 <h1>Interests</h1>
                 <ul>
-                  {userData[0].profile.interests.map((interest, index) => (
+                  {userData.profile.interests.map((interest, index) => (
                     <li>{interest}</li>
                   ))}
                 </ul>
@@ -42,7 +42,7 @@ const BuddyListItem = ({ userData }) => {
               <div className="buddyCuisines">
                 <h1>Cuisines</h1>
                 <ul>
-                  {userData[0].profile.cuisines.map((cuisine, index) => (
+                  {userData.profile.cuisines.map((cuisine, index) => (
                     <li>{cuisine}</li>
                   ))}
                 </ul>
