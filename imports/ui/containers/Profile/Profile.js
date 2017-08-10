@@ -6,15 +6,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import './styles.css';
 
-const Profile = ({ updateEditStatus, dispatch, editStatus }) => (
+const Profile = ({ updateEditStatus, dispatch, editStatus, userData }) => (
   <div className="profileContainer">
     <div>
-      {!editStatus ?
-        <BuddyListItem />
+      {!editStatus && userData ?
+        <BuddyListItem userData={userData[0]} />
       :
-        <SignUp 
-
-        />
+        <SignUp />
       }
       <RaisedButton
         label={editStatus ? "Cancel" : "Edit Profile"}
@@ -23,7 +21,11 @@ const Profile = ({ updateEditStatus, dispatch, editStatus }) => (
         className="profileButton"
       />
     </div>
-    <LunchInvites />
+    <div className="inviteContainer">
+      <LunchInvites
+        userData={userData}
+      />
+    </div>
   </div>
 );
 

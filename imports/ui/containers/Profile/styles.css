@@ -6,14 +6,22 @@
   right: 100px;
 }
 
+.profileContainer {
+  margin: 1rem 0;
+}
+
 .profileContainer .buddyListInfo {
   flex-wrap: wrap;
   padding: 1rem 2rem;
 }
 
-.profileContainer .buddyName, .profileContainer .buddyBudget, .profileContainer .buddyInterests, .profileContainer .buddyCuisines {
+.profileContainer .buddyName, .profileContainer .buddyNumber, .profileContainer .buddyBudget, .profileContainer .buddyInterests, .profileContainer .buddyCuisines {
   flex-basis: 100%;
   padding: 1rem 0;
+}
+
+.profileContainer .buddyNumber {
+  display: initial;
 }
 
 .profileContainer .signup {
@@ -27,4 +35,11 @@
 
 .profileContainer .signup .cardContainer {
   width: 1100px;
+}
+
+.inviteContainer {
+  width: 1100px;
+  max-width: 95%;
+  min-width: 320px;
+  margin: 0 auto;
 }

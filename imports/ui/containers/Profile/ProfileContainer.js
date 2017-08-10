@@ -17,6 +17,7 @@ class ProfileContainer extends Component {
         updateEditStatus={editProfile}
         editStatus={this.props.editStatus}
         dispatch={this.props.dispatch}
+        userData={this.props.userData}
       />
     )
   }
@@ -29,18 +30,14 @@ function mapStateToProps(state) {
 }
 
 const ExtendedProfileContainer = createContainer(() => {
-    const usersSub = Meteor.subscribe('users');
-    const loading = !usersSub.ready();
-    
-    let users = null;
-    loading ? (users = null) : (users = Meteor.users.find().fetch());
-    const usersExists = !loading && !!users;
-    return {
-        loading,
-        users,
-        usersExists,
-    } }, ProfileContainer);
+  const usersSub = Meteor.subscribe('users');
+
+  let userData = null;
+  !usersSub.ready() ? (users = null) : (userData = Meteor.users.find({ _id: Meteor.userId() }).fetch());
+  const usersExists = !usersSub && !!users;
+  return {
+    userData,
+    usersExists,
+  } }, ProfileContainer);
 
 export default connect(mapStateToProps)(ExtendedProfileContainer);
-
-// export default ProfileContainer;

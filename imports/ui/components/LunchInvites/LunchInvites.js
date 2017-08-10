@@ -2,61 +2,60 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
+import Loader from '../Loader/';
+import './styles.css';
 
-const styles = {
-  button: {
-    margin: 12,
-  },
-  toggle: {
-    marginBottom: 16,
-  },
-};
 
 const ViewLunch = () => (
   <RaisedButton
     label="View Lunch"
     primary={true}
-    style={styles.button}
+    className="lunchButton"
   />
 )
 
-const LunchInvites = () => {
+const LunchInvites = ({ userData }) => {
 
-  return (<Paper zDepth={3}>
-    <div>
-      <h2>Availability: </h2>
-      <Toggle
-        label="Disabled"
-        disabled={true}
-        style={styles.toggle}
-      />
-    </div>
-    <ul>
-      <li>
-        <p>someUser and friends would like to be your lunch buddy!</p>
-        <p>Budget: $$</p>
-        <p>Invite sent: 5 mins ago</p>
-        <div>
-          <RaisedButton
-            href=""
-            target="_blank"
-            label="Accept"
-            secondary={true}
-            style={styles.button}
-            icon={<i className="fa fa-check" aria-hidden="true"></i>}
-          />
-          <RaisedButton
-            href=""
-            target="_blank"
-            label="Decline"
-            secondary={true}
-            style={styles.button}
-            icon={<i className="fa fa-times" aria-hidden="true"></i>}
+  if (userData) {
+    return (
+      <Paper className="lunchInviteContainer" zDepth={3}>
+        <div className="availability">
+          <h2>Availability: </h2>
+          <Toggle
+            disabled={ userData[0].profile.currentLunch ? true : false }
           />
         </div>
-      </li>
-    </ul>
-  </Paper>);
+        <h2>Lunch Invitations!</h2>
+        <ul>
+          <li className="singleInvite">
+            <div className="inviteInfo">
+              <p>someUser and friends would like to be your lunch buddy!</p>
+              <p>Budget: $$</p>
+              <p>Invite sent: 5 mins ago</p>
+            </div>
+            <div className="inviteActions">
+              <RaisedButton
+                label="Accept"
+                primary
+                className="lunchButton"
+                icon={<i className="fa fa-check" aria-hidden="true"></i>}
+              />
+              <RaisedButton
+                label="Decline"
+                secondary
+                className="lunchButton"
+                icon={<i className="fa fa-times" aria-hidden="true"></i>}
+              />
+            </div>
+          </li>
+        </ul>
+      </Paper>
+    );
+  } else {
+    return (
+      <Loader />
+    );
+  }
 }
 
 export default LunchInvites;
