@@ -6,6 +6,10 @@
   right: 100px;
 }
 
+.profileContainer {
+  margin: 1rem 0;
+}
+
 .profileContainer .buddyListInfo {
   flex-wrap: wrap;
   padding: 1rem 2rem;
@@ -31,4 +35,11 @@
 
 .profileContainer .signup .cardContainer {
   width: 1100px;
+}
+
+.inviteContainer {
+  width: 1100px;
+  max-width: 95%;
+  min-width: 320px;
+  margin: 0 auto;
 }

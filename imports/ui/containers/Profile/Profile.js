@@ -12,9 +12,7 @@ const Profile = ({ updateEditStatus, dispatch, editStatus, userData }) => (
       {!editStatus ?
         <BuddyListItem userData={userData} />
       :
-        <SignUp 
-
-        />
+        <SignUp />
       }
       <RaisedButton
         label={editStatus ? "Cancel" : "Edit Profile"}
@@ -23,7 +21,11 @@ const Profile = ({ updateEditStatus, dispatch, editStatus, userData }) => (
         className="profileButton"
       />
     </div>
-    <LunchInvites />
+    <div className="inviteContainer">
+      <LunchInvites
+        userData={userData}
+      />
+    </div>
   </div>
 );
 

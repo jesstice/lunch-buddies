@@ -1,0 +1,28 @@
+.lunchInviteContainer {
+  padding: 1rem 2rem;
+}
+
+h2 {
+  text-transform: uppercase;
+}
+
+.lunchButton {
+  margin: 8px;
+}
+
+.availability {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.singleInvite {
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inviteInfo {
+  flex-basis: 60%;
+}

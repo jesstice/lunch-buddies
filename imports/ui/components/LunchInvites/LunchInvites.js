@@ -17,22 +17,23 @@ const ViewLunch = () => (
 const LunchInvites = ({ userData }) => {
 
   if (userData) {
-
     return (
-      <Paper zDepth={3}>
-        <div>
+      <Paper className="lunchInviteContainer" zDepth={3}>
+        <div className="availability">
           <h2>Availability: </h2>
           <Toggle
             disabled={ userData[0].profile.currentLunch ? true : false }
-            className="lunchToggle"
           />
         </div>
+        <h2>Lunch Invitations!</h2>
         <ul>
-          <li>
-            <p>someUser and friends would like to be your lunch buddy!</p>
-            <p>Budget: $$</p>
-            <p>Invite sent: 5 mins ago</p>
-            <div>
+          <li className="singleInvite">
+            <div className="inviteInfo">
+              <p>someUser and friends would like to be your lunch buddy!</p>
+              <p>Budget: $$</p>
+              <p>Invite sent: 5 mins ago</p>
+            </div>
+            <div className="inviteActions">
               <RaisedButton
                 label="Accept"
                 primary
