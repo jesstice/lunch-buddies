@@ -11,9 +11,13 @@
   padding: 1rem 2rem;
 }
 
-.profileContainer .buddyName, .profileContainer .buddyBudget, .profileContainer .buddyInterests, .profileContainer .buddyCuisines {
+.profileContainer .buddyName, .profileContainer .buddyNumber, .profileContainer .buddyBudget, .profileContainer .buddyInterests, .profileContainer .buddyCuisines {
   flex-basis: 100%;
   padding: 1rem 0;
+}
+
+.profileContainer .buddyNumber {
+  display: initial;
 }
 
 .profileContainer .signup {

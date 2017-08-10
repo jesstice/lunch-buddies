@@ -6,34 +6,51 @@ import Paper from 'material-ui/Paper';
 import './styles.css';
 
 
-const BuddyListItem = () => {
-  return (
-    <div className="buddyListItemWrapper">
-      <li className="buddyListItem">
-        <Paper zDepth={3}>
-          <div className="buddyListInfo">
-            <Gravatar email="testemail@gmail.com" className="gravatarImage" size={150}/>
-            <div className="buddyName">
-              <h1>Fullname</h1>
-              <p>Name</p>
+const BuddyListItem = ({ userData }) => {
+
+  if (userData) {
+    return (
+      <div className="buddyListItemWrapper">
+        <li className="buddyListItem">
+          <Paper zDepth={3}>
+            <div className="buddyListInfo">
+              <Gravatar email={userData[0].emails[0].address} className="gravatarImage" size={150}/>
+              <div className="buddyName">
+                <h1>Name</h1>
+                  <p>{userData[0].profile.fullName}</p>  
+              </div>
+              <div className="buddyNumber">
+                <h1>Phone Number</h1>
+                 <p>{userData[0].profile.phoneNumber}</p> 
+              </div>
+              <div className="buddyBudget">
+                <h1>Budget</h1>
+                 <p>{userData[0].profile.budget}</p> 
+              </div>
+              <div className="buddyInterests">
+                <h1>Interests</h1>
+                <ul>
+                  {userData[0].profile.interests.map((interest, index) => (
+                    <li>{interest}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="buddyCuisines">
+                <h1>Cuisines</h1>
+                <ul>
+                  {userData[0].profile.cuisines.map((cuisine, index) => (
+                    <li>{cuisine}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="buddyBudget">
-              <h1>Budget</h1>
-              <p>Budget</p>
-            </div>
-            <div className="buddyInterests">
-              <h1>Interests</h1>
-              <p>Interests</p>
-            </div>
-            <div className="buddyCuisines">
-              <h1>Cuisines</h1>
-              <p>Cuisines</p>
-            </div>
-          </div>
-        </Paper>
-      </li>
-    </div>
-  )
+          </Paper>
+        </li>
+      </div>
+    )
+  } else {
+    return (<p>Loading...</p>)
+  }
 };
 
 export default BuddyListItem;
