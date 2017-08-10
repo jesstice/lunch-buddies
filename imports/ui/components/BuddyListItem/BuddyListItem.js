@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Gravatar from 'react-gravatar';
 import Paper from 'material-ui/Paper';
@@ -14,7 +15,9 @@ const BuddyListItem = ({ userData }) => {
         <li className="buddyListItem">
           <Paper zDepth={3}>
             <div className="buddyListInfo">
-              <Gravatar email={userData[0].emails[0].address} className="gravatarImage" size={150}/>
+              <Link to={`/profile/${userData[0]._id}`}>
+                <Gravatar email={userData[0].emails[0].address} className="gravatarImage" size={150}/>
+              </Link>
               <div className="buddyName">
                 <h1>Name</h1>
                   <p>{userData[0].profile.fullName}</p>  
