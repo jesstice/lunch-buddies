@@ -6,11 +6,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import './styles.css';
 
-const Profile = ({ updateEditStatus, dispatch, editStatus }) => (
+const Profile = ({ updateEditStatus, dispatch, editStatus, userData }) => (
   <div className="profileContainer">
     <div>
       {!editStatus ?
-        <BuddyListItem />
+        <BuddyListItem userData={userData} />
       :
         <SignUp 
 
