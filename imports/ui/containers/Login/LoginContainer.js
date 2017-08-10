@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Login from '../../components/Login/Login';
-import { Redirect } from 'react-router-dom';
 import { updateEmailField, updatePasswordField, showEmailError, showPasswordError } from '../../../../client/redux/modules/forms';
 
 class LoginContainer extends Component {
