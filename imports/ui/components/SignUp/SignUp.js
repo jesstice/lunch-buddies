@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import LoginForm from 'grommet/components/LoginForm';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
@@ -7,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Selector from '../../containers/Selector/index';
+import FilterList from '../../components/FilterList/FilterList';
 import './styles.css';
 
 
@@ -43,11 +45,12 @@ const SignUp = ({
               <div>
                 <TextField name="Password" hintText="Password" fullWidth type="password" label="Password" onChange={handlePassword}/>
               </div>
-              <div>
-                <Selector arr={interests} onChange={handleInterests}/>
+              
+                <FilterList />
+                {/* <Selector arr={interests} onChange={handleInterests}/>
                 <Selector arr={cuisine} onChange={handleCuisines}/>
-                <Selector arr={budget} onChange={handleBudget}/>
-              </div>
+                <Selector arr={budget} onChange={handleBudget}/> */}
+           
               <RaisedButton className="enterButton" primary fullWidth type="submit">
                 Sign Up
               </RaisedButton>
