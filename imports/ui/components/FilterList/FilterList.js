@@ -10,7 +10,7 @@ import './styles.css';
 const FilterList = ({ interestsFilters, cuisineFilters, budgetFilters, dispatch }) => {
   const interests = ['Sports', 'Music', 'Politics', 'Travel', 'Pop Culture'];
   const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgers & Fries'];
-  const budget = ['Under $10', '$10 to $20', '$20 and higher'];
+  const budget = ['Under 10', '10 to 20', '20 and higher'];
 
   return (
     <div className="filterList">

@@ -6,10 +6,13 @@ import BuddyListItem from '../BuddyListItem/BuddyListItem';
 import { createContainer } from 'meteor/react-meteor-data';
 
 const BuddyList = ({ users, cuisine }) => {
+  const buds = users.map((buddy)=> {
+    return ( <BuddyListItem userData={buddy} /> )
+  })
   return (
     <div className="buddyListWrapper">
       <ul>
-        <BuddyListItem />
+       {buds}
       </ul>
     </div>
   )
