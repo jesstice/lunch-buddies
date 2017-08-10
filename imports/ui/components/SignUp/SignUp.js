@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginForm from 'grommet/components/LoginForm';
-import './styles.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Selector from '../../containers/Selector/index';
+import './styles.css';
 
 
 const SignUp = ({ 

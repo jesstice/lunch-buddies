@@ -12,7 +12,6 @@ import {
 } from '../lunches/methods';
 
 // Create a users collection
-// export const Users = new Mongo.Collection('buddies'); // would not allow us to create another users collection;
 
 // Schema
 const usersSchema = new SimpleSchema({  // should consider changing this as well;
