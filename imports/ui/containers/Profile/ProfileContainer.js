@@ -1,12 +1,46 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createContainer } from 'meteor/react-meteor-data';
+
+import { editProfile } from '../../../../client/redux/modules/profile';
 import Profile from './Profile';
 
 class ProfileContainer extends Component {
+
+  // editUserProfile = ({ profileEditsObject }) => {
+  //   Meteor.call('users.editProfile', profileEditsObject);
+  // }
+
   render() {
     return(
-      <Profile />
+      <Profile
+        updateEditStatus={editProfile}
+        editStatus={this.props.editStatus}
+        dispatch={this.props.dispatch}
+      />
     )
   }
 }
 
-export default ProfileContainer;
+function mapStateToProps(state) {
+  return {
+    editStatus: state.profile.editProfile
+  };
+}
+
+const ExtendedProfileContainer = createContainer(() => {
+    const usersSub = Meteor.subscribe('users');
+    const loading = !usersSub.ready();
+    
+    let users = null;
+    loading ? (users = null) : (users = Meteor.users.find().fetch());
+    const usersExists = !loading && !!users;
+    return {
+        loading,
+        users,
+        usersExists,
+    } }, ProfileContainer);
+
+export default connect(mapStateToProps)(ExtendedProfileContainer);
+
+// export default ProfileContainer;

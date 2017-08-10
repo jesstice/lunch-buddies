@@ -1,0 +1,30 @@
+.profileButton {
+  margin: 12px;
+  position: absolute;
+  z-index: 999;
+  top: 100px;
+  right: 100px;
+}
+
+.profileContainer .buddyListInfo {
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+}
+
+.profileContainer .buddyName, .profileContainer .buddyBudget, .profileContainer .buddyInterests, .profileContainer .buddyCuisines {
+  flex-basis: 100%;
+  padding: 1rem 0;
+}
+
+.profileContainer .signup {
+  padding: 1rem 2rem;
+}
+
+.profileContainer .signup, .profileContainer .signup .cardContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.profileContainer .signup .cardContainer {
+  width: 1100px;
+}

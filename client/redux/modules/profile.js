@@ -2,10 +2,9 @@
 export const EDIT_PROFILE = 'EDIT_PROFILE'
 
 // ACTION CREATORS
-export function editProfile(editProfile) {
+export function editProfile() {
   return {
-    type: EDIT_PROFILE,
-    payload: editProfile
+    type: EDIT_PROFILE
   };
 }
 
@@ -18,9 +17,9 @@ export function profileReducer(state = initialState, action) {
   switch (action.type) {
     case EDIT_PROFILE:
       const profileState = {
-        ...state,
-        editProfile: action.payload
+        ...state
       };
+      profileState.editProfile = !profileState.editProfile
       return profileState
 
     default:
