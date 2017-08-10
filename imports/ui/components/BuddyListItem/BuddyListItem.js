@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Gravatar from 'react-gravatar';
 import Paper from 'material-ui/Paper';
+import Loader from '../Loader/index';
 import './styles.css';
 
 
@@ -52,7 +53,9 @@ const BuddyListItem = ({ userData }) => {
       </div>
     )
   } else {
-    return (<p>Loading...</p>)
+    return (
+      <Loader />
+    );
   }
 };
 

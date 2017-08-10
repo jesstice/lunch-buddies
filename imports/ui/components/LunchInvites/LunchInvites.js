@@ -2,61 +2,59 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
+import Loader from '../Loader/';
+import './styles.css';
 
-const styles = {
-  button: {
-    margin: 12,
-  },
-  toggle: {
-    marginBottom: 16,
-  },
-};
 
 const ViewLunch = () => (
   <RaisedButton
     label="View Lunch"
     primary={true}
-    style={styles.button}
+    className="lunchButton"
   />
 )
 
-const LunchInvites = () => {
+const LunchInvites = ({ userData }) => {
 
-  return (<Paper zDepth={3}>
-    <div>
-      <h2>Availability: </h2>
-      <Toggle
-        label="Disabled"
-        disabled={true}
-        style={styles.toggle}
-      />
-    </div>
-    <ul>
-      <li>
-        <p>someUser and friends would like to be your lunch buddy!</p>
-        <p>Budget: $$</p>
-        <p>Invite sent: 5 mins ago</p>
+  if (userData) {
+
+    return (
+      <Paper zDepth={3}>
         <div>
-          <RaisedButton
-            href=""
-            target="_blank"
-            label="Accept"
-            secondary={true}
-            style={styles.button}
-            icon={<i className="fa fa-check" aria-hidden="true"></i>}
-          />
-          <RaisedButton
-            href=""
-            target="_blank"
-            label="Decline"
-            secondary={true}
-            style={styles.button}
-            icon={<i className="fa fa-times" aria-hidden="true"></i>}
+          <h2>Availability: </h2>
+          <Toggle
+            disabled={ userData[0].profile.currentLunch ? true : false }
+            className="lunchToggle"
           />
         </div>
-      </li>
-    </ul>
-  </Paper>);
+        <ul>
+          <li>
+            <p>someUser and friends would like to be your lunch buddy!</p>
+            <p>Budget: $$</p>
+            <p>Invite sent: 5 mins ago</p>
+            <div>
+              <RaisedButton
+                label="Accept"
+                primary
+                className="lunchButton"
+                icon={<i className="fa fa-check" aria-hidden="true"></i>}
+              />
+              <RaisedButton
+                label="Decline"
+                secondary
+                className="lunchButton"
+                icon={<i className="fa fa-times" aria-hidden="true"></i>}
+              />
+            </div>
+          </li>
+        </ul>
+      </Paper>
+    );
+  } else {
+    return (
+      <Loader />
+    );
+  }
 }
 
 export default LunchInvites;
