@@ -12,7 +12,7 @@ import './styles.css';
 const HeaderBar = () => (
   <AppBar
     className="header-bar"
-    iconElementLeft={<Link to={'/'}><img className="header-icon home-icon" src={'images/sushi.svg'}/></Link>}
+    iconElementLeft={<Link to={'/'}><img className="header-icon home-icon" src={'/images/sushi.svg'}/></Link>}
     iconStyleLeft={
       {'marginLeft': 0}
     }
@@ -31,7 +31,7 @@ const HeaderBar = () => (
         className="icon-button"
         tooltip="New Invite"
       >
-        <img className="badge-icon" src={'images/icecream.svg'}/>
+        <img className="badge-icon" src={'/images/icecream.svg'}/>
       </IconButton>
     </Badge>
     <RaisedButton
@@ -40,7 +40,7 @@ const HeaderBar = () => (
       containerElement={<Link to={`/profile/${Meteor.userId()}`} />}
       labelPosition="before"
       backgroundColor="#a4c639"
-      icon={<img className="header-icon" src={'images/pizza.svg'}/>}
+      icon={<img className="header-icon" src={'/images/pizza.svg'}/>}
     />
     <RaisedButton
       className="header-button"
