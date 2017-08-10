@@ -6,17 +6,19 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import './styles.css';
 
-const Profile = ({ editProfile, dispatch, editStatus }) => (
+const Profile = ({ updateEditStatus, dispatch, editStatus }) => (
   <div className="profileContainer">
     <div>
       {!editStatus ?
         <BuddyListItem />
       :
-        <SignUp />
+        <SignUp 
+
+        />
       }
       <RaisedButton
         label={editStatus ? "Cancel" : "Edit Profile"}
-        onTouchTap={() => dispatch(editProfile())}
+        onTouchTap={() => dispatch(updateEditStatus())}
         secondary={true}
         className="profileButton"
       />

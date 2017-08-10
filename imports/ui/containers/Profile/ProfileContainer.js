@@ -6,10 +6,15 @@ import { editProfile } from '../../../../client/redux/modules/profile';
 import Profile from './Profile';
 
 class ProfileContainer extends Component {
+
+  // editUserProfile = ({ profileEditsObject }) => {
+  //   Meteor.call('users.editProfile', profileEditsObject);
+  // }
+
   render() {
     return(
       <Profile
-        editProfile={editProfile}
+        updateEditStatus={editProfile}
         editStatus={this.props.editStatus}
         dispatch={this.props.dispatch}
       />
