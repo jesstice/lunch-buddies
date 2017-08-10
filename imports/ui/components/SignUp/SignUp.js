@@ -10,40 +10,51 @@ import MenuItem from 'material-ui/MenuItem';
 import Selector from '../../containers/Selector/index';
 
 
+const SignUp = ({ 
+  handleSignUp, 
+  handleEmail, 
+  handlePassword, 
+  handleFullname, 
+  handleBudget, 
+  handleCuisines, 
+  handleInterests, 
+  handlePhone 
+}) => {
 
-const SignUp = () => {
   const interests = ['sports', 'crab juice', 'fishing', 'dance dance legislation'];
   const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgerland'];
   const budget = ['Under 10$', '10$ to 20$', '20$ and higher'];
+
   return (
     <div className="signup">
       <Paper zDepth={5}>
         <div className="cardContainer">
           <div className="formContainer">
-            <form autoComplete="off">
+            <form onSubmit={handleSignUp} autoComplete="off">
               <div>
-                <TextField name="Name" hintText="What's your name?" fullWidth label="Name and Lastname" />
+                <TextField name="Name" hintText="What's your name?" fullWidth label="Name" onChange={handleFullname}/>
               </div>
               <div>
-                <TextField name="Phone" hintText="Phone number" fullWidth label="Phone_number" />
+                <TextField name="Phone" hintText="Phone number" fullWidth label="Phone" onChange={handlePhone}/>
               </div>
               <div>
-                <TextField name="Email" hintText="Email" fullWidth type="email" label="Email" />
+                <TextField name="Email" hintText="Email" fullWidth type="email" label="Email" onChange={handleEmail}/>
               </div>
               <div>
-                <TextField name="Password" hintText="Password" fullWidth type="password" label="Password" />
+                <TextField name="Password" hintText="Password" fullWidth type="password" label="Password" onChange={handlePassword}/>
               </div>
               <div>
-                <Selector arr={interests} /><Selector arr={cuisine} /><Selector arr={budget} />
+                <Selector arr={interests} onChange={handleInterests}/>
+                <Selector arr={cuisine} onChange={handleCuisines}/>
+                <Selector arr={budget} onChange={handleBudget}/>
               </div>
               <RaisedButton className="enterButton" primary fullWidth type="submit">
-                Enter
-                                    </RaisedButton>
+                Sign Up
+              </RaisedButton>
             </form>
           </div>
         </div>
       </Paper>
-
     </div>
   )
 };

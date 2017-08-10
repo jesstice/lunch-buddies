@@ -9,7 +9,7 @@ import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 
 import './styles.css';
 
-const HeaderBar = () => (
+const HeaderBar = ({ handleLogout }) => (
   <AppBar
     className="header-bar"
     iconElementLeft={<Link to={'/'}><img className="header-icon home-icon" src={'images/sushi.svg'}/></Link>}
@@ -46,6 +46,7 @@ const HeaderBar = () => (
       className="header-button"
       label="Logout"
       backgroundColor="#a4c639"
+      onClick={handleLogout}
     />
   </AppBar>
 );
