@@ -1,52 +1,27 @@
 import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { connect } from 'react-redux';
+const Selector = ({ selectValues, dispatch, onChangeAction, arr }) => {
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-class Selector extends Component {
-  state = {
-    values: [],
-  };
-
-  handleChange = (event, index, values) => this.setState({values});
-
-  menuItems(values) {
-    return this.props.arr.map((name) => (
-      <MenuItem
-        key={name}
-        insetChildren={true}
-        checked={values && values.indexOf(name) > -1}
-        value={name}
-        primaryText={name}
-      />
-    ));
-  }
-
-  render() {
-    const {values} = this.state;
-    return (
+return (
       <SelectField
         multiple={true}
         hintText="Select as many as you like"
-        value={values}
-        onChange={this.handleChange}
+        value={selectValues}
+        onChange={(event, index, values) => dispatch(onChangeAction(values, selectValues))}
       >
-        {this.menuItems(values)}
+        {arr.map((name) => (
+          <MenuItem
+            key={name}
+            insetChildren
+            checked={selectValues && selectValues.includes(name)}
+            value={name}
+            primaryText={name}
+          />
+        ))}
       </SelectField>
-    );
-  }
-}
+  );
+};
 
 export default Selector;
