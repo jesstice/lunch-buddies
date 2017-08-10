@@ -15,6 +15,7 @@ class LoginContainer extends Component {
           emailError = this.props.emailError,
           passwordError = this.props.passwordError
 
+    // TO DO: Add login error messages
     // if (!email) {
     //   this.props.dispatch(showEmailError('This field is required'));
     // } else {
@@ -33,11 +34,6 @@ class LoginContainer extends Component {
           console.log("There was an error:" + error.reason);
         } else {
           this.props.history.push('/')
-          // console.log('before');
-          // return (
-          // <Redirect to='/profile' />
-        // );
-          console.log('after');
         }
       });
     }
@@ -59,7 +55,6 @@ class LoginContainer extends Component {
       <div>
         <Login 
 
-
         handleEmail={(e) => {
           this.handleEmail(e);
         }}
@@ -71,14 +66,6 @@ class LoginContainer extends Component {
         handleLogin={(e) => {
            e.preventDefault(); 
           this.handleLogin({ email: this.props.updateEmailField, password: this.props.updatePasswordField, emailError: this.props.emailError, passwordError: this.props.passwordError });
-        }}
-
-        showEmailError={(e) => {
-          this.showEmailError({ emailError: this.props.emailError });
-        }}
-
-        showPasswordError={(e) => {
-          this.showPasswordError({ passwordError: this.props.passwordError });
         }}
         />
       </div>

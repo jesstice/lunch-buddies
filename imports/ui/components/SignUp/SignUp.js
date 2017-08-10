@@ -22,10 +22,10 @@ const SignUp = () => {
           <div className="formContainer">
             <form autoComplete="off">
               <div>
-                <TextField name="Name" hintText="What's your name?" fullWidth label="Name and Lastname" />
+                <TextField name="Name" hintText="What's your name?" fullWidth label="Name" />
               </div>
               <div>
-                <TextField name="Phone" hintText="Phone number" fullWidth label="Phone_number" />
+                <TextField name="Phone" hintText="Phone number" fullWidth label="Phone" />
               </div>
               <div>
                 <TextField name="Email" hintText="Email" fullWidth type="email" label="Email" />
