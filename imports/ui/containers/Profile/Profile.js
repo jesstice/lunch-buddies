@@ -1,16 +1,13 @@
 import React from 'react';
-// import { connect } from 'react-redux';
 import SignUp from '../../components/SignUp/SignUp';
 import LunchInvites from '../../components/LunchInvites/LunchInvites';
 import BuddyListItem from '../../components/BuddyListItem/';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const style = {
-  margin: 12,
-};
+import './styles.css';
 
 const Profile = ({ editProfile, dispatch, editStatus }) => (
-  <div className="profile-container">
+  <div className="profileContainer">
     <div>
       {!editStatus ?
         <BuddyListItem />
@@ -18,21 +15,14 @@ const Profile = ({ editProfile, dispatch, editStatus }) => (
         <SignUp />
       }
       <RaisedButton
-        label="Edit Profile"
-        onTouchTap={() => dispatch(editProfile(true))}
+        label={editStatus ? "Cancel" : "Edit Profile"}
+        onTouchTap={() => dispatch(editProfile())}
         secondary={true}
-        disabled={editStatus ? true : false} // disable button if editing profile
-        style={style}
+        className="profileButton"
       />
     </div>
     <LunchInvites />
   </div>
 );
-
-// function mapStateToProps(state) {
-//   return {
-//     edit: state.profile.editProfile
-//   };
-// }
 
 export default Profile;
