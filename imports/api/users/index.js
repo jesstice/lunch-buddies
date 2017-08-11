@@ -4,7 +4,8 @@ import SimpleSchema from 'simpl-schema';
 import {
   editProfile,
   sendInvite,
-  removeLunch
+  removeLunch,
+  createUser
 } from './methods';
 import {
   createLunch,
@@ -14,7 +15,7 @@ import {
 // Create a users collection
 
 // Schema
-const usersSchema = new SimpleSchema({  // should consider changing this as well;
+const profileSchema = new SimpleSchema({
   fullName: {
     type: String,
     label: "Full Name"
@@ -29,36 +30,75 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
     defaultValue: true
   },
   budget: {
-    type: String,
+    type: Array,
     label: "Budget"
   },
+  'budget.$': { type: String },
   interests: {
-    type: { type: Array },
+    type: Array,
     label: "Interests"
   },
   'interests.$': { type: String },
   cuisines: {
-    type: { type: Array },
+    type: Array,
     label: "Cuisines"
   },
   'cuisines.$': { type: String },
   currentLunch: {
-    type: { type: Array },
-    label: "Current Lunch"
+    type: String,
+    label: "Current Lunch",
+    optional: true
   },
-  'currentLunch.$': { type: Object },
   pendingLunches: {
-    type: { type: Array },
+    type: Array,
     label: "Pending Lunches",
+    optional: true
   },
-  'pendingLunches.$': { type: Object }
-
+  'pendingLunches.$': { type: String }
 });
+
+  // "profile.fullName": {type: String},
+  // "profile.available": {type: Boolean},
+  // "profile.budget": {type: Array, minCount: 1},
+  // "profile.budget.$": {type: String},
+  // "profile.phoneNumber": {type: String},
+  // "profile.available": {type: Boolean},
+  // "profile.interests": {type: Array, minCount: 1},
+  // "profile.interests.$": {type: String},
+  // "profile.cuisines": {type: Array, minCount: 1},
+  // "profile.cuisines.$": {type: String},
+  // "profile.currentLunch": {type: String, optional: true},
+  // "profile.pendingLunches": {type: Array, optional: true},
+  // "profile.pendingLunches.$": {type: String, optional: true}
+
+const usersSchema = new SimpleSchema({  // should consider changing this as well;
+  email: {
+    type: String,
+    label: "Email"
+  },
+  password: {
+    type: String,
+    label: "Password"
+  },
+  profile: { 
+    type: profileSchema 
+  },
+});
+
 
 // Publications
 
 // Methods to allow client to access/write to collection
 Meteor.methods({
+
+  'users.createUser'(user) {
+    if (usersSchema.validate(user)) {
+      createUser(user);
+    } else {
+      console.log('Validation failed...')
+      // console.log(usersSchema.getObjectSchema('profile'));
+    }
+  },
 
   'users.editProfile'(profileEdits) {
     if (!this.userId ) {
