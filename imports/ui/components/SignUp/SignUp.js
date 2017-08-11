@@ -12,20 +12,11 @@ import FilterList from '../../components/FilterList/FilterList';
 import './styles.css';
 
 
-const SignUp = ({ 
-  handleSignUp, 
-  handleEmail, 
-  handlePassword, 
-  handleFullname, 
-  handleBudget, 
-  handleCuisines, 
-  handleInterests, 
-  handlePhone 
-}) => {
+const SignUp = ({ handleSignUp, handleEmail, handlePassword, handleFullname,  handlePhone }) => {
 
-  const interests = ['sports', 'crab juice', 'fishing', 'dance dance legislation'];
-  const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgerland'];
-  const budget = ['Under 10$', '10$ to 20$', '20$ and higher'];
+  // const interests = ['sports', 'crab juice', 'fishing', 'dance dance legislation'];
+  // const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgerland'];
+  // const budget = ['Under 10$', '10$ to 20$', '20$ and higher'];
 
   return (
     <div className="signup">
@@ -45,12 +36,9 @@ const SignUp = ({
               <div>
                 <TextField name="Password" hintText="Password" fullWidth type="password" label="Password" onChange={handlePassword}/>
               </div>
-              
+              <div>
                 <FilterList />
-                {/* <Selector arr={interests} onChange={handleInterests}/>
-                <Selector arr={cuisine} onChange={handleCuisines}/>
-                <Selector arr={budget} onChange={handleBudget}/> */}
-           
+              </div>
               <RaisedButton className="enterButton" primary fullWidth type="submit">
                 Sign Up
               </RaisedButton>

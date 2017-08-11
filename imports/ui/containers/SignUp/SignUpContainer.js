@@ -4,51 +4,48 @@ import { connect } from 'react-redux';
 import { Accounts } from 'meteor/accounts-base';
 import SignUp from '../../components/SignUp/SignUp';
 import { 
-  updateEmailField, 
-  updatePasswordField, 
-  updateFullnameField, 
-  updateBudgetField, 
-  updateCuisinesField,
-  updateInterestsField,
+  updateEmailField,
+  updatePasswordField,
+  updateFullnameField,
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
 
 class SignUpContainer extends Component {
 
-  handleSignUp = ({ 
-  updateEmailField, 
-  updatePasswordField, 
-  updateFullnameField, 
-  updateBudgetField, 
-  updateCuisinesField,
-  updateInterestsField,
-  updatePhoneField,
-  dispatch
-  }) => {
+  handleSignUp = ({ updateEmailField, updatePasswordField, updateFullnameField, updatePhoneField, dispatch }) => {
     const email = this.props.updateEmailField,
           password = this.props.updatePasswordField,
           fullName = this.props.updateFullnameField,
-          budget = this.props.updateBudgetField,
-          cuisines = this.props.updateCuisinesField,
-          interests = this.props.updateInterestsField,
-          phoneNumber = this.props.updatePhoneField
+          phoneNumber = this.props.updatePhoneField,
+          budget = this.props.budgetFilters,
+          cuisines = this.props.cuisineFilters,
+          interests = this.props.interestsFilters
 
-    Accounts.createUser({ 
-      email, 
-      password, 
-      fullName, 
-      budget, 
-      cuisines, 
-      interests, 
-      phoneNumber 
-    }, (error) => {
-      if (error) {
-        console.log("There was an error: " + error.reason);
-      } else { 
-        this.props.history.push('/')
-      };
-    })
+    const user = { 
+      email: this.props.updateEmailField,
+      password: this.props.updatePasswordField,
+      profile: {
+        fullName: this.props.updateFullnameField,
+        budget: this.props.budgetFilters,
+        cuisines: this.props.cuisineFilters, 
+        interests: this.props.interestsFilters, 
+        phoneNumber: this.props.updatePhoneField,
+        currentLunch: null,
+        pendingLunches: [],
+        available: true
+      }
+    }
+
+    Meteor.call('users.createUser', user)
   }
+
+// (error) => {
+//       if (error) {
+//         console.log("There was an error: " + error.reason);
+//       } else { 
+//         this.props.history.push('/')
+//       };
+//     }
 
   handleEmail = (event) => {
     this.props.dispatch(updateEmailField(event.target.value));
@@ -77,22 +74,18 @@ class SignUpContainer extends Component {
   handlePhone = (event) => {
     this.props.dispatch(updatePhoneField(event.target.value));
   }
-
   
   render () {
     return (
       <div>
         <SignUp 
 
-        handleSignup={(e) => {
+        handleSignUp={(e) => {
           e.preventDefault();
           this.handleSignUp({ 
             email: this.props.updateEmailField,
             password: this.props.updatePasswordField,
             fullName: this.props.updateFullnameField,
-            budget: this.props.updateBudgetField,
-            cuisines: this.props.updateCuisinesField,
-            interests: this.props.updateInterestsField,
             phoneNumber: this.props.updatePhoneField
           });
         }}
@@ -134,9 +127,6 @@ const mapStateToProps = state => ({
     updateEmailField: state.forms.emailField,
     updatePasswordField: state.forms.passwordField,
     updateFullnameField: state.forms.fullnameField,
-    updateBudgetField: state.forms.budgetField,
-    updateCuisinesField: state.forms.cuisinesField,
-    updateInterestsField: state.forms.interestsField,
     updatePhoneField: state.forms.phoneField,
     interestsFilters: state.filters.interestsFilters,
     cuisineFilters: state.filters.cuisineFilters,
