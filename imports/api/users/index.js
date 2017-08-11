@@ -12,7 +12,6 @@ import {
   addLunchBuddy
 } from '../lunches/methods';
 
-// Create a users collection
 
 // Schema
 const profileSchema = new SimpleSchema({
@@ -57,21 +56,8 @@ const profileSchema = new SimpleSchema({
   'pendingLunches.$': { type: String }
 });
 
-  // "profile.fullName": {type: String},
-  // "profile.available": {type: Boolean},
-  // "profile.budget": {type: Array, minCount: 1},
-  // "profile.budget.$": {type: String},
-  // "profile.phoneNumber": {type: String},
-  // "profile.available": {type: Boolean},
-  // "profile.interests": {type: Array, minCount: 1},
-  // "profile.interests.$": {type: String},
-  // "profile.cuisines": {type: Array, minCount: 1},
-  // "profile.cuisines.$": {type: String},
-  // "profile.currentLunch": {type: String, optional: true},
-  // "profile.pendingLunches": {type: Array, optional: true},
-  // "profile.pendingLunches.$": {type: String, optional: true}
 
-const usersSchema = new SimpleSchema({  // should consider changing this as well;
+const usersSchema = new SimpleSchema({
   email: {
     type: String,
     label: "Email"
@@ -92,11 +78,10 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
 Meteor.methods({
 
   'users.createUser'(user) {
-    if (usersSchema.validate(user)) {
+    if (usersSchema.namedContext('validateUser').validate(user)) {
       createUser(user);
     } else {
       console.log('Validation failed...')
-      // console.log(usersSchema.getObjectSchema('profile'));
     }
   },
 

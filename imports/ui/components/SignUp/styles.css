@@ -2,6 +2,7 @@
     align-items: center;
     justify-content: center;
     background: transparent;
+    display: flex;
 }
 
 .signup .cardContainer {
