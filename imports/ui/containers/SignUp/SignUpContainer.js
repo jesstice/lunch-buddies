@@ -75,7 +75,6 @@ class SignUpContainer extends Component {
   handlePhone = (event) => {
     this.props.dispatch(updatePhoneField(event.target.value));
   }
-<<<<<<< HEAD
 
   render() {
     return (
@@ -119,51 +118,6 @@ class SignUpContainer extends Component {
           handlePhone={(e) => {
             this.handlePhone(e);
           }}
-=======
-  
-  render () {
-    return (
-      <div>
-        <SignUp 
-
-        handleSignUp={(e) => {
-          e.preventDefault();
-          this.handleSignUp({ 
-            email: this.props.updateEmailField,
-            password: this.props.updatePasswordField,
-            fullName: this.props.updateFullnameField,
-            phoneNumber: this.props.updatePhoneField
-          });
-        }}
-        
-        handleEmail={(e) => {
-          this.handleEmail(e);
-        }}
-
-        handlePassword={(e) => {
-          this.handlePassword(e);
-        }}
-
-        handleFullname={(e) => {
-          this.handleFullname(e);
-        }}
-
-        handleBudget={(e) => {
-          this.handleBudget(e);
-        }}
-
-        handleCuisines={(e) => {
-          this.handleCuisines(e);
-        }}
-
-        handleInterests={(e) => {
-          this.handleInterests(e);
-        }}
-
-        handlePhone={(e) => {
-          this.handlePhone(e);
-        }}
->>>>>>> dd43c060965cec14e432fefc4131c357d771c75d
         />
       </div>
     )
@@ -171,7 +125,6 @@ class SignUpContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-<<<<<<< HEAD
   updateEmailField: state.forms.emailField,
   updatePasswordField: state.forms.passwordField,
   updateFullnameField: state.forms.fullnameField,
@@ -179,15 +132,6 @@ const mapStateToProps = state => ({
   interestsFilters: state.filters.interestsFilters,
   cuisineFilters: state.filters.cuisineFilters,
   budgetFilters: state.filters.budgetFilters
-=======
-    updateEmailField: state.forms.emailField,
-    updatePasswordField: state.forms.passwordField,
-    updateFullnameField: state.forms.fullnameField,
-    updatePhoneField: state.forms.phoneField,
-    interestsFilters: state.filters.interestsFilters,
-    cuisineFilters: state.filters.cuisineFilters,
-    budgetFilters: state.filters.budgetFilters
->>>>>>> dd43c060965cec14e432fefc4131c357d771c75d
 });
 
 export default connect(mapStateToProps)(SignUpContainer);
