@@ -25,7 +25,7 @@ Meteor.startup(() => {
         pendingLunches: []
       }
     });
-        user2 = Accounts.createUser({
+    user2 = Accounts.createUser({
       email: 'caramelle@blle.com',
       password: '123456',
       profile: {
@@ -39,7 +39,7 @@ Meteor.startup(() => {
         pendingLunches: []
       }
     });
-            user1 = Accounts.createUser({
+    user1 = Accounts.createUser({
       email: 'caramelle@alle.com',
       password: '123456',
       profile: {
@@ -53,5 +53,15 @@ Meteor.startup(() => {
         pendingLunches: []
       }
     });
+  }
+
+  if(Lunches.find().count() === 0) {
+    Lunches.insert({
+      createdOn: new Date,
+      due: createdOn + 24,
+      buddies: ['MEZRiMghQqAMZaP68'],
+      budget: '10 to 20',
+      cuisines: ['Chinese', 'Burgerland']
+    })
   }
 });
