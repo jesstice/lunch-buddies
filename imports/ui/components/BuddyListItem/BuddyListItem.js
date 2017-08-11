@@ -35,7 +35,7 @@ const BuddyListItem = ({ userData }) => {
                 <h1>Interests</h1>
                 <ul>
                   {userData.profile.interests.map((interest, index) => (
-                    <li>{interest}</li>
+                    <li key={index}>{interest}</li>
                   ))}
                 </ul>
               </div>
@@ -43,7 +43,7 @@ const BuddyListItem = ({ userData }) => {
                 <h1>Cuisines</h1>
                 <ul>
                   {userData.profile.cuisines.map((cuisine, index) => (
-                    <li>{cuisine}</li>
+                    <li key={index}>{cuisine}</li>
                   ))}
                 </ul>
               </div>
