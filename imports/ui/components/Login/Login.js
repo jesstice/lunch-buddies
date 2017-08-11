@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
@@ -34,9 +35,14 @@ const Login = ({ handleLogin, handleEmail, handlePassword, emailError, passwordE
                                 onChange={handlePassword}
                             />
                         </div>
-                        <RaisedButton className="enterButton" primary fullWidth type="submit">
+                        <RaisedButton className="loginButton" primary fullWidth type="submit">
                             Login
                         </RaisedButton>
+                        <Link to={'/signup'}>
+                            <RaisedButton className="signUpButton" primary fullWidth>
+                                Sign Up
+                            </RaisedButton>
+                        </Link>
                     </form>
                 </div>
             </Paper>

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginForm from 'grommet/components/LoginForm';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -20,7 +21,7 @@ const SignUp = ({ handleSignUp, handleEmail, handlePassword, handleFullname,  ha
 
   return (
     <div className="signup">
-      <Paper zDepth={5}>
+      <Paper zDepth={3}>
         <div className="cardContainer">
           <div className="formContainer">
             <form onSubmit={handleSignUp} autoComplete="off">
@@ -42,6 +43,9 @@ const SignUp = ({ handleSignUp, handleEmail, handlePassword, handleFullname,  ha
               <RaisedButton className="enterButton" primary fullWidth type="submit">
                 Sign Up
               </RaisedButton>
+              <Link to={'/login'} className="cancel">
+                <p>Cancel</p>
+              </Link>
             </form>
           </div>
         </div>

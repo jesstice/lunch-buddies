@@ -5,6 +5,10 @@
     display: flex;
 }
 
+.signup > :nth-child(1) {
+    margin-top: 5.5rem;
+}
+
 .signup .cardContainer {
     width: 420px;
     max-width: 95%;
@@ -63,4 +67,14 @@
 
 .filterList {
     display: inline-block;
+}
+
+.cancel {
+    text-align: center;
+    color: black;
+    text-decoration: none;
+}
+
+.cancel p {
+    margin-top: 2rem;
 }

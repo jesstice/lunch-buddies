@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderBar from '../HeaderBar/';
+import './styles.css';
 //import MiniLunchInvites from '../MiniLunchInvites/MiniLunchInvites';
 
 const Layout = ({children}) => {
