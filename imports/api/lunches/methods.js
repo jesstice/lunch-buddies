@@ -1,23 +1,25 @@
 import { Lunches } from './index';
 import { Random } from 'meteor/random';
+import { Mongo } from 'meteor/mongo';
 import moment from 'moment';
 
 // LUNCH METHODS
 
 // insert new lunch
-export const createLunch = (user, options) => {
+export const createLunch = ({user, options}) => {
   const lunchId = Random.id();
-  
-  Lunches.insert({
-    id: lunchId,
-    createdOn: moment().format(), //creates ISO version
-    due: moment().add(1, "days").format(),
-    budget: options.budget,
-    buddies: [user],
-    cuisines: [options.cuisines]
-  });
+  const cr_time = new Date();
+  const due_time = moment().hour(24).format('YYYYMMDDHH');
+    Lunches.insert({
+      id: lunchId,
+      createdOn: cr_time,
+      due: due_time,
+      budget: [options.budget],
+      buddies: [user],
+      cuisines: [options.cuisines]
+    });
 
-  Meteor.users.update(this.userId, {
+  Meteor.users.update(user, {
     $set: {
       "profile.currentLunch": lunchId
     }

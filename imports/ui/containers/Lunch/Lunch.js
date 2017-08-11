@@ -13,7 +13,9 @@ const styles = {
   }
 }
 
-const Lunch = () => {
+const Lunch = ({handleLunchCreation}) => {
+  const user = Meteor.user();
+  const user_id = Meteor.userId();
   return (
     <div className="lunchWrapper">
       <Paper zDepth={3}>
@@ -33,7 +35,7 @@ const Lunch = () => {
             label="Leave this lunch"
             primary={true}
             style={styles.button}
-            onTouchTap={() => }
+            onTouchTap={()=>{handleLunchCreation()}}
           />
         </div>
       </Paper>
