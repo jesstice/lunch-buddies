@@ -10,30 +10,30 @@ export const Lunches = new Mongo.Collection('lunches');
 Meteor.methods({
 
   'lunches.createLunch'({user, options}) {
-
+     if (lunchSchema.namedContext('validateLunch').validate(options)) {
       createLunch({user, options});
-
+     } else {
+       console.log('Validation fail')
+     }
     }
   }
 );
 
 //set up schema
 lunchSchema = new SimpleSchema({
-  createdOn: {type: Date},
-  due: String,
   buddies: {
-    type: { type: Array },
-    min: 1,
+    type: Array ,
     label: "Buddies"
   },
-  'buddies.$': { type: String },
+  "buddies.$": { type: String },
   budget: {
-    type: String,
+    type: Array,
     label: "Budget"
   },
+  "budget.$": { type: String },
   cuisines: {
-    type: { type: Array },
+    type: Array,
     label: "Cuisines"
   },
-  'cuisines.$': { type: String }
+  "cuisines.$": { type: String }
 });
