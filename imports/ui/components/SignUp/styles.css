@@ -2,6 +2,7 @@
     align-items: center;
     justify-content: center;
     background: transparent;
+    display: flex;
 }
 
 .signup .cardContainer {
@@ -58,4 +59,8 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.filterList {
+    display: inline-block;
 }

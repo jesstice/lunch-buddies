@@ -1,4 +1,4 @@
-//import SignUpContainer from './SignUpContainer';
-import SignUp from '../../components/SignUp/SignUp'
+import SignUpContainer from './SignUpContainer';
+// import SignUp from '../../components/SignUp/SignUp'
 
-export default SignUp;
+export default SignUpContainer;

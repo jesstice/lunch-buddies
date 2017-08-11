@@ -1,10 +1,12 @@
 import { Mongo } from 'meteor/mongo';
 
-// USER METHODS
-
 // insert new user
-export const createUser = () => {
-
+export const createUser = (user) => {
+  Accounts.createUser({
+    email: user.email,
+    password: user.password,
+    profile: user.profile
+  })
 }
 
 // update user profile

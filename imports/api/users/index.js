@@ -4,18 +4,17 @@ import SimpleSchema from 'simpl-schema';
 import {
   editProfile,
   sendInvite,
-  removeLunch
+  removeLunch,
+  createUser
 } from './methods';
 import {
   createLunch,
   addLunchBuddy
 } from '../lunches/methods';
 
-// Create a users collection
-// export const Users = new Mongo.Collection('buddies'); // would not allow us to create another users collection;
 
 // Schema
-const usersSchema = new SimpleSchema({  // should consider changing this as well;
+const profileSchema = new SimpleSchema({
   fullName: {
     type: String,
     label: "Full Name"
@@ -30,36 +29,61 @@ const usersSchema = new SimpleSchema({  // should consider changing this as well
     defaultValue: true
   },
   budget: {
-    type: String,
+    type: Array,
     label: "Budget"
   },
+  'budget.$': { type: String },
   interests: {
-    type: { type: Array },
+    type: Array,
     label: "Interests"
   },
   'interests.$': { type: String },
   cuisines: {
-    type: { type: Array },
+    type: Array,
     label: "Cuisines"
   },
   'cuisines.$': { type: String },
   currentLunch: {
-    type: { type: Array },
-    label: "Current Lunch"
+    type: String,
+    label: "Current Lunch",
+    optional: true
   },
-  'currentLunch.$': { type: Object },
   pendingLunches: {
-    type: { type: Array },
+    type: Array,
     label: "Pending Lunches",
+    optional: true
   },
-  'pendingLunches.$': { type: Object }
-
+  'pendingLunches.$': { type: String }
 });
+
+
+const usersSchema = new SimpleSchema({
+  email: {
+    type: String,
+    label: "Email"
+  },
+  password: {
+    type: String,
+    label: "Password"
+  },
+  profile: { 
+    type: profileSchema 
+  },
+});
+
 
 // Publications
 
 // Methods to allow client to access/write to collection
 Meteor.methods({
+
+  'users.createUser'(user) {
+    if (usersSchema.namedContext('validateUser').validate(user)) {
+      createUser(user);
+    } else {
+      console.log('Validation failed...')
+    }
+  },
 
   'users.editProfile'(profileEdits) {
     if (!this.userId ) {

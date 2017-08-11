@@ -1,29 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import LoginForm from 'grommet/components/LoginForm';
-import './styles.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Selector from '../../containers/Selector/index';
+import FilterList from '../../components/FilterList/FilterList';
+import './styles.css';
 
 
-const SignUp = ({ 
-  handleSignUp, 
-  handleEmail, 
-  handlePassword, 
-  handleFullname, 
-  handleBudget, 
-  handleCuisines, 
-  handleInterests, 
-  handlePhone 
-}) => {
+const SignUp = ({ handleSignUp, handleEmail, handlePassword, handleFullname,  handlePhone }) => {
 
-  const interests = ['sports', 'crab juice', 'fishing', 'dance dance legislation'];
-  const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgerland'];
-  const budget = ['Under 10$', '10$ to 20$', '20$ and higher'];
+  // const interests = ['sports', 'crab juice', 'fishing', 'dance dance legislation'];
+  // const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgerland'];
+  // const budget = ['Under 10$', '10$ to 20$', '20$ and higher'];
 
   return (
     <div className="signup">
@@ -44,9 +37,7 @@ const SignUp = ({
                 <TextField name="Password" hintText="Password" fullWidth type="password" label="Password" onChange={handlePassword}/>
               </div>
               <div>
-                <Selector arr={interests} onChange={handleInterests}/>
-                <Selector arr={cuisine} onChange={handleCuisines}/>
-                <Selector arr={budget} onChange={handleBudget}/>
+                <FilterList />
               </div>
               <RaisedButton className="enterButton" primary fullWidth type="submit">
                 Sign Up
