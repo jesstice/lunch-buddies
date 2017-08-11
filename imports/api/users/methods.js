@@ -1,16 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 
-// USER METHODS
-// {
-//       fullName: user.fullName,
-//       budget: user.budget,
-//       interests: user.interests,
-//       cuisines: user.cuisines,
-//       phoneNumber: user.phoneNumber,
-//       currentLunch: user.currentLunch,
-//       availabile: user.availabile,
-//       pendingLunches: user.pendingLunches
-//     }
 // insert new user
 export const createUser = (user) => {
   Accounts.createUser({

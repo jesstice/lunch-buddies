@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accounts } from 'meteor/accounts-base';
 import SignUp from '../../components/SignUp/SignUp';
-import { 
+import {
   updateEmailField,
   updatePasswordField,
   updateFullnameField,
@@ -14,21 +14,21 @@ class SignUpContainer extends Component {
 
   handleSignUp = ({ updateEmailField, updatePasswordField, updateFullnameField, updatePhoneField, dispatch }) => {
     const email = this.props.updateEmailField,
-          password = this.props.updatePasswordField,
-          fullName = this.props.updateFullnameField,
-          phoneNumber = this.props.updatePhoneField,
-          budget = this.props.budgetFilters,
-          cuisines = this.props.cuisineFilters,
-          interests = this.props.interestsFilters
+      password = this.props.updatePasswordField,
+      fullName = this.props.updateFullnameField,
+      phoneNumber = this.props.updatePhoneField,
+      budget = this.props.budgetFilters,
+      cuisines = this.props.cuisineFilters,
+      interests = this.props.interestsFilters
 
-    const user = { 
+    const user = {
       email: this.props.updateEmailField,
       password: this.props.updatePasswordField,
       profile: {
         fullName: this.props.updateFullnameField,
         budget: this.props.budgetFilters,
-        cuisines: this.props.cuisineFilters, 
-        interests: this.props.interestsFilters, 
+        cuisines: this.props.cuisineFilters,
+        interests: this.props.interestsFilters,
         phoneNumber: this.props.updatePhoneField,
         currentLunch: null,
         pendingLunches: [],
@@ -36,16 +36,17 @@ class SignUpContainer extends Component {
       }
     }
 
-    Meteor.call('users.createUser', user)
+    if (user) {
+      Meteor.call('users.createUser', user, (error) => {
+        if (error) {
+          console.log("There was an error: " + error.reason);
+        } else {
+          this.props.history.push('/')
+        }
+      }
+      )
+    }
   }
-
-// (error) => {
-//       if (error) {
-//         console.log("There was an error: " + error.reason);
-//       } else { 
-//         this.props.history.push('/')
-//       };
-//     }
 
   handleEmail = (event) => {
     this.props.dispatch(updateEmailField(event.target.value));
@@ -74,49 +75,49 @@ class SignUpContainer extends Component {
   handlePhone = (event) => {
     this.props.dispatch(updatePhoneField(event.target.value));
   }
-  
-  render () {
+
+  render() {
     return (
       <div>
-        <SignUp 
+        <SignUp
 
-        handleSignUp={(e) => {
-          e.preventDefault();
-          this.handleSignUp({ 
-            email: this.props.updateEmailField,
-            password: this.props.updatePasswordField,
-            fullName: this.props.updateFullnameField,
-            phoneNumber: this.props.updatePhoneField
-          });
-        }}
-        
-        handleEmail={(e) => {
-          this.handleEmail(e);
-        }}
+          handleSignUp={(e) => {
+            e.preventDefault();
+            this.handleSignUp({
+              email: this.props.updateEmailField,
+              password: this.props.updatePasswordField,
+              fullName: this.props.updateFullnameField,
+              phoneNumber: this.props.updatePhoneField
+            });
+          }}
 
-        handlePassword={(e) => {
-          this.handlePassword(e);
-        }}
+          handleEmail={(e) => {
+            this.handleEmail(e);
+          }}
 
-        handleFullname={(e) => {
-          this.handleFullname(e);
-        }}
+          handlePassword={(e) => {
+            this.handlePassword(e);
+          }}
 
-        handleBudget={(e) => {
-          this.handleBudget(e);
-        }}
+          handleFullname={(e) => {
+            this.handleFullname(e);
+          }}
 
-        handleCuisines={(e) => {
-          this.handleCuisines(e);
-        }}
+          handleBudget={(e) => {
+            this.handleBudget(e);
+          }}
 
-        handleInterests={(e) => {
-          this.handleInterests(e);
-        }}
+          handleCuisines={(e) => {
+            this.handleCuisines(e);
+          }}
 
-        handlePhone={(e) => {
-          this.handlePhone(e);
-        }}
+          handleInterests={(e) => {
+            this.handleInterests(e);
+          }}
+
+          handlePhone={(e) => {
+            this.handlePhone(e);
+          }}
         />
       </div>
     )
@@ -124,13 +125,13 @@ class SignUpContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    updateEmailField: state.forms.emailField,
-    updatePasswordField: state.forms.passwordField,
-    updateFullnameField: state.forms.fullnameField,
-    updatePhoneField: state.forms.phoneField,
-    interestsFilters: state.filters.interestsFilters,
-    cuisineFilters: state.filters.cuisineFilters,
-    budgetFilters: state.filters.budgetFilters
+  updateEmailField: state.forms.emailField,
+  updatePasswordField: state.forms.passwordField,
+  updateFullnameField: state.forms.fullnameField,
+  updatePhoneField: state.forms.phoneField,
+  interestsFilters: state.filters.interestsFilters,
+  cuisineFilters: state.filters.cuisineFilters,
+  budgetFilters: state.filters.budgetFilters
 });
 
 export default connect(mapStateToProps)(SignUpContainer);
