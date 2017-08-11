@@ -7,7 +7,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 const BuddyList = ({ users, cuisine }) => {
   const buds = users.map((buddy)=> {
-    return ( <BuddyListItem userData={buddy} /> )
+    return ( <BuddyListItem userData={buddy} key={buddy._id} /> )
   })
   return (
     <div className="buddyListWrapper">
