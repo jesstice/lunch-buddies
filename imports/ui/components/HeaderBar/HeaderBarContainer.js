@@ -17,15 +17,19 @@ class HeaderBarContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <HeaderBar 
-        handleLogout={(e) => {
-          this.handleLogout(e);
-        }}
-        />
-      </div>
-    );
+    if (Meteor.userId()) {
+      return (
+        <div>
+          <HeaderBar
+            handleLogout={(e) => {
+              this.handleLogout(e);
+            }}
+          />
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 

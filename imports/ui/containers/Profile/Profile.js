@@ -24,11 +24,14 @@ const Profile = ({ updateEditStatus, dispatch, editStatus, userData, currentUser
       : null
       }
     </div>
-    <div className="inviteContainer">
-      <LunchInvites
-        userData={userData}
-      />
-    </div>
+    {currentUserId === Meteor.userId() ?
+      <div className="inviteContainer">
+        <LunchInvites
+          userData={userData}
+        />
+      </div>
+    : null
+    }
   </div>
 );
 
