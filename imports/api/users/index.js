@@ -93,12 +93,11 @@ Meteor.methods({
       )
     }
 
-    if (usersSchema.validate(profileEdits)) {
+    if (usersSchema.namedContext('validateEdits').validate(profileEdits)) {
       editProfile(profileEdits);
     } else {
       console.log('Validation failed...');
     }
-
   },
 
   'users.sendInvite'(user, inviteeId) {
