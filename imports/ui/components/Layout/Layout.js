@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderBar from '../HeaderBar/';
-//import MiniLunchInvites from '../MiniLunchInvites/MiniLunchInvites';
+import MyInvites from '../../containers/MyInvites/';
 
 const Layout = ({children}) => {
   return (
@@ -8,6 +8,7 @@ const Layout = ({children}) => {
       <div className="app-header">
         <HeaderBar />
       </div>
+      <MyInvites />
       <div className="app-content">
           {children}
       </div>
