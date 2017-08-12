@@ -96,7 +96,8 @@ Meteor.methods({
     if (usersSchema.namedContext('validateEdits').validate(profileEdits)) {
       editProfile(profileEdits);
     } else {
-      console.log('Validation failed...');
+      console.log(profileEdits);
+      // console.log('Validation failed...');
     }
   },
 

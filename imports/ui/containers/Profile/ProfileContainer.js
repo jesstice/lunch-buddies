@@ -19,6 +19,7 @@ class ProfileContainer extends Component {
     const interestsFilters = this.props.interestsFilters;
     const cuisineFilters = this.props.cuisineFilters;
     const budgetFilters = this.props.budgetFilters;
+    
     Meteor.call('users.editProfile', {
       updateFullnameField,
       updatePhoneField,
@@ -32,16 +33,16 @@ class ProfileContainer extends Component {
     this.props.dispatch(updateFullnameField(name));
   }
 
-  handleBudget = (event) => {
-    this.props.dispatch(updateBudgetField(event.target.value));
+  handleBudget = (budget) => {
+    this.props.dispatch(updateBudgetField(budget));
   }
 
-  handleCuisines = (event) => {
-    this.props.dispatch(updateCuisinesField(event.target.value));
+  handleCuisines = (cuisines) => {
+    this.props.dispatch(updateCuisinesField(cuisines));
   }
 
-  handleInterests = (event) => {
-    this.props.dispatch(updateInterestsField(event.target.value));
+  handleInterests = (interests) => {
+    this.props.dispatch(updateInterestsField(interests));
   }
 
   handlePhone = (phone) => {
@@ -61,25 +62,25 @@ class ProfileContainer extends Component {
           this.editUserProfile
         }
 
-          handleFullname={
-            this.handleFullname
-          }
+        handleFullname={
+          this.handleFullname
+        }
 
-          handleBudget={(e) => {
-            this.handleBudget(e);
-          }}
+        handleBudget={
+          this.handleBudget
+        }
 
-          handleCuisines={(e) => {
-            this.handleCuisines(e);
-          }}
+        handleCuisines={
+          this.handleCuisines
+        }
 
-          handleInterests={(e) => {
-            this.handleInterests(e);
-          }}
+        handleInterests={
+          this.handleInterests
+        }
 
-          handlePhone={
-            this.handlePhone
-          }
+        handlePhone={
+          this.handlePhone
+        }
       />
     )
   }

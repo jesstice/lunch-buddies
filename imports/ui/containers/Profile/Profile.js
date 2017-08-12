@@ -13,64 +13,54 @@ import {
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
 
-  handleFullname = (event) => {
-    this.props.dispatch(updateFullnameField(event.target.value));
-  }
+handleFullname = (event) => {
+  this.props.dispatch(updateFullnameField(event.target.value));
+}
 
-  handleBudget = (event) => {
-    this.props.dispatch(updateBudgetField(event.target.value));
-  }
+handlePhone = (event) => {
+  this.props.dispatch(updatePhoneField(event.target.value));
+}
 
-  handleCuisines = (event) => {
-    this.props.dispatch(updateCuisinesField(event.target.value));
-  }
+handleBudget = (event) => {
+  this.props.dispatch(updateBudgetField(event.target.value));
+}
 
-  handleInterests = (event) => {
-    this.props.dispatch(updateInterestsField(event.target.value));
-  }
+handleCuisines = (event) => {
+  this.props.dispatch(updateCuisinesField(event.target.value));
+}
 
-  handlePhone = (event) => {
-    this.props.dispatch(updatePhoneField(event.target.value));
-  }
+handleInterests = (event) => {
+  this.props.dispatch(updateInterestsField(event.target.value));
+}
 
 
 const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone }) => (
-  
+
   <div className="profileContainer">
     <div>
       {(!editStatus && userData) ?
         <BuddyListItem userData={userData[0]} />
-      :
-       (editStatus && userData) ?
-         <EditableProfile 
-         userData={userData[0]}
+        :
+        (editStatus && userData) ?
+          <EditableProfile
+            userData={userData[0]}
 
+            editUserProfile={editUserProfile}
 
+            handleFullname={handleFullname}
 
-          editUserProfile={editUserProfile}
+            handleBudget={handleBudget}
 
-          handleFullname={handleFullname}
+            handleCuisines={handleCuisines}
 
-          handleBudget={(e) => {
-            this.handleBudget(e);
-          }}
+            handleInterests={handleInterests}
 
-          handleCuisines={(e) => {
-            this.handleCuisines(e);
-          }}
+            handlePhone={handlePhone}
 
-          handleInterests={(e) => {
-            this.handleInterests(e);
-          }}
-
-          handlePhone={handlePhone}
-
-          dispatch={(e) => {
-            this.dispatch(e);
-          }}
-         />
-      :
-        <Loader />
+            dispatch={dispatch}
+          />
+          :
+          <Loader />
       }
       <RaisedButton
         label={editStatus ? "Cancel" : "Edit Profile"}
