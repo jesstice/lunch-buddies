@@ -1,11 +1,10 @@
 // ACTION CONSTANT
-export const SHOW_INVITES_MODAL = 'SHOW_INVITES_MODAL'
+export const TOGGLE_MY_INVITES = 'TOGGLE_MY_INVITES'
 
 // ACTION CREATORS
-export function showInvitesModal(showInvites) {
+export function toggleMyInvites() {
   return {
-    type: SHOW_INVITES_MODAL,
-    payload: showInvites
+    type: TOGGLE_MY_INVITES
   };
 }
 
@@ -16,12 +15,12 @@ const initialState = {
 
 export function invitesReducer(state = initialState, action) {
   switch (action.type) {
-    case SHOW_INVITES_MODAL:
+    case TOGGLE_MY_INVITES:
       const invitesState = {
-        ...state,
-        showInvites: action.payload
+        ...state
       };
-      return invitesState
+      invitesState.showInvites = !invitesState.showInvites;
+      return invitesState;
 
     default:
       return state;
