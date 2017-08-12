@@ -3,10 +3,11 @@ import SignUp from '../../components/SignUp/SignUp';
 import LunchInvites from '../../components/LunchInvites/LunchInvites';
 import BuddyListItem from '../../components/BuddyListItem/';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 import './styles.css';
 
-const Profile = ({ updateEditStatus, dispatch, editStatus, userData, currentUserId }) => (
+const Profile = ({ updateEditStatus, dispatch, editStatus, userData, currentUserId, lunchData }) => (
   <div className="profileContainer">
     <div>
       {editStatus && currentUserId === Meteor.userId() ?
@@ -18,7 +19,7 @@ const Profile = ({ updateEditStatus, dispatch, editStatus, userData, currentUser
         <RaisedButton
           label={editStatus ? "Cancel" : "Edit Profile"}
           onTouchTap={() => dispatch(updateEditStatus())}
-          secondary={true}
+          secondary
           className="profileButton"
         />
       : null
@@ -26,9 +27,12 @@ const Profile = ({ updateEditStatus, dispatch, editStatus, userData, currentUser
     </div>
     {currentUserId === Meteor.userId() ?
       <div className="inviteContainer">
-        <LunchInvites
-          userData={userData}
-        />
+        <Paper className="invitePaper" zDepth={3}>
+          <LunchInvites
+            userData={userData}
+            lunchData={lunchData}
+          />
+        </Paper>
       </div>
     : null
     }
