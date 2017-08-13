@@ -10,7 +10,7 @@ import './styles.css';
 
 
 const BuddyListItem = ({ userData, handleLunch }) => {
-
+  user_id = Meteor.userId();
   if (userData) {
     return (
       <div className="buddyListItemWrapper">
@@ -48,13 +48,15 @@ const BuddyListItem = ({ userData, handleLunch }) => {
                   ))}
                 </ul>
               </div>
-                          <RaisedButton
+                 { user_id !== userData._id  ?      
+                 <RaisedButton
               label="Invite"
               primary
               className="invitationButton"
               icon={<i className="fa fa-check" aria-hidden="true"></i>}
               onTouchTap={()=>{handleLunch(userData._id, userData.profile.fullName)}}
             />
+              : null   }
             </div>
           </Paper>
         </li>
