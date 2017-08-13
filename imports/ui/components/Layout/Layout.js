@@ -2,6 +2,8 @@ import React from 'react';
 import HeaderBar from '../HeaderBar/';
 import MyInvites from '../../containers/MyInvites/';
 
+import './styles.css';
+
 const Layout = ({children}) => {
   return (
     <div className="app-wrapper">

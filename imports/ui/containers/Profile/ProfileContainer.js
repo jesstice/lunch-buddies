@@ -4,40 +4,107 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import { editProfile } from '../../../../client/redux/modules/profile';
 import Profile from './Profile';
+import {
+  updateEmailField,
+  updatePasswordField,
+  updateFullnameField,
+  updatePhoneField
+} from '../../../../client/redux/modules/forms';
 
 import Loader from '../../components/Loader/';
 
 class ProfileContainer extends Component {
 
-  // editUserProfile = ({ profileEditsObject }) => {
-  //   Meteor.call('users.editProfile', profileEditsObject);
-  // }
+  editUserProfile = () => {
+    const updateFullnameField = this.props.updateFullnameField;
+    const updatePhoneField = this.props.updatePhoneField;
+    const interestsFilters = this.props.interestsFilters;
+    const cuisineFilters = this.props.cuisineFilters;
+    const budgetFilters = this.props.budgetFilters;
+    
+    Meteor.call('users.editProfile', {
+      updateFullnameField,
+      updatePhoneField,
+      interestsFilters,
+      cuisineFilters,
+      budgetFilters
+    });
+  }
+
+  handleFullname = (name) => {
+    this.props.dispatch(updateFullnameField(name));
+  }
+
+  handleBudget = (budget) => {
+    this.props.dispatch(updateBudgetField(budget));
+  }
+
+  handleCuisines = (cuisines) => {
+    this.props.dispatch(updateCuisinesField(cuisines));
+  }
+
+  handleInterests = (interests) => {
+    this.props.dispatch(updateInterestsField(interests));
+  }
+
+  handlePhone = (phone) => {
+    this.props.dispatch(updatePhoneField(phone));
+  }
+
 
   render() {
-    const loading = this.props.loadingLunch && this.props.loadingUsers;
+   const loading = this.props.loadingLunch && this.props.loadingUsers;
+    
+   if (loading) {
+    return(
+      <Loader />
+    )
+  } else { 
+    return (
+      <Profile
+        updateEditStatus={editProfile}
+        editStatus={this.props.editStatus}
+        dispatch={this.props.dispatch}
+        userData={this.props.userData}
+        lunchData={this.props.lunchData}
+        currentUserId={this.props.match.params._id}
+      
+        editUserProfile={
+          this.editUserProfile
+        }
 
-    if (loading) {
-      return(
-        <Loader />
-      )
-    } else {
-      return (
-        <Profile
-          updateEditStatus={editProfile}
-          editStatus={this.props.editStatus}
-          dispatch={this.props.dispatch}
-          userData={this.props.userData}
-          currentUserId={this.props.match.params._id}
-          lunchData={this.props.lunchData}
-        />
-      );
-    }
-  }
+        handleFullname={
+          this.handleFullname
+        }
+
+        handleBudget={
+          this.handleBudget
+        }
+
+        handleCuisines={
+          this.handleCuisines
+        }
+
+        handleInterests={
+          this.handleInterests
+        }
+
+        handlePhone={
+          this.handlePhone
+        }
+      />
+    )
+  }  
 }
 
 function mapStateToProps(state) {
   return {
-    editStatus: state.profile.editProfile
+    editStatus: state.profile.editProfile,
+    updateFullnameField: state.forms.fullnameField,
+    updatePhoneField: state.forms.phoneField,
+    interestsFilters: state.filters.interestsFilters,
+    cuisineFilters: state.filters.cuisineFilters,
+    budgetFilters: state.filters.budgetFilters
   };
 }
 
