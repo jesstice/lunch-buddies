@@ -8,7 +8,7 @@ class InvitationalModalContainer extends Component {
   handleInvitation = () => { //check mycurrentlunch, if null > handleLunchCreation, otherwise push current lunch id into pending lunches of invitee;
     const user = Meteor.user();
     const user_id = Meteor.userId();
-    const invitee = "2tGKaMCRqgWPu5ADW"; //gonna be this.props.invitee;
+    const invitee = this.props.invitee_id; //gonna be this.props.invitee;
     user.profile.currentLunch ? Meteor.call('users.sendInvite', {user, invitee}, (error) =>{
       if(error) {
         console.log(error.reason);
@@ -47,6 +47,7 @@ class InvitationalModalContainer extends Component {
       <InvitationalModal  handleLunchCreation={this.handleLunchCreation} 
                           handleLunchFlip={this.handleLunchFlip}  
                           handleInvitation={this.handleInvitation}
+                          inviteeName={this.props.invitee_fullname}
                           
       />
       
@@ -59,7 +60,9 @@ class InvitationalModalContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-      showLunch: state.lunch.showLunchInvitation
+      showLunch: state.lunch.showLunchInvitation,
+      invitee_id: state.lunch.invitee_id,
+      invitee_fullname: state.lunch.invitee_fullName
     }
 }
 export default connect(mapStateToProps)(InvitationalModalContainer);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BuddyList from '../../components/BuddyList/BuddyList';
-import FilterList from '../../components/FilterList/FilterList';
+import FilterList from '../FilterList/';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
@@ -31,8 +31,8 @@ class HomeContainer extends Component {
         } 
         return users;   
     }
-  handleLunch = () => {
-    this.props.dispatch(flipCreateLunchModal());
+  handleLunch = (invitee_id, fullName) => {
+    this.props.dispatch(flipCreateLunchModal({invitee_id, fullName}));
   }
   render() {
     users = this.filterBuddiesByTags();

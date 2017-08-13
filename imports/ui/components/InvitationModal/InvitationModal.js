@@ -2,17 +2,16 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
-import Selector from '../../containers/Selector/';
 
 import './styles.css';
 
-const InvitationModal = ({handleLunchFlip, handleLunchCreation, handleInvitation}) => {
+const InvitationModal = ({handleLunchFlip, handleLunchCreation, handleInvitation, inviteeName}) => {
 
   return (
     <Dialog open={true}>
       <ul>
         <li>
-          <p>Invite buddyName!</p>
+          <p>You are about to invite <b>{inviteeName}</b></p>
           <div>
             <p>Select Your Budget:</p>
           </div>

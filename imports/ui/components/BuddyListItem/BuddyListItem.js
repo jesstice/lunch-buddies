@@ -53,7 +53,7 @@ const BuddyListItem = ({ userData, handleLunch }) => {
               primary
               className="invitationButton"
               icon={<i className="fa fa-check" aria-hidden="true"></i>}
-              onTouchTap={()=>{handleLunch()}}
+              onTouchTap={()=>{handleLunch(userData._id, userData.profile.fullName)}}
             />
             </div>
           </Paper>
