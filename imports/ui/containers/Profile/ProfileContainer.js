@@ -53,48 +53,49 @@ class ProfileContainer extends Component {
 
 
   render() {
-   const loading = this.props.loadingLunch && this.props.loadingUsers;
-    
-   if (loading) {
-    return(
-      <Loader />
-    )
-  } else { 
-    return (
-      <Profile
-        updateEditStatus={editProfile}
-        editStatus={this.props.editStatus}
-        dispatch={this.props.dispatch}
-        userData={this.props.userData}
-        lunchData={this.props.lunchData}
-        currentUserId={this.props.match.params._id}
+    const loading = this.props.loadingLunch && this.props.loadingUsers;
       
-        editUserProfile={
-          this.editUserProfile
-        }
+    if (loading) {
+      return(
+        <Loader />
+      )
+    } else { 
+      return (
+        <Profile
+          updateEditStatus={editProfile}
+          editStatus={this.props.editStatus}
+          dispatch={this.props.dispatch}
+          userData={this.props.userData}
+          lunchData={this.props.lunchData}
+          currentUserId={this.props.match.params._id}
+        
+          editUserProfile={
+            this.editUserProfile
+          }
 
-        handleFullname={
-          this.handleFullname
-        }
+          handleFullname={
+            this.handleFullname
+          }
 
-        handleBudget={
-          this.handleBudget
-        }
+          handleBudget={
+            this.handleBudget
+          }
 
-        handleCuisines={
-          this.handleCuisines
-        }
+          handleCuisines={
+            this.handleCuisines
+          }
 
-        handleInterests={
-          this.handleInterests
-        }
+          handleInterests={
+            this.handleInterests
+          }
 
-        handlePhone={
-          this.handlePhone
-        }
-      />
-    )
-  }  
+          handlePhone={
+            this.handlePhone
+          }
+        />
+      )
+    }
+  }
 }
 
 function mapStateToProps(state) {

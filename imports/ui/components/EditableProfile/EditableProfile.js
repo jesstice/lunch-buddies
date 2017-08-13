@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import FilterList from '../../components/FilterList/FilterList';
+import FilterList from '../../containers/FilterList/FilterList';
 import './styles.css';
 
 
