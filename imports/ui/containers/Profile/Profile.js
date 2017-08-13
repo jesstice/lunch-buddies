@@ -77,6 +77,7 @@ const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, user
       </div>
     : null
     }
+    </div>
   </div>
 );
 
