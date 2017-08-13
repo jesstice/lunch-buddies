@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
+import NewLunchSelectors from '../../containers/NewLunchSelectors/';
 
 import './styles.css';
 
@@ -13,7 +14,7 @@ const InvitationModal = ({handleLunchFlip, handleLunchCreation, handleInvitation
         <li>
           <p>You are about to invite <b>{inviteeName}</b></p>
           <div>
-            <p>Select Your Budget:</p>
+            <NewLunchSelectors />
           </div>
           <p>Invite sent: 5 mins ago</p>
           <div>
