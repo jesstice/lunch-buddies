@@ -22,11 +22,11 @@ export const editProfile = (edits) => {
   })
 }
 
-// update buddy pending lunch
-export const sendInvite = (user, inviteeId) => {
-  Meteor.users.update(inviteeId, {
-    $push: {
-      pendingLunches: user.currentLunch
+// update buddy pending lunch - $addToSet updates only if the value is unique;
+export const sendInvite = (lunchId, inviteeId) => {
+  Meteor.users.update({ _id: inviteeId }, {
+    $addToSet: {
+      pendingLunches: lunchId
     }
   })
 }

@@ -6,7 +6,7 @@ import Selector from '../../containers/Selector/';
 
 import './styles.css';
 
-const InvitationModal = ({handleLunchFlip, handleLunchCreation}) => {
+const InvitationModal = ({handleLunchFlip, handleLunchCreation, handleInvitation}) => {
 
   return (
     <Dialog open={true}>
@@ -23,7 +23,7 @@ const InvitationModal = ({handleLunchFlip, handleLunchCreation}) => {
               primary
               className="invitationButton"
               icon={<i className="fa fa-check" aria-hidden="true"></i>}
-              onTouchTap={()=>{handleLunchCreation()}}
+              onTouchTap={()=>{handleInvitation()}}
             />
             <RaisedButton
               label="Cancel"

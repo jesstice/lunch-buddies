@@ -7,7 +7,16 @@ import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
 class InvitationalModalContainer extends Component {
   handleInvitation = () => { //check mycurrentlunch, if null > handleLunchCreation, otherwise push current lunch id into pending lunches of invitee;
     const user = Meteor.user();
-    console.log(user);
+    const user_id = Meteor.userId();
+    const invitee = "PokcAFPzqWQYjgbSu"; //gonna be this.props.invitee;
+    user.profile.currentLunch ? Meteor.call('users.sendInvite', {user, invitee}, (error) =>{
+      if(error) {
+        console.log(error.reason);
+      } else {
+        console.log('looks like a win');
+      }
+    } ) : console.log('fail') //handle creation;
+   // console.log(user);
   }
   handleLunchCreation = () => {
     const user_id = Meteor.userId(); 
@@ -37,6 +46,7 @@ class InvitationalModalContainer extends Component {
       
       <InvitationalModal  handleLunchCreation={this.handleLunchCreation} 
                           handleLunchFlip={this.handleLunchFlip}  
+                          handleInvitation={this.handleInvitation}
                           
       />
       
