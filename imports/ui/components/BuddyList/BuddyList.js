@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import BuddyListItem from '../BuddyListItem/BuddyListItem';
 import { createContainer } from 'meteor/react-meteor-data';
 
-const BuddyList = ({ users, cuisine }) => {
+const BuddyList = ({ users, handleLunch }) => {
   const buds = users.map((buddy)=> {
-    return ( <BuddyListItem userData={buddy} key={buddy._id} /> )
+    return ( <BuddyListItem userData={buddy} key={buddy._id} handleLunch={handleLunch} /> )
   })
   return (
     <div className="buddyListWrapper">

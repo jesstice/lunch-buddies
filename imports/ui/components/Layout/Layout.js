@@ -1,7 +1,8 @@
 import React from 'react';
 import HeaderBar from '../HeaderBar/';
+import MyInvites from '../../containers/MyInvites/';
+
 import './styles.css';
-//import MiniLunchInvites from '../MiniLunchInvites/MiniLunchInvites';
 
 const Layout = ({children}) => {
   return (
@@ -9,6 +10,7 @@ const Layout = ({children}) => {
       <div className="app-header">
         <HeaderBar />
       </div>
+      <MyInvites />
       <div className="app-content">
           {children}
       </div>

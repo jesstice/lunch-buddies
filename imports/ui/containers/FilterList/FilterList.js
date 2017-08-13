@@ -2,7 +2,7 @@ import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Selector from '../../containers/Selector/index';
+import Selector from '../../components/Selector/index';
 import { filterByBudget, filterByInterests, filterByCuisine} from '../../../../client/redux/modules/filters';
 import './styles.css';
 

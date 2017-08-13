@@ -3,8 +3,12 @@ import SignUp from '../../components/SignUp/SignUp';
 import LunchInvites from '../../components/LunchInvites/LunchInvites';
 import BuddyListItem from '../../components/BuddyListItem/';
 import RaisedButton from 'material-ui/RaisedButton';
+
 import Loader from '../../components/Loader/Loader';
 import EditableProfile from '../../components/EditableProfile/EditableProfile';
+
+import Paper from 'material-ui/Paper';
+
 import './styles.css';
 import {
   updateEmailField,
@@ -34,46 +38,45 @@ handleInterests = (event) => {
 }
 
 
-const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone }) => (
-
+const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData }) => (
   <div className="profileContainer">
     <div>
-      {(!editStatus && userData) ?
-        <BuddyListItem userData={userData[0]} />
-        :
-        (editStatus && userData) ?
-          <EditableProfile
+      {editStatus && currentUserId === Meteor.userId() ?
+        <EditableProfile
             userData={userData[0]}
-
             editUserProfile={editUserProfile}
-
             handleFullname={handleFullname}
-
             handleBudget={handleBudget}
-
             handleCuisines={handleCuisines}
-
             handleInterests={handleInterests}
-
             handlePhone={handlePhone}
-
             dispatch={dispatch}
-          />
-          :
-          <Loader />
+         />
+      :
+        <BuddyListItem userData={userData[0]} />
       }
-      <RaisedButton
-        label={editStatus ? "Cancel" : "Edit Profile"}
-        onTouchTap={() => dispatch(updateEditStatus())}
-        secondary={true}
-        className="profileButton"
-      />
+      {currentUserId === Meteor.userId() ?
+        <RaisedButton
+          label={editStatus ? "Cancel" : "Edit Profile"}
+          onTouchTap={() => dispatch(updateEditStatus())}
+          secondary
+          className="profileButton"
+        />
+      : null
+      }
     </div>
-    <div className="inviteContainer">
-      <LunchInvites
-        userData={userData}
-      />
-    </div>
+    <div>
+    {currentUserId === Meteor.userId() ?
+      <div className="inviteContainer">
+        <Paper className="invitePaper" zDepth={3}>
+          <LunchInvites
+            userData={userData}
+            lunchData={lunchData}
+          />
+        </Paper>
+      </div>
+    : null
+    }
   </div>
 );
 

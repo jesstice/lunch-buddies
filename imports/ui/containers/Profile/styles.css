@@ -47,4 +47,7 @@
 .profileContainer .filterList {
   display: flex;
   flex-direction: column;
+
+.invitePaper {
+  padding: 1rem 2rem;
 }
