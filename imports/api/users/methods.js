@@ -22,7 +22,7 @@ export const editProfile = (edits) => {
   })
 }
 
-// update buddy pending lunch - $addToSet updates only if the value is unique;
+// update buddy pending lunch - $addToSet updates only if the value is unique; //just testing pc git
 export const sendInvite = (lunchId, inviteeId) => {
   Meteor.users.update({ _id: inviteeId }, {
     $addToSet: {
