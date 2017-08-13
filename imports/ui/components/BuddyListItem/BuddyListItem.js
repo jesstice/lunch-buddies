@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Gravatar from 'react-gravatar';
 import Paper from 'material-ui/Paper';
@@ -69,4 +69,4 @@ const BuddyListItem = ({ userData, handleLunch }) => {
   }
 };
 
-export default BuddyListItem;
+export default withRouter(BuddyListItem);
