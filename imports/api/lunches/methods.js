@@ -6,20 +6,20 @@ import moment from 'moment';
 // LUNCH METHODS
 
 // insert new lunch
-export const createLunch = ({user, options}) => {
+export const createLunch = ({user_id, options}) => {
   const lunchId = Random.id();
   const cr_time = new Date();
   const due_time = moment().hour(24).format('YYYYMMDDHH');
     Lunches.insert({
-      id: lunchId,
+      _id: lunchId,
       createdOn: cr_time,
       due: due_time,
       budget: [options.budget],
-      buddies: [user],
+      buddies: [user_id],
       cuisines: [options.cuisines]
     });
 
-  Meteor.users.update(user, {
+  Meteor.users.update(user_id, {
     $set: {
       "profile.currentLunch": lunchId
     }

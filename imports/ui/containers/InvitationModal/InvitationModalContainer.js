@@ -8,12 +8,12 @@ class InvitationalModalContainer extends Component {
   handleInvitation = () => { //check mycurrentlunch, if null > handleLunchCreation, otherwise push current lunch id into pending lunches of invitee;
     const user = Meteor.user();
     const user_id = Meteor.userId();
-    const invitee = "PokcAFPzqWQYjgbSu"; //gonna be this.props.invitee;
+    const invitee = "2tGKaMCRqgWPu5ADW"; //gonna be this.props.invitee;
     user.profile.currentLunch ? Meteor.call('users.sendInvite', {user, invitee}, (error) =>{
       if(error) {
         console.log(error.reason);
       } else {
-        console.log('looks like a win');
+        this.props.dispatch(flipCreateLunchModal());
       }
     } ) : console.log('fail') //handle creation;
    // console.log(user);
@@ -31,7 +31,7 @@ class InvitationalModalContainer extends Component {
         if (error) {
           console.log("There was an error: " + error.reason);
         } else {
-          this.props.history.push('/')
+          console.log('possible success');//this.props.history.push('/')
         }
       }
       )

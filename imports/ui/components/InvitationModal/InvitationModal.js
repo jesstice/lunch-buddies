@@ -26,6 +26,13 @@ const InvitationModal = ({handleLunchFlip, handleLunchCreation, handleInvitation
               onTouchTap={()=>{handleInvitation()}}
             />
             <RaisedButton
+              label="Create Lunch"
+              primary
+              className="invitationButton"
+              icon={<i className="fa fa-check" aria-hidden="true"></i>}
+              onTouchTap={()=>{handleLunchCreation()}}
+            />
+            <RaisedButton
               label="Cancel"
               secondary
               className="invitationButton"

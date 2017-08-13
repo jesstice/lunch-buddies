@@ -101,7 +101,7 @@ Meteor.methods({
 
   },
 
-  'users.sendInvite'({user, inviteeId}) {
+  'users.sendInvite'({user, invitee}) {
      if (!this.userId ) {
       throw new Meteor.Error(
         'users.sentInvite.not-authorized',
@@ -109,7 +109,7 @@ Meteor.methods({
       )
     }
     lunchId = user.profile.currentLunch;
-    sendInvite(lunchId, inviteeId);
+    sendInvite(lunchId, invitee);
   },
 
   'users.inviteUser'(user, options) {

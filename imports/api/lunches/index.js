@@ -9,9 +9,9 @@ import {
 export const Lunches = new Mongo.Collection('lunches');
 Meteor.methods({
 
-  'lunches.createLunch'({user, options}) {
+  'lunches.createLunch'({user_id, options}) {
      if (lunchSchema.namedContext('validateLunch').validate(options)) {
-      createLunch({user, options});
+      createLunch({user_id, options});
      } else {
        console.log('Validation fail')
      }
