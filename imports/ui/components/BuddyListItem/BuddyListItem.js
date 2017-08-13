@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Gravatar from 'react-gravatar';
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 import Loader from '../Loader/index';
 import './styles.css';
 
 
-const BuddyListItem = ({ userData }) => {
-
+const BuddyListItem = ({ userData, handleLunch }) => {
+  user_id = Meteor.userId();
   if (userData) {
     return (
       <div className="buddyListItemWrapper">
@@ -35,7 +36,7 @@ const BuddyListItem = ({ userData }) => {
                 <h1>Interests</h1>
                 <ul>
                   {userData.profile.interests.map((interest, index) => (
-                    <li>{interest}</li>
+                    <li key={index}>{interest}</li>
                   ))}
                 </ul>
               </div>
@@ -43,10 +44,19 @@ const BuddyListItem = ({ userData }) => {
                 <h1>Cuisines</h1>
                 <ul>
                   {userData.profile.cuisines.map((cuisine, index) => (
-                    <li>{cuisine}</li>
+                    <li key={index}>{cuisine}</li>
                   ))}
                 </ul>
               </div>
+                 { user_id !== userData._id  ?      
+                 <RaisedButton
+              label="Invite"
+              primary
+              className="invitationButton"
+              icon={<i className="fa fa-check" aria-hidden="true"></i>}
+              onTouchTap={()=>{handleLunch(userData._id, userData.profile.fullName)}}
+            />
+              : null   }
             </div>
           </Paper>
         </li>

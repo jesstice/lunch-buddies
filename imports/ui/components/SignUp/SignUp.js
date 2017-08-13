@@ -5,10 +5,8 @@ import LoginForm from 'grommet/components/LoginForm';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import Selector from '../../containers/Selector/index';
-import FilterList from '../../components/FilterList/FilterList';
+import FilterList from '../../containers/FilterList/';
 import './styles.css';
 
 

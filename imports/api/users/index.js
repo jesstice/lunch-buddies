@@ -101,15 +101,15 @@ Meteor.methods({
 
   },
 
-  'users.sendInvite'(user, inviteeId) {
+  'users.sendInvite'({user, invitee}) {
      if (!this.userId ) {
       throw new Meteor.Error(
         'users.sentInvite.not-authorized',
         'You must be logged in to send invite.'
       )
     }
-
-    sendInvite(user, inviteeId);
+    lunchId = user.profile.currentLunch;
+    sendInvite(lunchId, invitee);
   },
 
   'users.inviteUser'(user, options) {
