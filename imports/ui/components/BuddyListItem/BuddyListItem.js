@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Gravatar from 'react-gravatar';
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 import Loader from '../Loader/index';
 import './styles.css';
 
 
-const BuddyListItem = ({ userData }) => {
+const BuddyListItem = ({ userData, handleLunch }) => {
 
   if (userData) {
     return (
@@ -47,6 +48,13 @@ const BuddyListItem = ({ userData }) => {
                   ))}
                 </ul>
               </div>
+                          <RaisedButton
+              label="Invite"
+              primary
+              className="invitationButton"
+              icon={<i className="fa fa-check" aria-hidden="true"></i>}
+              onTouchTap={()=>{handleLunch()}}
+            />
             </div>
           </Paper>
         </li>

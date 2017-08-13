@@ -1,20 +1,20 @@
-import Paper from 'material-ui/Paper';
+import React from 'react';
+import Dialog from 'material-ui/Dialog';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
 import Selector from '../../containers/Selector/';
 
 import './styles.css';
 
-const InvitationModal = () => {
+const InvitationModal = ({handleLunchFlip, handleLunchCreation}) => {
 
   return (
-    <Paper zDepth={3}>
+    <Dialog open={true}>
       <ul>
         <li>
           <p>Invite buddyName!</p>
           <div>
             <p>Select Your Budget:</p>
-            <Selector />
           </div>
           <p>Invite sent: 5 mins ago</p>
           <div>
@@ -22,18 +22,20 @@ const InvitationModal = () => {
               label="Invite"
               primary
               className="invitationButton"
-              icon={<i class="fa fa-check" aria-hidden="true"></i>}
+              icon={<i className="fa fa-check" aria-hidden="true"></i>}
+              onTouchTap={()=>{handleLunchCreation()}}
             />
             <RaisedButton
               label="Cancel"
               secondary
               className="invitationButton"
-              icon={<i class="fa fa-times" aria-hidden="true"></i>}
+              icon={<i className="fa fa-times" aria-hidden="true"></i>}
+              onTouchTap={()=>{handleLunchFlip()}}
             />
           </div>
         </li>
       </ul>
-    </Paper>
+    </Dialog>
   );
 }
 

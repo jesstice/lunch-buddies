@@ -35,7 +35,6 @@ const Lunch = ({handleLunchCreation}) => {
             label="Leave this lunch"
             primary={true}
             style={styles.button}
-            onTouchTap={()=>{handleLunchCreation()}}
           />
         </div>
       </Paper>

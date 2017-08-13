@@ -25,7 +25,7 @@ const Routes = () => {
           <Route exact path="/" component={Home} />
            <Route exact path="/profile/:_id" component={Profile} /> 
           {/* <Route exact path="/profile" component={Profile} /> */}
-           <Route exact path="/mylunch" component={Lunch} /> 
+          <Route exact path="/mylunch" component={Lunch} /> 
           <Route component={NotFound} />
           {/* TO DO: replace when sign up configured
           <Public exact path="/login" component={Login} />
