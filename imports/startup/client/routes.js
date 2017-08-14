@@ -15,19 +15,19 @@ import Profile from '../../ui/containers/Profile/index';
 import Lunch from '../../ui/containers/Lunch/index';
 import NotFound from '../../ui/components/NotFound/index';
 // import Public from ...
-// import Authenticated from ...
+import Authenticated from '../../ui/components/Authenticated/';
 
 const Routes = () => {
-    return ( 
-        <Switch>
-          <Route exact path="/login" component={Login} /> 
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/" component={Home} />
-           <Route exact path="/profile/:_id" component={Profile} /> 
-          {/* <Route exact path="/profile" component={Profile} /> */}
-          <Route exact path="/mylunch" component={Lunch} /> 
-          <Route component={NotFound} />
-          {/* TO DO: replace when sign up configured
+  return (
+    <Switch>
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={SignUp} />
+      <Authenticated exact path="/" component={Home} />
+      <Authenticated exact path="/profile/:_id" component={Profile} />
+      {/* <Route exact path="/profile" component={Profile} /> */}
+      <Authenticated exact path="/mylunch" component={Lunch} />
+      <Authenticated component={NotFound} />
+      {/* TO DO: replace when sign up configured
           <Public exact path="/login" component={Login} />
           <Public exact path="/signup" component={SignUp} />
           <Authenticated exact path="/" component={Home} />
@@ -35,8 +35,8 @@ const Routes = () => {
           <Authenticated component={NotFound} />
           <Authenticated exact path="/mylunch" component={Lunch} />
           */}
-        </Switch>
-    );
+    </Switch>
+  );
 };
 
 export default Routes;

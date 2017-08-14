@@ -2,9 +2,10 @@ import { Meteor } from 'meteor/meteor'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
-
+import Login from '../../containers/Login/index';
+import Loader from '../Loader/index';
 import HeaderBar from './HeaderBar';
 
 class HeaderBarContainer extends Component {
@@ -13,26 +14,34 @@ class HeaderBarContainer extends Component {
       if (error) {
         console.log("There was an error:" + error.reason);
       } else {
-        this.props.history.push('/login');
+        console.log('logged out')
       }
     });
   }
 
   render() {
-    if (Meteor.userId() && this.props.inviteData) {
-      return (
-        <div>
-          <HeaderBar
-            dispatch={this.props.dispatch}
-            handleLogout={(e) => {
-              this.handleLogout(e);
-            }}
-            numberOfInvites={this.props.inviteData[0].profile.pendingLunches}
-          />
-        </div>
-      );
+    if (Meteor.userId()) {
+      if (this.props.inviteData) {
+        return (
+          <div>
+            <HeaderBar
+              dispatch={this.props.dispatch}
+              handleLogout={this.handleLogout}
+              numberOfInvites={this.props.inviteData[0].profile.pendingLunches}
+            />
+          </div>
+        );
+      } else {
+        return (
+          <Loader />
+        )
+      }
     } else {
-      return null;
+      return (
+        <Redirect
+          to={'/login'}
+        />
+      )
     }
   }
 }
@@ -50,6 +59,7 @@ const ExtendedHeaderBarContainer = createContainer(() => {
   !usersSub.ready() ? (users = null) : (inviteData = Meteor.users.find({ _id: Meteor.userId() }).fetch());
   return {
     inviteData,
-  } }, HeaderBarContainer);
+  }
+}, HeaderBarContainer);
 
 export default connect(mapStateToProps)(ExtendedHeaderBarContainer);
