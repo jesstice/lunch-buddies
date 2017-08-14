@@ -70,7 +70,7 @@ const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, user
       <div className="inviteContainer">
         <Paper className="invitePaper" zDepth={3}>
           <LunchInvites
-            userData={userData}
+            userData={userData[0]}
             lunchData={lunchData}
           />
         </Paper>

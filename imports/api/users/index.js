@@ -5,7 +5,9 @@ import {
   editProfile,
   sendInvite,
   removeLunch,
-  createUser
+  createUser,
+  acceptInvite,
+  removeInvite
 } from './methods';
 import {
   createLunch,
@@ -146,7 +148,7 @@ Meteor.methods({
     removeInvite(lunchId);
   },
 
-  'users.acceptInvite'(user, lunchId) {
+  'users.acceptInvite'({user, lunchId}) {
     if (!this.userId ) {
       throw new Meteor.Error(
         'users.inviteUser.not-authorized',

@@ -30,23 +30,6 @@ const MyInvites = ({ openStatus, lunchData, userData, loading }) => {
     </Drawer>
   );
 
-  // return (
-  //   <Drawer
-  //     width={300}
-  //     openSecondary={true}
-  //     open={openStatus}
-  //   >
-  //     <AppBar
-  //       className="invitesTitle"
-  //       title="My Invites"
-  //       showMenuIconButton={false}
-  //     />
-  //     <LunchInvites
-  //       userData={userData}
-  //       lunchData={lunchData}
-  //     />
-  //   </Drawer>
-  // );
 }
 
 export default MyInvites;
