@@ -22,7 +22,7 @@ Meteor.startup(() => {
         interests: ['crab juice', 'dance dance legislation'],
         cuisines: ['Italian', 'Chinese', 'Japanese', 'Burgerland'],
         currentLunch: null,
-        pendingLunches: []
+        pendingLunches: ['JKhH7jty4tKWmaMP4', '5koffyFvg9AeLxGEX']
       }
     });
     user2 = Accounts.createUser({

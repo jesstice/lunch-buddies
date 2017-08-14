@@ -7,14 +7,34 @@ import Loader from '../../components/Loader/';
 
 class MyInvitesContainer extends Component {
 
+  filterLunchData = (user) => {
+    pendingIds = user.profile.pendingLunches;
+    pendingLunches = this.props.lunchData;
+
+    pendingLunches = pendingLunches.filter((lunch) => pendingIds.find(id => lunch._id === id));
+    return pendingLunches;
+  }
+
+  acceptInvite = (user, lunchId) => {
+    Meteor.call('users.acceptInvite', {user, lunchId})
+  }
+
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
+    const { currentUser } = this.props;
+    let filteredLunchData;
+    // filteredLunchData = this.filterLunchData(currentUser);
+    
+    if (!loading) {
+      filteredLunchData = this.filterLunchData(currentUser);
+      console.log(filteredLunchData);
+    }
 
     return (
       <MyInvites
         openStatus={this.props.openStatus}
-        userData={this.props.userData} 
-        lunchData={this.props.lunchData}
+        userData={currentUser}
+        lunchData={filteredLunchData}
         loading={loading}
       />
     )
@@ -27,18 +47,18 @@ function mapStateToProps(state) {
   };
 }
 
-let pendingIds = ['ZPGdi8WgN9rcfhATr', 'hmjDyDz2BhbaiNYoc'];
 
 const ExtendedMyInvitesContainer = createContainer(() => {
   const usersSub = Meteor.subscribe('users');
   const loadingUsers = !usersSub.ready();
-  const userData = Meteor.users.find({ _id: Meteor.userId() }).fetch();
+  const userData = Meteor.users.find().fetch();
 
   const lunchSub = Meteor.subscribe('lunches');
   const loadingLunch = !lunchSub.ready();
-  const lunchData = Lunches.find({ tempId: { $in: pendingIds } }).fetch();
+  const lunchData = Lunches.find().fetch();
 
   return {
+    currentUser: Meteor.user(),
     userData,
     loadingUsers,
     lunchData,

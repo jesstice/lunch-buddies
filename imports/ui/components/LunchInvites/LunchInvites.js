@@ -29,39 +29,37 @@ const LunchInvites = ({ userData, lunchData }) => {
             label="Accept"
             primary
             className="lunchButton"
-            icon={<i className="fa fa-check" aria-hidden="true"></i>}
           />
           <RaisedButton
             label="Decline"
             secondary
             className="lunchButton"
-            icon={<i className="fa fa-times" aria-hidden="true"></i>}
           />
         </div>
       </li>
     )
   })
 
-    return (
-      <div>
-        <div className="availability">
-          <h2>Availability: </h2>
-          <Toggle
-            disabled={ userData[0].profile.currentLunch ? true : false }
-          />
-        </div>
-        <h2>Lunch Invitations!</h2>
-        <ul>
-          {!userData[0].profile.pendingLunches && userData[0].profile.pendingLunches < 0 ?
-            <li>
-              <p> Looks like you have no invites! Go invite a buddy to lunch! :&lpar; </p>
-            </li>
-            :
-            invites
-          }
-        </ul>
+  return (
+    <div>
+      <div className="availability">
+        <h2>Availability: </h2>
+        <Toggle
+          disabled={ !userData.profile.currentLunch ? false : true }
+        />
       </div>
-    )
+      <h2>Lunch Invitations!</h2>
+      <ul>
+        {!userData.profile.pendingLunches && userData.profile.pendingLunches < 0 ?
+          <li>
+            <p> Looks like you have no invites! Go invite a buddy to lunch! :&lpar; </p>
+          </li>
+          :
+          invites
+        }
+      </ul>
+    </div>
+  )
 
 }
 
