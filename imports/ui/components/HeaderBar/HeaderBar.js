@@ -6,11 +6,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
-import { toggleMyInvites } from '../../../../client/redux/modules/invites';
 
 import './styles.css';
 
-const HeaderBar = ({ handleLogout, numberOfInvites, dispatch }) => {
+const HeaderBar = ({ handleLogout, numberOfInvites, dispatch, toggleOpenMyInvites }) => {
   const userId = Meteor.userId();
 
   if(userId) {
@@ -35,7 +34,7 @@ const HeaderBar = ({ handleLogout, numberOfInvites, dispatch }) => {
           <IconButton
             className="icon-button"
             tooltip="My Invites"
-            onTouchTap={() => dispatch(toggleMyInvites())}
+            onTouchTap={() => toggleOpenMyInvites()}
           >
             <img className="badge-icon" src={'/images/icecream.svg'}/>
           </IconButton>
