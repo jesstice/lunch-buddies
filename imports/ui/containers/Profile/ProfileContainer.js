@@ -16,21 +16,20 @@ import Loader from '../../components/Loader/';
 class ProfileContainer extends Component {
 
   editUserProfile = () => {
-    const updateFullnameField = this.props.updateFullnameField;
-    const updatePhoneField = this.props.updatePhoneField;
-    const interestsFilters = this.props.interestsFilters;
-    const cuisineFilters = this.props.cuisineFilters;
-    const budgetFilters = this.props.budgetFilters;
-    
+    const fullName = this.props.updateFullnameField;
+    const phoneNumber = this.props.updatePhoneField;
+    const interests = this.props.interestsFilters;
+    const cuisines = this.props.cuisineFilters;
+    const budget = this.props.budgetFilters;
+
     Meteor.call('users.editProfile', {
-      updateFullnameField,
-      updatePhoneField,
-      interestsFilters,
-      cuisineFilters,
-      budgetFilters
+      fullName,
+      phoneNumber,
+      interests,
+      cuisines,
+      budget
     });
   }
-
   handleFullname = (name) => {
     this.props.dispatch(updateFullnameField(name));
   }
