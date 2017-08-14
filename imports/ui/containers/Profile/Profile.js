@@ -17,68 +17,56 @@ import {
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
 
-handleFullname = (event) => {
-  this.props.dispatch(updateFullnameField(event.target.value));
-}
-
-handlePhone = (event) => {
-  this.props.dispatch(updatePhoneField(event.target.value));
-}
-
-handleBudget = (event) => {
-  this.props.dispatch(updateBudgetField(event.target.value));
-}
-
-handleCuisines = (event) => {
-  this.props.dispatch(updateCuisinesField(event.target.value));
-}
-
-handleInterests = (event) => {
-  this.props.dispatch(updateInterestsField(event.target.value));
-}
-
-
-const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData }) => (
-  <div className="profileContainer">
-    <div>
-      {editStatus && currentUserId === Meteor.userId() ?
-        <EditableProfile
-            userData={userData[0]}
-            editUserProfile={editUserProfile}
-            handleFullname={handleFullname}
-            handleBudget={handleBudget}
-            handleCuisines={handleCuisines}
-            handleInterests={handleInterests}
-            handlePhone={handlePhone}
-            dispatch={dispatch}
-         />
-      :
-        <BuddyListItem userData={userData[0]} />
-      }
-      {currentUserId === Meteor.userId() ?
-        <RaisedButton
-          label={editStatus ? "Cancel" : "Edit Profile"}
-          onTouchTap={() => dispatch(updateEditStatus())}
-          secondary
-          className="profileButton"
-        />
-      : null
-      }
-    </div>
-    <div>
-    {currentUserId === Meteor.userId() ?
-      <div className="inviteContainer">
-        <Paper className="invitePaper" zDepth={3}>
-          <LunchInvites
-            userData={userData[0]}
-            lunchData={lunchData}
+const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData, handleLunch }) => {
+const logged_in_user = Meteor.userId()
+const check = (currentUserId === logged_in_user);
+  return (
+   <div className="profileContainer">
+     <div>
+       {editStatus && check ?
+         <EditableProfile
+             userData={userData[0]}
+             editUserProfile={editUserProfile}
+             handleFullname={handleFullname}
+             handlePhone={handlePhone}
+             dispatch={dispatch}
           />
-        </Paper>
-      </div>
-    : null
-    }
-    </div>
-  </div>
-);
+       :
+         <BuddyListItem userData={userData[0]} handleLunch={handleLunch}/>
+       }
+       {check ?
+       (editStatus ?
+         <RaisedButton
+           label={"Cancel"}
+           onTouchTap={() => dispatch(updateEditStatus())}
+           secondary
+           className="profileButton"
+         />
+       : 
+       <RaisedButton
+           label={"Edit Profile"}
+           onTouchTap={() => dispatch(updateEditStatus())}
+           secondary
+           className="profileButton"
+         />)
+      :null
+       }
+     </div>
+     <div>
+     {check ?
+       <div className="inviteContainer">
+         <Paper className="invitePaper" zDepth={3}>
+           <LunchInvites
+             userData={userData[0]}
+             lunchData={lunchData}
+           />
+         </Paper>
+       </div>
+     : null
+     }
+     </div>
+   </div>
+ );
+}
 
 export default Profile;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import { editProfile } from '../../../../client/redux/modules/profile';
+import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
 import Profile from './Profile';
 import { wipeFilterState } from '../../../../client/redux/modules/filters';
 import {
@@ -11,7 +12,7 @@ import {
   updateFullnameField,
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
-
+import InvitationModalContainer from '../InvitationModal/';
 import Loader from '../../components/Loader/';
 
 class ProfileContainer extends Component {
@@ -57,7 +58,9 @@ class ProfileContainer extends Component {
   handlePhone = (phone) => {
     this.props.dispatch(updatePhoneField(phone));
   }
-
+  handleLunch = (invitee_id, fullName) => {
+    this.props.dispatch(flipCreateLunchModal({invitee_id, fullName}));
+  }
 
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
@@ -68,6 +71,7 @@ class ProfileContainer extends Component {
       )
     } else { 
       return (
+        <span>
         <Profile
           updateEditStatus={editProfile}
           editStatus={this.props.editStatus}
@@ -99,7 +103,12 @@ class ProfileContainer extends Component {
           handlePhone={
             this.handlePhone
           }
+          handleLunch={
+            this.handleLunch
+          }
         />
+        <InvitationModalContainer />
+        </span>
       )
     }
   }
@@ -112,7 +121,8 @@ function mapStateToProps(state) {
     updatePhoneField: state.forms.phoneField,
     interestsFilters: state.filters.interestsFilters,
     cuisineFilters: state.filters.cuisineFilters,
-    budgetFilters: state.filters.budgetFilters
+    budgetFilters: state.filters.budgetFilters,
+    showLunch: state.lunch.showLunchInvitation
   };
 }
 
