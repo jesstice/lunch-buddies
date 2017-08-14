@@ -48,7 +48,7 @@ const HeaderBar = ({ handleLogout, numberOfInvites, dispatch }) => (
       className="header-button"
       label="Logout"
       backgroundColor="#a4c639"
-      onClick={handleLogout}
+      onClick={() => handleLogout()}
     />
   </AppBar>
 );
