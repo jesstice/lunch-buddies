@@ -16,12 +16,13 @@ export const createLunch = ({user_id, options}) => {
       due: due_time,
       budget: [options.budget],
       buddies: [user_id],
-      cuisines: [options.cuisines]
+      cuisines: [options.cuisines],
     });
 
   Meteor.users.update(user_id, {
     $set: {
-      "profile.currentLunch": lunchId
+      "profile.currentLunch": lunchId,
+      "profile.availability": false
     }
   })
 }

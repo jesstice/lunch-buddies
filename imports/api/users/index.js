@@ -144,13 +144,7 @@ Meteor.methods({
       )
     }
 
-    Meteor.users.update(this.userId, {
-      $pull: {
-        "profile.pendingLunches": { $in: [lunchId] }
-      }
-    })
-
-    // removeInvite(lunchId);
+    removeInvite(lunchId);
   },
 
   'users.acceptInvite'({user, lunchId}) {
@@ -161,16 +155,7 @@ Meteor.methods({
       )
     }
 
-    Meteor.users.update(this.userId, {
-      $pull: {
-        "profile.pendingLunches": { $in: [lunchId] }
-      },
-      $set: {
-        "profile.currentLunch": lunchId
-      }
-    })
-
-    // acceptInvite(lunchId);
+    acceptInvite(lunchId);
     addLunchBuddy(user);
   }
 });
