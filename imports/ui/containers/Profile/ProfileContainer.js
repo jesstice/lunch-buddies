@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import { editProfile } from '../../../../client/redux/modules/profile';
 import Profile from './Profile';
+import { wipeFilterState } from '../../../../client/redux/modules/filters';
 import {
   updateEmailField,
   updatePasswordField,
@@ -28,6 +29,13 @@ class ProfileContainer extends Component {
       interests,
       cuisines,
       budget
+    }, (error) => {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        this.props.dispatch(wipeFilterState());
+        this.props.dispatch(editProfile());
+      }
     });
   }
   handleFullname = (name) => {
