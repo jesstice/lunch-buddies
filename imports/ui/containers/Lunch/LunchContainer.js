@@ -36,7 +36,7 @@ class LunchContainer extends Component {
           console.log("There was an error: " + error.reason);
         } else {
           // <Redirect to={`/profile/${user._id}`} />
-          this.props.history.push('/')
+          this.props.history.push(`/profile/${user._id}`)
         }
       })
     }
