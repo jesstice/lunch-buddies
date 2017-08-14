@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import MyInvites from './MyInvites';
 import Loader from '../../components/Loader/';
+import { acceptInvite, declineInvite } from '../../../../client/redux/modules/invites';
 
 class MyInvitesContainer extends Component {
 
@@ -15,19 +16,43 @@ class MyInvitesContainer extends Component {
     return pendingLunches;
   }
 
-  acceptInvite = (user, lunchId) => {
+  acceptLunchInvite = () => {
+    user = Meteor.user();
+    const lunchId = this.props.myLunchId;
+
     Meteor.call('users.acceptInvite', {user, lunchId})
+  }
+
+  declineLunchInvite = () => {
+    const lunchId = this.props.myLunchId;
+
+    Meteor.call('users.removeInvite', lunchId)
+  }
+
+  clickAcceptButton = (lunchId) => {
+    this.props.dispatch(acceptInvite(lunchId));
+  }
+
+  clickDeclineButton = (lunchId) => {
+    this.props.dispatch(declineInvite(lunchId));
   }
 
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
     const { currentUser } = this.props;
     let filteredLunchData;
-    // filteredLunchData = this.filterLunchData(currentUser);
     
     if (!loading) {
       filteredLunchData = this.filterLunchData(currentUser);
       console.log(filteredLunchData);
+    }
+
+    if (this.props.acceptInvite && this.props.myLunchId) {
+      this.acceptLunchInvite();
+    }
+
+    if (this.props.declineInvite && this.props.myLunchId) {
+      this.declineLunchInvite();
     }
 
     return (
@@ -36,6 +61,8 @@ class MyInvitesContainer extends Component {
         userData={currentUser}
         lunchData={filteredLunchData}
         loading={loading}
+        acceptButton={this.clickAcceptButton}
+        declineButton={this.clickDeclineButton}
       />
     )
   }
@@ -43,7 +70,10 @@ class MyInvitesContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    openStatus: state.invites.showInvites
+    openStatus: state.invites.showInvites,
+    myLunchId: state.invites.lunchId,
+    acceptInvite: state.invites.accept,
+    declineInvite: state.invites.decline
   };
 }
 

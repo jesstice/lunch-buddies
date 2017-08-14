@@ -15,21 +15,21 @@ Meteor.startup(() => {
       email: 'caramelle@elle.com',
       password: '123456',
       profile: {
-        fullName: 'Kek Pek',
+        fullName: 'Commissioner Gordon',
         phoneNumber: '035-0365-035-30',
         available: true,
         budget: ['10 to 20'],
         interests: ['crab juice', 'dance dance legislation'],
         cuisines: ['Italian', 'Chinese', 'Japanese', 'Burgerland'],
         currentLunch: null,
-        pendingLunches: ['JKhH7jty4tKWmaMP4', '5koffyFvg9AeLxGEX']
+        pendingLunches: []
       }
     });
     user2 = Accounts.createUser({
-      email: 'caramelle@blle.com',
+      email: 'iambatman@batman.com',
       password: '123456',
       profile: {
-        fullName: 'pepe Pek',
+        fullName: 'Bruce Wayne',
         phoneNumber: '035-789-035-30',
         available: true,
         budget: ['10 to 20'],
@@ -39,31 +39,17 @@ Meteor.startup(() => {
         pendingLunches: []
       }
     });
-    user1 = Accounts.createUser({
-      email: 'caramelle@alle.com',
-      password: '123456',
-      profile: {
-        fullName: 'bisha Pek',
-        phoneNumber: '035-999-035-30',
-        available: true,
-        budget: ['10 to 20'],
-        interests: ['dance dance legislation'],
-        cuisines: ['Chinese', 'Burgerland'],
-        currentLunch: null,
-        pendingLunches: []
-      }
-    });
   }
 
-  if(Lunches.find().count() === 0) {
-    const cr_time = new Date();
-    const due_time = moment().hour(24).format('YYYYMMDDHH');
-    Lunches.insert({
-      createdOn: cr_time,
-      due: due_time,
-      buddies: ['MEZRiMghQqAMZaP68'],
-      budget: '10 to 20',
-      cuisines: ['Chinese', 'Burgerland']
-    })
-  }
+  // if(Lunches.find().count() === 0) {
+  //   const cr_time = new Date();
+  //   const due_time = moment().hour(24).format('YYYYMMDDHH');
+  //   Lunches.insert({
+  //     createdOn: cr_time,
+  //     due: due_time,
+  //     buddies: ['MEZRiMghQqAMZaP68'],
+  //     budget: '10 to 20',
+  //     cuisines: ['Chinese', 'Burgerland']
+  //   })
+  // }
 });

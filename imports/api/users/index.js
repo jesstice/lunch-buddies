@@ -13,7 +13,7 @@ import {
   createLunch,
   addLunchBuddy
 } from '../lunches/methods';
-
+import { Lunches } from '../lunches/index';
 
 // Schema
 const profileSchema = new SimpleSchema({
@@ -99,7 +99,6 @@ Meteor.methods({
       editProfile(profileEdits);
     } else {
       console.log(profileEdits);
-      // console.log('Validation failed...');
     }
   },
 
@@ -145,7 +144,13 @@ Meteor.methods({
       )
     }
 
-    removeInvite(lunchId);
+    Meteor.users.update(this.userId, {
+      $pull: {
+        "profile.pendingLunches": { $in: [lunchId] }
+      }
+    })
+
+    // removeInvite(lunchId);
   },
 
   'users.acceptInvite'({user, lunchId}) {
@@ -156,7 +161,16 @@ Meteor.methods({
       )
     }
 
-    acceptInvite(lunchId);
+    Meteor.users.update(this.userId, {
+      $pull: {
+        "profile.pendingLunches": { $in: [lunchId] }
+      },
+      $set: {
+        "profile.currentLunch": lunchId
+      }
+    })
+
+    // acceptInvite(lunchId);
     addLunchBuddy(user);
   }
 });

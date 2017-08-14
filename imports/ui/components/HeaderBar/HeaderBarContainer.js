@@ -7,6 +7,7 @@ import { Accounts } from 'meteor/accounts-base';
 import Login from '../../containers/Login/index';
 import Loader from '../Loader/index';
 import HeaderBar from './HeaderBar';
+import { toggleMyInvites } from '../../../../client/redux/modules/invites';
 
 class HeaderBarContainer extends Component {
   handleLogout() {
@@ -19,6 +20,10 @@ class HeaderBarContainer extends Component {
     });
   }
 
+  toggleOpenMyInvites = () => {
+    this.props.dispatch(toggleMyInvites())
+  }
+
   render() {
     if (Meteor.userId()) {
       if (this.props.inviteData) {
@@ -28,6 +33,7 @@ class HeaderBarContainer extends Component {
               dispatch={this.props.dispatch}
               handleLogout={this.handleLogout}
               numberOfInvites={this.props.inviteData[0].profile.pendingLunches}
+              toggleOpenMyInvites={this.toggleOpenMyInvites}
             />
           </div>
         );
