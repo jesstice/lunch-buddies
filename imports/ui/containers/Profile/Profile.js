@@ -38,7 +38,7 @@ handleInterests = (event) => {
 }
 
 
-const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData }) => (
+const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData, acceptButton, declineButton }) => (
   <div className="profileContainer">
     <div>
       {editStatus && currentUserId === Meteor.userId() ?
@@ -72,6 +72,8 @@ const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, user
           <LunchInvites
             userData={userData[0]}
             lunchData={lunchData}
+            acceptButton={acceptButton}
+            declineButton={declineButton}
           />
         </Paper>
       </div>

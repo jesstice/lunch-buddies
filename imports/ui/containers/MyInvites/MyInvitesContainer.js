@@ -8,11 +8,25 @@ import { acceptInvite, declineInvite } from '../../../../client/redux/modules/in
 
 class MyInvitesContainer extends Component {
 
+  addNamesToLunch = (pendingLunches) => {
+    userData = this.props.userData;
+
+    updatedPendingLunches = pendingLunches.map(lunch => {
+      lunch.buddies = lunch.buddies.map((buddy) => {
+        buddy = userData.filter(user => user._id === buddy)
+        return buddy;
+      });
+      return lunch;
+    });
+    return updatedPendingLunches;
+  }
+
   filterLunchData = (user) => {
     pendingIds = user.profile.pendingLunches;
     pendingLunches = this.props.lunchData;
 
     pendingLunches = pendingLunches.filter((lunch) => pendingIds.find(id => lunch._id === id));
+    pendingLunches = this.addNamesToLunch(pendingLunches);
     return pendingLunches;
   }
 
@@ -43,8 +57,7 @@ class MyInvitesContainer extends Component {
     let filteredLunchData;
     
     if (!loading) {
-      filteredLunchData = this.filterLunchData(currentUser);
-      console.log(filteredLunchData);
+      filteredLunchData = this.filterLunchData(currentUser);;
     }
 
     if (this.props.acceptInvite && this.props.myLunchId) {
