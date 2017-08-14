@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Loader from '../Loader/';
 import './styles.css';
 
-const LunchInvites = ({ userData, lunchData, acceptButton, declineButton }) => {
+const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availabilityStatus }) => {
 
   const invites = lunchData.map((lunch) => {
     return (
@@ -38,7 +38,8 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton }) => {
       <div className="availability">
         <h2>Availability: </h2>
         <Toggle
-          disabled={ !userData.profile.currentLunch ? false : true }
+          onToggle={() => availabilityStatus()}
+          toggled={ userData.profile.availability ? true : false }
         />
       </div>
       <h2>Lunch Invitations!</h2>

@@ -51,6 +51,10 @@ class MyInvitesContainer extends Component {
     this.props.dispatch(declineInvite(lunchId));
   }
 
+  updateAvailabilityStatus = () => {
+    Meteor.call('users.updateAvailability');
+  }
+
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
     const { currentUser } = this.props;
@@ -76,6 +80,7 @@ class MyInvitesContainer extends Component {
         loading={loading}
         acceptButton={this.clickAcceptButton}
         declineButton={this.clickDeclineButton}
+        availabilityStatus={this.updateAvailabilityStatus}
       />
     )
   }
