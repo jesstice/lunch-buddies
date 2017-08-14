@@ -28,8 +28,8 @@ export const createLunch = ({user_id, options}) => {
 
 // update lunch with new buddy
 export const addLunchBuddy = (user) => {
-  Lunches.find({ _id: user.profile.currentLunch }).update({
-    $push: {
+  Lunches.update({ _id: user.profile.currentLunch }, {
+    $addToSet: {
       buddies: user._id
     }
   })

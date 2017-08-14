@@ -13,7 +13,7 @@ import {
   createLunch,
   addLunchBuddy
 } from '../lunches/methods';
-
+import { Lunches } from '../lunches/index';
 
 // Schema
 const profileSchema = new SimpleSchema({
@@ -99,7 +99,6 @@ Meteor.methods({
       editProfile(profileEdits);
     } else {
       console.log(profileEdits);
-      // console.log('Validation failed...');
     }
   },
 
