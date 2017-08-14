@@ -11,6 +11,7 @@ import './styles.css';
 
 const HeaderBar = ({ handleLogout, numberOfInvites, dispatch, toggleOpenMyInvites }) => {
   const userId = Meteor.userId();
+  const user = Meteor.user();
 
   if(userId) {
     return (
@@ -39,6 +40,16 @@ const HeaderBar = ({ handleLogout, numberOfInvites, dispatch, toggleOpenMyInvite
             <img className="badge-icon" src={'/images/icecream.svg'}/>
           </IconButton>
         </Badge>
+        {(user.profile.currentLunch) ?
+        <RaisedButton
+          className="header-button"
+          label="My Lunch"
+          containerElement={<Link to={'/mylunch'} />}
+          labelPosition="before"
+          backgroundColor="#a4c639"
+          icon={<img className="header-icon" src={'/images/burger.svg'}/>}
+        />
+        :null}
         <RaisedButton
           className="header-button"
           label="Profile"

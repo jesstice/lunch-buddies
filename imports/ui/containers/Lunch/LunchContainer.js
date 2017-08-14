@@ -13,7 +13,7 @@ class LunchContainer extends Component {
   lunchData = this.props.lunchData;
   user = Meteor.user();
 
-  filterCurrentLunch() {
+  filterCurrentLunch = () => {
     allLunches = this.props.lunchData;
     user = Meteor.user();
     filteredLunch = allLunches.filter(lunch => user.profile.currentLunch === lunch._id);
@@ -29,26 +29,26 @@ class LunchContainer extends Component {
     return result;
   }
 
-  leaveCurrentLunch() {
-    Meteor.call('users.removeLunch', (error) => {
-      if (error) {
+  leaveCurrentLunch = () => {
+    if (user.profile.currentLunch) {
+      Meteor.call('users.removeLunch', (error) => {
+        if (error) {
           console.log("There was an error: " + error.reason);
         } else {
           <Redirect to={`/profile/${user._id}`} />
         }
-      });
+      })
     }
-
+  }
 
 
   render() {
     if (this.props.usersSub && this.props.lunchSub) {
       filteredLunch = this.filterCurrentLunch();
-      leaveCurrentLunch = this.leaveCurrentLunch();
       return (
         <Lunch
           filteredLunch={filteredLunch}
-          leaveCurrentLunch={leaveCurrentLunch}
+          leaveCurrentLunch={this.leaveCurrentLunch}
         />
       )
     } else {
@@ -62,12 +62,6 @@ const ExtendedLunchContainer = createContainer(function () {
   const lunchSub = Meteor.subscribe('lunches').ready();
   Meteor.subscribe('users').ready();
   Meteor.subscribe('lunches').ready();
-
-  //const loadingUsers = !usersSub;
-  //const loadingLunch = !lunchSub;
-  // const lunchData = Lunches.find().fetch();
-  // const userData = Meteor.users.find().fetch();
-
 
   return {
     userData: Meteor.users.find().fetch(),

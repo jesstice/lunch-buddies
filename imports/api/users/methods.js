@@ -34,7 +34,7 @@ export const sendInvite = (lunchId, invitee) => {
 
 // remove user current lunch
 export const removeLunch = () => {
-  Meteor.users.update(this.userId, {
+  Meteor.users.update(Meteor.userId(), {
     $set: {
       "profile.currentLunch": null
     }

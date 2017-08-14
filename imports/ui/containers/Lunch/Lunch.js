@@ -6,7 +6,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
 import './styles.css';
 
-// TO DO: Add "Leave Lunch" button
 
 const styles = {
   button: {
@@ -68,7 +67,7 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
               label="Leave this lunch"
               primary={true}
               style={styles.button}
-              onTouchTap={()=>{leaveCurrentLunch()}}
+              onTouchTap={() => {leaveCurrentLunch()}}
             />
           </div>
         </div>
