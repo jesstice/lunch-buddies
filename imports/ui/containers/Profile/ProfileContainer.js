@@ -3,34 +3,42 @@ import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import { editProfile } from '../../../../client/redux/modules/profile';
+import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
 import Profile from './Profile';
+import { wipeFilterState } from '../../../../client/redux/modules/filters';
 import {
   updateEmailField,
   updatePasswordField,
   updateFullnameField,
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
-
+import InvitationModalContainer from '../InvitationModal/';
 import Loader from '../../components/Loader/';
 
 class ProfileContainer extends Component {
 
   editUserProfile = () => {
-    const updateFullnameField = this.props.updateFullnameField;
-    const updatePhoneField = this.props.updatePhoneField;
-    const interestsFilters = this.props.interestsFilters;
-    const cuisineFilters = this.props.cuisineFilters;
-    const budgetFilters = this.props.budgetFilters;
-    
+    const fullName = this.props.updateFullnameField;
+    const phoneNumber = this.props.updatePhoneField;
+    const interests = this.props.interestsFilters;
+    const cuisines = this.props.cuisineFilters;
+    const budget = this.props.budgetFilters;
+
     Meteor.call('users.editProfile', {
-      updateFullnameField,
-      updatePhoneField,
-      interestsFilters,
-      cuisineFilters,
-      budgetFilters
+      fullName,
+      phoneNumber,
+      interests,
+      cuisines,
+      budget
+    }, (error) => {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        this.props.dispatch(wipeFilterState());
+        this.props.dispatch(editProfile());
+      }
     });
   }
-
   handleFullname = (name) => {
     this.props.dispatch(updateFullnameField(name));
   }
@@ -50,7 +58,9 @@ class ProfileContainer extends Component {
   handlePhone = (phone) => {
     this.props.dispatch(updatePhoneField(phone));
   }
-
+  handleLunch = (invitee_id, fullName) => {
+    this.props.dispatch(flipCreateLunchModal({invitee_id, fullName}));
+  }
 
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
@@ -61,6 +71,7 @@ class ProfileContainer extends Component {
       )
     } else { 
       return (
+        <span>
         <Profile
           updateEditStatus={editProfile}
           editStatus={this.props.editStatus}
@@ -92,7 +103,12 @@ class ProfileContainer extends Component {
           handlePhone={
             this.handlePhone
           }
+          handleLunch={
+            this.handleLunch
+          }
         />
+        <InvitationModalContainer />
+        </span>
       )
     }
   }
@@ -105,7 +121,8 @@ function mapStateToProps(state) {
     updatePhoneField: state.forms.phoneField,
     interestsFilters: state.filters.interestsFilters,
     cuisineFilters: state.filters.cuisineFilters,
-    budgetFilters: state.filters.budgetFilters
+    budgetFilters: state.filters.budgetFilters,
+    showLunch: state.lunch.showLunchInvitation
   };
 }
 
