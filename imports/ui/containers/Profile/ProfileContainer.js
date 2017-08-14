@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import { editProfile } from '../../../../client/redux/modules/profile';
+import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
 import Profile from './Profile';
+import { wipeFilterState } from '../../../../client/redux/modules/filters';
 import {
   updateEmailField,
   updatePasswordField,
@@ -11,27 +13,34 @@ import {
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
 import { acceptInvite, declineInvite } from '../../../../client/redux/modules/invites';
+import InvitationModalContainer from '../InvitationModal/';
 import Loader from '../../components/Loader/';
 
 class ProfileContainer extends Component {
 
   // Edit profile methods
   editUserProfile = () => {
-    const updateFullnameField = this.props.updateFullnameField;
-    const updatePhoneField = this.props.updatePhoneField;
-    const interestsFilters = this.props.interestsFilters;
-    const cuisineFilters = this.props.cuisineFilters;
-    const budgetFilters = this.props.budgetFilters;
-    
+    const fullName = this.props.updateFullnameField;
+    const phoneNumber = this.props.updatePhoneField;
+    const interests = this.props.interestsFilters;
+    const cuisines = this.props.cuisineFilters;
+    const budget = this.props.budgetFilters;
+
     Meteor.call('users.editProfile', {
-      updateFullnameField,
-      updatePhoneField,
-      interestsFilters,
-      cuisineFilters,
-      budgetFilters
+      fullName,
+      phoneNumber,
+      interests,
+      cuisines,
+      budget
+    }, (error) => {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        this.props.dispatch(wipeFilterState());
+        this.props.dispatch(editProfile());
+      }
     });
   }
-
   handleFullname = (name) => {
     this.props.dispatch(updateFullnameField(name));
   }
@@ -50,6 +59,10 @@ class ProfileContainer extends Component {
 
   handlePhone = (phone) => {
     this.props.dispatch(updatePhoneField(phone));
+  }
+  
+  handleLunch = (invitee_id, fullName) => {
+    this.props.dispatch(flipCreateLunchModal({invitee_id, fullName}));
   }
 
   // Accept and decline invite methods
@@ -94,7 +107,6 @@ class ProfileContainer extends Component {
 
   clickDeclineButton = (lunchId) => {
     this.props.dispatch(declineInvite(lunchId));
-  }
 
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
@@ -121,24 +133,28 @@ class ProfileContainer extends Component {
       )
     } else { 
       return (
-        <Profile
-          updateEditStatus={editProfile}
-          editStatus={this.props.editStatus}
-          dispatch={this.props.dispatch}
-          userData={userProfileData}
+        <span>
+          <Profile
+            updateEditStatus={editProfile}
+            editStatus={this.props.editStatus}
+            dispatch={this.props.dispatch}
+            userData={userProfileData}
 
-          editUserProfile={this.editUserProfile}
-          handleFullname={this.handleFullname}
-          handleBudget={this.handleBudget}
-          handleCuisines={this.handleCuisines}
-          handleInterests={this.handleInterests}
-          handlePhone={this.handlePhone}
+            editUserProfile={this.editUserProfile}
+            handleFullname={this.handleFullname}
+            handleBudget={this.handleBudget}
+            handleCuisines={this.handleCuisines}
+            handleInterests={this.handleInterests}
+            handlePhone={this.handlePhone}
+            handleLunch={this.handleLunch}
 
-          lunchData={filteredLunchData}
-          currentUserId={match.params._id}
-          acceptButton={this.clickAcceptButton}
-          declineButton={this.clickDeclineButton}
-        />
+            lunchData={filteredLunchData}
+            currentUserId={match.params._id}
+            acceptButton={this.clickAcceptButton}
+            declineButton={this.clickDeclineButton}
+          />
+          <InvitationModalContainer />
+        </span>
       )
     }
   }
@@ -154,7 +170,8 @@ function mapStateToProps(state) {
     budgetFilters: state.filters.budgetFilters,
     myLunchId: state.invites.lunchId,
     acceptInvite: state.invites.accept,
-    declineInvite: state.invites.decline
+    declineInvite: state.invites.decline,
+    showLunch: state.lunch.showLunchInvitation
   };
 }
 

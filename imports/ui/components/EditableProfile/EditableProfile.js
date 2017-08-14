@@ -10,7 +10,7 @@ import './styles.css';
 
 const EditableProfile = ({ updateFullnameField, updatePhoneField, editUserProfile, handleEmail, handlePassword, handleFullname, handlePhone, userData, dispatch }) => {
 
-  const user = Meteor.userId();
+  const user = Meteor.user();
 
   return (
     <div className="editProfile">
@@ -19,10 +19,10 @@ const EditableProfile = ({ updateFullnameField, updatePhoneField, editUserProfil
           <div className="formContainer">
             <form onSubmit={(e) => editUserProfile(e.preventDefault())} autoComplete="off">
               <div>
-                <TextField value={(!updateFullnameField) ? userData.profile.fullName : event.target.value} name="Name" hintText="What's your name?" fullWidth label="Name" onChange={(event) => handleFullname(event.target.value)} />
+                <TextField value={updateFullnameField} name="Name" hintText={user.profile.fullName} fullWidth label="Name" onChange={(event) => handleFullname(event.target.value)} />
               </div>
               <div>
-                <TextField value={(!updatePhoneField) ? userData.profile.phoneNumber : event.target.value} name="Phone" hintText="Phone number" fullWidth label="Phone" onChange={(event) => handlePhone(event.target.value)} />
+                <TextField value={updatePhoneField} name="Phone" hintText={user.profile.phoneNumber} fullWidth label="Phone" onChange={(event) => handlePhone(event.target.value)} />
               </div>
               <div>
                 <FilterList />

@@ -73,6 +73,31 @@ const usersSchema = new SimpleSchema({
     type: profileSchema 
   },
 });
+const editSchema = new SimpleSchema({
+  fullName: {
+    type: String,
+    label: "Email"
+  },
+  phoneNumber: {
+    type: String,
+    label: "Phone Number"
+  },
+  interests: {
+    type: Array,
+    label: "Interests"
+  },
+  cuisines: {
+    type: Array,
+    label: "Cuisines"
+  },
+  budget: {
+    type: Array,
+    label: "Budget"
+  },
+  'cuisines.$': { type: String },
+  'interests.$': { type: String },
+  'budget.$': { type: String }
+});
 
 
 // Publications
@@ -95,11 +120,10 @@ Meteor.methods({
         'You are not allowed to update another user\'s profile.'
       )
     }
-
-    if (usersSchema.namedContext('validateEdits').validate(profileEdits)) {
+    if (editSchema.namedContext('validateEdits').validate(profileEdits)) {
       editProfile(profileEdits);
     } else {
-      console.log(profileEdits);
+      console.log("something went wrong \n", profileEdits);
     }
   },
 

@@ -12,7 +12,7 @@ export const createUser = (user) => {
 
 // update user profile
 export const editProfile = (edits) => {
-  Meteor.users.update(this.userId, {
+  Meteor.users.update(Meteor.userId(), { //was failing because of this.userId for some reason;
     $set: {
       "profile.fullName": edits.fullName,
       "profile.phoneNumber": edits.phoneNumber,
