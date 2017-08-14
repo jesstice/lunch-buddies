@@ -14,7 +14,7 @@ const ViewLunch = () => (
   />
 )
 
-const LunchInvites = ({ userData, lunchData }) => {
+const LunchInvites = ({ userData, lunchData, acceptButton, declineButton }) => {
 
   const invites = lunchData.map((lunch) => {
     return (
@@ -29,11 +29,13 @@ const LunchInvites = ({ userData, lunchData }) => {
             label="Accept"
             primary
             className="lunchButton"
+            onTouchTap={() => acceptButton(lunch._id)}
           />
           <RaisedButton
             label="Decline"
             secondary
             className="lunchButton"
+            onTouchTap={() => declineButton(lunch._id)}
           />
         </div>
       </li>

@@ -28,9 +28,9 @@ export const createLunch = ({user_id, options}) => {
 
 // update lunch with new buddy
 export const addLunchBuddy = (user) => {
-  Lunches.find({ id: user.currentLunch }).update({
+  Lunches.find({ _id: user.profile.currentLunch }).update({
     $push: {
-      buddies: user
+      buddies: user._id
     }
   })
 }

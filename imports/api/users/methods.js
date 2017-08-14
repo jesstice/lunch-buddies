@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import { Meteor } from 'meteor/meteor';
 
 // insert new user
 export const createUser = (user) => {
@@ -44,7 +45,7 @@ export const removeLunch = () => {
 export const removeInvite = (lunchId) => {
   Meteor.users.update(this.userId, {
     $pull: {
-      "profile.pendingLunches": { $eq: lunchId }
+      "profile.pendingLunches": { $in: [lunchId] }
     }
   })
 }
@@ -53,7 +54,7 @@ export const removeInvite = (lunchId) => {
 export const acceptInvite = (lunchId) => {
   Meteor.users.update(this.userId, {
     $pull: {
-      "profile.pendingLunches": { $eq: lunchId }
+      "profile.pendingLunches": { $in: [lunchId] }
     },
     $set: {
       "profile.currentLunch": lunchId
