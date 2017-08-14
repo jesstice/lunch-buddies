@@ -6,5 +6,5 @@ Meteor.publish('users', function(){
 });
 
 Meteor.publish('lunches', function() {
-  return Lunches.find({}, {fields: { "id": 1 }});
+  return Lunches.find();
 })

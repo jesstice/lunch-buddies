@@ -13,30 +13,47 @@ const styles = {
   }
 }
 
-const Lunch = ({handleLunchCreation}) => {
+const Lunch = ({ filteredLunch }) => {
   const user = Meteor.user();
   const user_id = Meteor.userId();
+  // const lunchBuddy = 
+
   return (
     <div className="lunchWrapper">
       <Paper zDepth={3}>
-        <div className="lunchBuddies">
-          <h1>Lunch Buddies</h1>
-          <li>
-            <Gravatar email="testemail@gmail.com" className="gravatarImage" size={150}/>
-          </li>
-        </div>
-        <h1>Lunch Details</h1>
-        <p>Budget: $$</p>
-        <p>Cuisine: Italian</p>
-        <div>
-          <RaisedButton
-            href=""
-            target="_blank"
-            label="Leave this lunch"
-            primary={true}
-            style={styles.button}
-          />
-        </div>
+          <div>
+            <div className="lunchBuddies">
+              <h1>Lunch Buddies</h1>
+              <ul>
+                  <li>
+                    <Gravatar email={filteredLunch.names[0][0].emails[0].address} className="gravatarImage" size={150}/>
+                    {filteredLunch.names[0][0].profile.fullName}
+                  </li>
+              </ul>
+            </div>
+            <h1>Lunch Details</h1>
+            <h2>Budget:</h2>
+            <ul>
+              {filteredLunch.filteredLunch[0].budget[0].map((budget, index) => (
+                <li key={index}>{budget}</li>
+              ))}
+            </ul>
+            <h2>Cuisines:</h2>
+            <ul>
+              {filteredLunch.filteredLunch[0].cuisines[0].map((cuisine, index) => (
+                <li key={index}>{cuisine}</li>
+              ))}
+            </ul>
+            <div>
+              <RaisedButton
+                href=""
+                target="_blank"
+                label="Leave this lunch"
+                primary={true}
+                style={styles.button}
+              />
+            </div>
+          </div>
       </Paper>
     </div>
   )
