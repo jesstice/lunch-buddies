@@ -14,9 +14,21 @@ const styles = {
   }
 }
 
-const Lunch = ({ filteredLunch, userData }) => {
+const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
   user = Meteor.user();
   user_id = Meteor.userId();
+
+  const lunchBuds = filteredLunch.names[0].map((name, index) => {
+    return (
+      <li key={index}>
+        <Link to={`/profile/${name._id}`}>
+          <Gravatar email={name.emails[0].address} className="gravatarImage" size={150} />
+        </Link>
+          <p className="lunchBudName">{name.profile.fullName}</p>
+          <p>Interests: {name.profile.interests.join(', ')}</p>
+      </li>
+    )
+  });
 
   return (
     <div className="lunchWrapper">
@@ -25,12 +37,7 @@ const Lunch = ({ filteredLunch, userData }) => {
           <div className="lunchBuddies">
             <h1 className="lunchInfo">Lunch Buddies</h1>
             <ul>
-              <li>
-                <Link to={`/profile/${userData._id}`}>
-                  <Gravatar email={filteredLunch.names[0][0].emails[0].address} className="gravatarImage" size={150} />
-                  <p>{filteredLunch.names[0][0].profile.fullName}</p>
-                </Link>
-              </li>
+              {lunchBuds}
             </ul>
           </div>
           <div className="lunchDetails">
@@ -61,6 +68,7 @@ const Lunch = ({ filteredLunch, userData }) => {
               label="Leave this lunch"
               primary={true}
               style={styles.button}
+              onTouchTap={()=>{leaveCurrentLunch()}}
             />
           </div>
         </div>

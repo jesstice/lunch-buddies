@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter, Redirect } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { connect } from 'react-redux';
 import Lunch from './Lunch';
@@ -10,14 +11,15 @@ import Loader from '../../components/Loader/';
 class LunchContainer extends Component {
   userData = this.props.userData;
   lunchData = this.props.lunchData;
+  user = Meteor.user();
 
   filterCurrentLunch() {
     allLunches = this.props.lunchData;
     user = Meteor.user();
     filteredLunch = allLunches.filter(lunch => user.profile.currentLunch === lunch._id);
     names = filteredLunch[0].buddies.reduce((acc, curr) => {
-      kek = this.props.userData.filter(user => user._id === curr)
-      acc.push(kek);
+      lunchBuddies = this.props.userData.filter(user => user._id === curr)
+      acc.push(lunchBuddies);
       return acc
     }, [])
     result = {
@@ -28,20 +30,25 @@ class LunchContainer extends Component {
   }
 
   leaveCurrentLunch() {
-    Meteor.call('')
-  }
+    Meteor.call('users.removeLunch', (error) => {
+      if (error) {
+          console.log("There was an error: " + error.reason);
+        } else {
+          <Redirect to={`/profile/${user._id}`} />
+        }
+      });
+    }
 
 
 
   render() {
-    userData = this.props.userData;
-
     if (this.props.usersSub && this.props.lunchSub) {
       filteredLunch = this.filterCurrentLunch();
+      leaveCurrentLunch = this.leaveCurrentLunch();
       return (
         <Lunch
           filteredLunch={filteredLunch}
-          userData={userData}
+          leaveCurrentLunch={leaveCurrentLunch}
         />
       )
     } else {

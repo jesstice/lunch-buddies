@@ -18,19 +18,19 @@ const BuddyListItem = ({ userData, handleLunch }) => {
           <Paper zDepth={3}>
             <div className="buddyListInfo">
               <Link to={`/profile/${userData._id}`}>
-                <Gravatar email={userData.emails[0].address} className="gravatarImage" size={150}/>
+                <Gravatar email={userData.emails[0].address} className="gravatarImage" size={150} />
               </Link>
               <div className="buddyName">
                 <h1>Name</h1>
-                  <p>{userData.profile.fullName}</p>  
+                <p>{userData.profile.fullName}</p>
               </div>
               <div className="buddyNumber">
                 <h1>Phone Number</h1>
-                 <p>{userData.profile.phoneNumber}</p> 
+                <p>{userData.profile.phoneNumber}</p>
               </div>
               <div className="buddyBudget">
                 <h1>Budget</h1>
-                 <p>{userData.profile.budget}</p> 
+                <p>{userData.profile.budget}</p>
               </div>
               <div className="buddyInterests">
                 <h1>Interests</h1>
@@ -48,15 +48,15 @@ const BuddyListItem = ({ userData, handleLunch }) => {
                   ))}
                 </ul>
               </div>
-                 { user_id !== userData._id  ?      
-                 <RaisedButton
-              label="Invite"
-              primary
-              className="invitationButton"
-              icon={<i className="fa fa-check" aria-hidden="true"></i>}
-              onTouchTap={()=>{handleLunch(userData._id, userData.profile.fullName)}}
-            />
-              : null   }
+              {user_id !== userData._id ?
+                <RaisedButton
+                  label="Invite"
+                  primary
+                  className="invitationButton"
+                  icon={<i className="fa fa-check" aria-hidden="true"></i>}
+                  onTouchTap={() => { handleLunch(userData._id, userData.profile.fullName) }}
+                />
+                : null}
             </div>
           </Paper>
         </li>

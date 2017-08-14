@@ -8,14 +8,14 @@ import { createContainer } from 'meteor/react-meteor-data';
 const BuddyList = ({ users, handleLunch }) => {
   const buds = users.map((buddy)=> {
     return ( <BuddyListItem userData={buddy} key={buddy._id} handleLunch={handleLunch} /> )
-  })
+  });
   return (
     <div className="buddyListWrapper">
       <ul>
        {buds}
       </ul>
     </div>
-  )
+  );
 };
 // testing the nesting
 
