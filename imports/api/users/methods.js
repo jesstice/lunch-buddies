@@ -43,7 +43,7 @@ export const removeLunch = () => {
 
 // remove invite from pending lunch
 export const removeInvite = (lunchId) => {
-  Meteor.users.update(this.userId, {
+  Meteor.users.update(Meteor.userId(), {
     $pull: {
       "profile.pendingLunches": { $in: [lunchId] }
     }
@@ -52,12 +52,21 @@ export const removeInvite = (lunchId) => {
 
 // update pending and current lunch
 export const acceptInvite = (lunchId) => {
-  Meteor.users.update(this.userId, {
+  Meteor.users.update(Meteor.userId(), {
     $pull: {
       "profile.pendingLunches": { $in: [lunchId] }
     },
     $set: {
       "profile.currentLunch": lunchId
+    }
+  })
+}
+
+// update availability status to true
+export const updateAvailability = () => {
+  Meteor.users.update(Meteor.userId(), {
+    $set: {
+      "profile.availability": true
     }
   })
 }

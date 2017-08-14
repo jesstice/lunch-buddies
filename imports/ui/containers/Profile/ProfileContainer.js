@@ -12,11 +12,13 @@ import {
   updateFullnameField,
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
+import { acceptInvite, declineInvite } from '../../../../client/redux/modules/invites';
 import InvitationModalContainer from '../InvitationModal/';
 import Loader from '../../components/Loader/';
 
 class ProfileContainer extends Component {
 
+  // Edit profile methods
   editUserProfile = () => {
     const fullName = this.props.updateFullnameField;
     const phoneNumber = this.props.updatePhoneField;
@@ -58,13 +60,73 @@ class ProfileContainer extends Component {
   handlePhone = (phone) => {
     this.props.dispatch(updatePhoneField(phone));
   }
+  
   handleLunch = (invitee_id, fullName) => {
     this.props.dispatch(flipCreateLunchModal({invitee_id, fullName}));
   }
 
+  // Accept and decline invite methods
+  addNamesToLunch = (pendingLunches) => {
+    userData = this.props.userData;
+
+    updatedPendingLunches = pendingLunches.map(lunch => {
+      lunch.buddies = lunch.buddies.map((buddy) => {
+        buddy = userData.filter(user => user._id === buddy)
+        return buddy;
+      });
+      return lunch;
+    });
+    return updatedPendingLunches;
+  }
+
+  filterLunchData = (user) => {
+    pendingIds = user.profile.pendingLunches;
+    pendingLunches = this.props.lunchData;
+
+    pendingLunches = pendingLunches.filter((lunch) => pendingIds.find(id => lunch._id === id));
+    pendingLunches = this.addNamesToLunch(pendingLunches);
+    return pendingLunches;
+  }
+
+  acceptLunchInvite = () => {
+    user = Meteor.user();
+    const lunchId = this.props.myLunchId;
+
+    Meteor.call('users.acceptInvite', {user, lunchId})
+  }
+
+  declineLunchInvite = () => {
+    const lunchId = this.props.myLunchId;
+
+    Meteor.call('users.removeInvite', lunchId)
+  }
+
+  clickAcceptButton = (lunchId) => {
+    this.props.dispatch(acceptInvite(lunchId));
+  }
+
+  clickDeclineButton = (lunchId) => {
+    this.props.dispatch(declineInvite(lunchId));
+
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
-      
+    const { currentUser, match } = this.props;
+    let userProfileData;
+    let filteredLunchData;
+
+    if (!loading) {
+      filteredLunchData = this.filterLunchData(currentUser);
+      userProfileData  = this.props.userData.filter(user => user._id === match.params._id);
+    }
+
+    if (this.props.acceptInvite && this.props.myLunchId) {
+      this.acceptLunchInvite();
+    }
+
+    if (this.props.declineInvite && this.props.myLunchId) {
+      this.declineLunchInvite();
+    }
+
     if (loading) {
       return(
         <Loader />
@@ -72,42 +134,26 @@ class ProfileContainer extends Component {
     } else { 
       return (
         <span>
-        <Profile
-          updateEditStatus={editProfile}
-          editStatus={this.props.editStatus}
-          dispatch={this.props.dispatch}
-          userData={this.props.userData}
-          lunchData={this.props.lunchData}
-          currentUserId={this.props.match.params._id}
-        
-          editUserProfile={
-            this.editUserProfile
-          }
+          <Profile
+            updateEditStatus={editProfile}
+            editStatus={this.props.editStatus}
+            dispatch={this.props.dispatch}
+            userData={userProfileData}
 
-          handleFullname={
-            this.handleFullname
-          }
+            editUserProfile={this.editUserProfile}
+            handleFullname={this.handleFullname}
+            handleBudget={this.handleBudget}
+            handleCuisines={this.handleCuisines}
+            handleInterests={this.handleInterests}
+            handlePhone={this.handlePhone}
+            handleLunch={this.handleLunch}
 
-          handleBudget={
-            this.handleBudget
-          }
-
-          handleCuisines={
-            this.handleCuisines
-          }
-
-          handleInterests={
-            this.handleInterests
-          }
-
-          handlePhone={
-            this.handlePhone
-          }
-          handleLunch={
-            this.handleLunch
-          }
-        />
-        <InvitationModalContainer />
+            lunchData={filteredLunchData}
+            currentUserId={match.params._id}
+            acceptButton={this.clickAcceptButton}
+            declineButton={this.clickDeclineButton}
+          />
+          <InvitationModalContainer />
         </span>
       )
     }
@@ -122,22 +168,24 @@ function mapStateToProps(state) {
     interestsFilters: state.filters.interestsFilters,
     cuisineFilters: state.filters.cuisineFilters,
     budgetFilters: state.filters.budgetFilters,
+    myLunchId: state.invites.lunchId,
+    acceptInvite: state.invites.accept,
+    declineInvite: state.invites.decline,
     showLunch: state.lunch.showLunchInvitation
   };
 }
 
-let pendingIds = ['ZPGdi8WgN9rcfhATr', 'hmjDyDz2BhbaiNYoc'];
-
-const ExtendedProfileContainer = createContainer(({ match }) => {
+const ExtendedProfileContainer = createContainer(() => {
   const usersSub = Meteor.subscribe('users');
   const loadingUsers = !usersSub.ready();
-  const userData = Meteor.users.find({ _id: match.params._id }).fetch();
+  const userData = Meteor.users.find().fetch();
 
   const lunchSub = Meteor.subscribe('lunches');
   const loadingLunch = !lunchSub.ready();
-  const lunchData = Lunches.find({ tempId: { $in: pendingIds } }).fetch();
+  const lunchData = Lunches.find().fetch();
 
   return {
+    currentUser: Meteor.user(),
     userData,
     loadingUsers,
     lunchData,

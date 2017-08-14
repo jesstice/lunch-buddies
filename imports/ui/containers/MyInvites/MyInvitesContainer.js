@@ -8,11 +8,25 @@ import { acceptInvite, declineInvite } from '../../../../client/redux/modules/in
 
 class MyInvitesContainer extends Component {
 
+  addNamesToLunch = (pendingLunches) => {
+    userData = this.props.userData;
+
+    updatedPendingLunches = pendingLunches.map(lunch => {
+      lunch.buddies = lunch.buddies.map((buddy) => {
+        buddy = userData.filter(user => user._id === buddy)
+        return buddy;
+      });
+      return lunch;
+    });
+    return updatedPendingLunches;
+  }
+
   filterLunchData = (user) => {
     pendingIds = user.profile.pendingLunches;
     pendingLunches = this.props.lunchData;
 
     pendingLunches = pendingLunches.filter((lunch) => pendingIds.find(id => lunch._id === id));
+    pendingLunches = this.addNamesToLunch(pendingLunches);
     return pendingLunches;
   }
 
@@ -37,14 +51,17 @@ class MyInvitesContainer extends Component {
     this.props.dispatch(declineInvite(lunchId));
   }
 
+  updateAvailabilityStatus = () => {
+    Meteor.call('users.updateAvailability');
+  }
+
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
     const { currentUser } = this.props;
     let filteredLunchData;
     
     if (!loading) {
-      filteredLunchData = this.filterLunchData(currentUser);
-      console.log(filteredLunchData);
+      filteredLunchData = this.filterLunchData(currentUser);;
     }
 
     if (this.props.acceptInvite && this.props.myLunchId) {
@@ -63,6 +80,7 @@ class MyInvitesContainer extends Component {
         loading={loading}
         acceptButton={this.clickAcceptButton}
         declineButton={this.clickDeclineButton}
+        availabilityStatus={this.updateAvailabilityStatus}
       />
     )
   }

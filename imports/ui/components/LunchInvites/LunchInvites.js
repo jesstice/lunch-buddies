@@ -5,22 +5,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Loader from '../Loader/';
 import './styles.css';
 
-
-const ViewLunch = () => (
-  <RaisedButton
-    label="View Lunch"
-    primary={true}
-    className="lunchButton"
-  />
-)
-
-const LunchInvites = ({ userData, lunchData, acceptButton, declineButton }) => {
+const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availabilityStatus }) => {
 
   const invites = lunchData.map((lunch) => {
     return (
       <li className="singleInvite" key={lunch._id.toString()}>
         <div className="inviteInfo">
-          <p>{lunch.buddies.join(', ')} like to be your lunch buddy!</p>
+          <p>{lunch.buddies[0].map(buddy => buddy.profile.fullName)} like to be your lunch buddy!</p>
           <p>Budget: ${lunch.budget.toString()}</p>
           <p>Invite sent: {lunch.createdOn.toString()}</p>
         </div>
@@ -43,18 +34,19 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton }) => {
   })
 
   return (
-    <div>
+    <div className="lunchInvitesContainer">
       <div className="availability">
         <h2>Availability: </h2>
         <Toggle
-          disabled={ !userData.profile.currentLunch ? false : true }
+          onToggle={() => availabilityStatus()}
+          toggled={ userData.profile.availability ? true : false }
         />
       </div>
       <h2>Lunch Invitations!</h2>
       <ul>
-        {!userData.profile.pendingLunches && userData.profile.pendingLunches < 0 ?
+        {userData.profile.pendingLunches.length === 0 ?
           <li>
-            <p> Looks like you have no invites! Go invite a buddy to lunch! :&lpar; </p>
+            <p> Looks like you have no invites! Go invite a buddy to lunch!</p>
           </li>
           :
           invites
@@ -62,7 +54,6 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton }) => {
       </ul>
     </div>
   )
-
 }
 
 export default LunchInvites;

@@ -7,7 +7,8 @@ import {
   removeLunch,
   createUser,
   acceptInvite,
-  removeInvite
+  removeInvite,
+  updateAvailability
 } from './methods';
 import {
   createLunch,
@@ -168,13 +169,7 @@ Meteor.methods({
       )
     }
 
-    Meteor.users.update(this.userId, {
-      $pull: {
-        "profile.pendingLunches": { $in: [lunchId] }
-      }
-    })
-
-    // removeInvite(lunchId);
+    removeInvite(lunchId);
   },
 
   'users.acceptInvite'({user, lunchId}) {
@@ -185,16 +180,19 @@ Meteor.methods({
       )
     }
 
-    Meteor.users.update(this.userId, {
-      $pull: {
-        "profile.pendingLunches": { $in: [lunchId] }
-      },
-      $set: {
-        "profile.currentLunch": lunchId
-      }
-    })
-
-    // acceptInvite(lunchId);
+    acceptInvite(lunchId);
     addLunchBuddy(user);
+  },
+
+  'users.updateAvailability'() {
+    if (!this.userId ) {
+      throw new Meteor.Error(
+        'users.updateAvailability.not-authorized',
+        'You must be logged in to update your availability.'
+      )
+    }
+
+    updateAvailability();
+    removeLunch();
   }
 });
