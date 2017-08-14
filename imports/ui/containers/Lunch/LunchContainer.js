@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter, Redirect } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { connect } from 'react-redux';
 import Lunch from './Lunch';
@@ -10,14 +11,15 @@ import Loader from '../../components/Loader/';
 class LunchContainer extends Component {
   userData = this.props.userData;
   lunchData = this.props.lunchData;
+  user = Meteor.user();
 
-  filterCurrentLunch() {
+  filterCurrentLunch = () => {
     allLunches = this.props.lunchData;
     user = Meteor.user();
     filteredLunch = allLunches.filter(lunch => user.profile.currentLunch === lunch._id);
     names = filteredLunch[0].buddies.reduce((acc, curr) => {
-      kek = this.props.userData.filter(user => user._id === curr)
-      acc.push(kek);
+      lunchBuddies = this.props.userData.filter(user => user._id === curr)
+      acc.push(lunchBuddies);
       return acc
     }, [])
     result = {
@@ -27,6 +29,18 @@ class LunchContainer extends Component {
     return result;
   }
 
+  leaveCurrentLunch = () => {
+    if (user.profile.currentLunch) {
+      Meteor.call('users.removeLunch', (error) => {
+        if (error) {
+          console.log("There was an error: " + error.reason);
+        } else {
+          // <Redirect to={`/profile/${user._id}`} />
+          this.props.history.push(`/profile/${user._id}`)
+        }
+      })
+    }
+  }
 
 
   render() {
@@ -35,6 +49,7 @@ class LunchContainer extends Component {
       return (
         <Lunch
           filteredLunch={filteredLunch}
+          leaveCurrentLunch={this.leaveCurrentLunch}
         />
       )
     } else {
@@ -48,13 +63,6 @@ const ExtendedLunchContainer = createContainer(function () {
   const lunchSub = Meteor.subscribe('lunches').ready();
   Meteor.subscribe('users').ready();
   Meteor.subscribe('lunches').ready();
-  //const loadingUsers = !usersSub;
-  //  const userData = Meteor.users.find().fetch();
-
-
-  //const loadingLunch = !lunchSub;
-  // const lunchData = Lunches.find().fetch();
-
 
   return {
     userData: Meteor.users.find().fetch(),
