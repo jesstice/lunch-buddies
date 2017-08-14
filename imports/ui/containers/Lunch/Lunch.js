@@ -23,7 +23,7 @@ const Lunch = ({ filteredLunch }) => {
       <Paper zDepth={3}>
           <div>
             <div className="lunchBuddies">
-              <h1>Lunch Buddies</h1>
+              <h1 className="lunchInfo">Lunch Buddies</h1>
               <ul>
                   <li>
                     <Gravatar email={filteredLunch.names[0][0].emails[0].address} className="gravatarImage" size={150}/>
@@ -31,7 +31,7 @@ const Lunch = ({ filteredLunch }) => {
                   </li>
               </ul>
             </div>
-            <h1>Lunch Details</h1>
+            <h1 className="lunchInfo">Lunch Details</h1>
             <h2>Budget:</h2>
             <ul>
               {filteredLunch.filteredLunch[0].budget[0].map((budget, index) => (

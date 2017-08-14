@@ -4,3 +4,13 @@
     min-width: 320px;
     margin: 0 auto;
 }
+
+.lunchInfo {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.lunchBuddies li {
+    display: flex;
+    flex-direction: column;
+}
