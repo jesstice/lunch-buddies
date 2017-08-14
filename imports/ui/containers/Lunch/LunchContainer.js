@@ -27,14 +27,21 @@ class LunchContainer extends Component {
     return result;
   }
 
+  leaveCurrentLunch() {
+    Meteor.call('')
+  }
+
 
 
   render() {
+    userData = this.props.userData;
+
     if (this.props.usersSub && this.props.lunchSub) {
       filteredLunch = this.filterCurrentLunch();
       return (
         <Lunch
           filteredLunch={filteredLunch}
+          userData={userData}
         />
       )
     } else {
@@ -48,12 +55,11 @@ const ExtendedLunchContainer = createContainer(function () {
   const lunchSub = Meteor.subscribe('lunches').ready();
   Meteor.subscribe('users').ready();
   Meteor.subscribe('lunches').ready();
+
   //const loadingUsers = !usersSub;
-  //  const userData = Meteor.users.find().fetch();
-
-
   //const loadingLunch = !lunchSub;
   // const lunchData = Lunches.find().fetch();
+  // const userData = Meteor.users.find().fetch();
 
 
   return {
