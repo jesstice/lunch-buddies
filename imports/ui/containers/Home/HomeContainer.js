@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import BuddyList from '../../components/BuddyList/BuddyList';
 import FilterList from '../FilterList/';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -16,7 +17,8 @@ class HomeContainer extends Component {
           cuisines = this.props.cuisineFilters;
           user_id = Meteor.userId();
           const unfiltered = this.props.users;
-          filtered = unfiltered.filter(user => user._id !== user_id);
+          not_me = unfiltered.filter(user => user._id !== user_id);
+          filtered = not_me.filter(user => user.profile.available);
     let users = filtered;
         if (interests.length) {
             users = users.filter(user => user.profile.interests.find(tag => interests.includes(tag)));
@@ -66,3 +68,29 @@ const HomeWrap = createContainer(function() {
 }, HomeContainer);
 
 export default connect(mapStateToProps)(HomeWrap);
+
+HomeContainer.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      emails: PropTypes.arrayOf(
+        PropTypes.shape({
+          address: PropTypes.string.isRequired
+        })
+      ),
+      profile: PropTypes.shape({
+        available: PropTypes.bool.isRequired,
+        budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+        cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+        interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+        currentLunch: PropTypes.string,
+        fullName: PropTypes.string.isRequired,
+        pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+        phoneNumber: PropTypes.string.isRequired
+      }).isRequired
+    })),
+    showLunch: PropTypes.bool.isRequired,
+    budgetFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
+    interestsFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
+    cuisineFilters: PropTypes.arrayOf(PropTypes.string).isRequired    
+};
