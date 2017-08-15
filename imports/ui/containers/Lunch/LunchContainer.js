@@ -43,6 +43,10 @@ class LunchContainer extends Component {
 
 
   render() {
+    if(this.user.profile.available) {
+      this.props.history.push(`/profile/${user._id}`);
+    }
+
     if (this.props.usersSub && this.props.lunchSub) {
       filteredLunch = this.filterCurrentLunch();
       return (

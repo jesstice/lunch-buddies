@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import  moment  from 'moment';
 // import collections
-// import { Users } from '../../api/users/';
  import { Lunches } from '../../api/lunches/';
 
 Meteor.startup(() => {
@@ -41,15 +40,4 @@ Meteor.startup(() => {
     });
   }
 
-  // if(Lunches.find().count() === 0) {
-  //   const cr_time = new Date();
-  //   const due_time = moment().hour(24).format('YYYYMMDDHH');
-  //   Lunches.insert({
-  //     createdOn: cr_time,
-  //     due: due_time,
-  //     buddies: ['MEZRiMghQqAMZaP68'],
-  //     budget: '10 to 20',
-  //     cuisines: ['Chinese', 'Burgerland']
-  //   })
-  // }
 });

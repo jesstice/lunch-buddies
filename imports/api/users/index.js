@@ -184,15 +184,15 @@ Meteor.methods({
     addLunchBuddy(user);
   },
 
-  'users.updateAvailability'() {
+  'users.setAvailableStatus'(available) {
     if (!this.userId ) {
       throw new Meteor.Error(
-        'users.updateAvailability.not-authorized',
+        'users.setAvailabilityTrue.not-authorized',
         'You must be logged in to update your availability.'
       )
     }
 
-    updateAvailability();
+    updateAvailability(available);
     removeLunch();
   }
 });

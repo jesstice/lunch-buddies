@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Loader from '../Loader/';
 import './styles.css';
 
-const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availabilityStatus }) => {
+const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availabilityStatus, today }) => {
 
   const invites = lunchData.map((lunch) => {
     return (
@@ -16,14 +16,18 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
           <p>Invite sent: {lunch.createdOn.toString()}</p>
         </div>
         <div className="inviteActions">
+          { lunch.createdOn > today ?
+            <RaisedButton
+              label="Accept"
+              primary
+              className="lunchButton"
+              onTouchTap={() => acceptButton(lunch._id)}
+            />
+            :
+            null
+          }
           <RaisedButton
-            label="Accept"
-            primary
-            className="lunchButton"
-            onTouchTap={() => acceptButton(lunch._id)}
-          />
-          <RaisedButton
-            label="Decline"
+            label={lunch.createdOn > today ? "Decline" : "Remove Invite" }
             secondary
             className="lunchButton"
             onTouchTap={() => declineButton(lunch._id)}
@@ -39,15 +43,20 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
         <h2>Availability: </h2>
         <Toggle
           onToggle={() => availabilityStatus()}
-          toggled={ userData.profile.availability ? true : false }
+          toggled={ userData.profile.available ? true : false }
         />
       </div>
       <h2>Lunch Invitations!</h2>
       <ul>
         {userData.profile.pendingLunches.length === 0 ?
-          <li>
-            <p> Looks like you have no invites! Go invite a buddy to lunch!</p>
-          </li>
+          userData.profile.available ?
+            <li>
+              <p> Looks like you have no invites! Go invite a buddy to lunch!</p>
+            </li>
+            :
+            <li>
+              <p>Looks like you have lunch plans for today! Have fun!</p>
+            </li>
           :
           invites
         }
