@@ -22,6 +22,7 @@
 
 .buddyListInfo h1 {
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .buddyNumber {

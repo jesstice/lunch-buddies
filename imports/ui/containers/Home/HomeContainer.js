@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
 import InvitationModalContainer from '../InvitationModal/';
+import './styles.css';
 
 class HomeContainer extends Component {
 
