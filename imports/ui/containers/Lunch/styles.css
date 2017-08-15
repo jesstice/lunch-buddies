@@ -1,73 +1,69 @@
-h2 {
-    text-transform: none;
-    font-weight: bold !important;
+.myLunchContainer h2 {
+  text-transform: none;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
-
 .lunchWrapper {
-    width: 1100px;
-    max-width: 95%;
-    min-width: 320px;
-    margin: 0 auto;
-    margin-top: 3rem;
+  width: 1100px;
+  max-width: 95%;
+  min-width: 320px;
+  margin: 0 auto;
+  margin-top: 3rem;
 }
-
 .myLunchContainer {
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 .myLunchContainer p {
-    text-align: center;
+  text-align: center;
+  margin: 10px 0;
 }
-
 .lunchInfo {
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
 }
-
 .lunchDetailsInner {
-    display: flex;
+  display: flex;
 }
-
+.lunchBuddies {
+  width: 100%;
+}
+.lunchBuddies ul {
+  display: flex;
+  justify-content: space-around;
+}
 .lunchDetails li {
-    text-align: center;
+  text-align: center;
 }
-
 .lunchBuddies, .lunchDetails {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
-
 .lunchBuddies h1 {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
-
 .lunchBuddies a {
-    text-decoration: none;
-    color: black;
-    text-align: center;
+  text-decoration: none;
+  color: black;
+  text-align: center;
 }
-
 .lunchBuddies li {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
 .lunchBuddies img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
-
-.lunchBudget, .lunchCuisines {
-    margin: 2rem;
+.lunchBudget, .lunchCuisines, .lunchCreationDate {
+  margin: 2rem;
+  text-align: center;
 }
-
 .lunchBudName {
-    font-weight: bold;
+  font-weight: bold;
 }
-
 .leaveLunch {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }

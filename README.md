@@ -1,35 +1,43 @@
 # Lunch Buddies
 ## Description
-This web app will help you find your lunch buddies so you will never have to eat alone! Built using Meteor, React, and MongoDB.
+This web app will help you find your lunch buddies so you will never have to eat alone! Built using Meteor, React, Redux and MongoDB.
 
 ## Technologies Used
+- Accounts Password, Accounts-UI-Unstyled
+- Material UI
 - Meteor
+- Moment
 - MongoDB
+- Prop Types
 - React
+- React Gravatar
+- Redux
+- Simpl Schema
+
 ## Installation
-Since this app utlizes Meteor framework, for it to work you've got to proceed with the following steps:
-1. visit https://www.meteor.com/install 
-2. follow installation instructions for meteor framework
-3. clone the repo
-4. run "meteor npm install" in the cloned repo folder
-5. run "meteor" to start a project
-   Witness the glory of lunch budz @ the address that meteor will provide you with in the terminal;
+As this app utlizes a Meteor framework, proceed with the following steps to run Lunch Buddies:
+1. Visit https://www.meteor.com/install and follow the installation instructions for Meteor.
+2. Clone the Lunch Buddies repo.
+4. Run "meteor npm install" in the cloned repo folder.
+5. Run "meteor" to start the project! And what you will witness is our glorious app!
 
 ## Usage
-Lunch Buddies is an app for setting up your perfect lunch party!
+Lunch Buddies is a web application for setting up your perfect lunch party!
 
-Start your adventure into the world of social interactions by signing up on /signup page;
-After you have successfully created your account and filled your interests, culinary preferences and desired budget - you are all set. If you change your mind later - no worries, you can change preferences on Profile page.
+Start your adventure into the world of social interactions by signing up on the Signup (/signup) page.
+After you have successfully created your account and selected your interests, culinary preferences and desired budget, you are all set. If you change your mind later, no worries - you can change preferences on your Profile (/profile/[userID]) page.
 
-On homes page you will see the list of all available buddies. Conditional filtering may be applied via drop-down filters. If you are really interested in discussing conspiracy theories or want to hang out with people that prefer Italian food - this could be a good idea.
+On the home page you will see the list of all available buddies. Conditional filtering can be applied via drop-down filters. If you are really interested in discussing conspiracy theories or want to hang out with people that prefer Italian food - this could be a good idea.
 
-As soon as you've figured out filtering it's time to send some invitations! You can do that by either clicking "Invite" button on home page near, or on each users specific profile page by clicking the same "Invite" button.
+As soon as you've figured out filtering, it's time to send some invitations! You can do that by either clicking the "Invite" button on the home page, or on other user's profile pages by clicking the same "Invite" button.
 
-Since you are the one making first step you have the ability to choose this particular lunch party preferences, such as budget and cuisines. Afterwards you can see your current lunch and people that have accepted your invitation on /mylunch page. Every member of the lunch party can send invitations to other users, so If you accept a pending invitation, you are able to invite people too. 
+Since you are the one making the first step, you have the ability to choose the lunch party preferences, such as the budget and cuisines. Afterwards you can view your current lunch and the buddies who have accepted your invitation on the Lunch (/mylunch) page. Each member of the lunch party can send invitations to other users, so if you accept a pending invitation, you are able to invite people too!
 
-To ditch existing group you can either click "Leave this Lunch" on myLunch page or just flip the "Available" toggle. Flipping the "Available" toggle also hides you from the eyes of other users, since only available users are displayed on the main page.
+To ditch the lunch, you can either click "Leave this Lunch" on the Lunch (/myLunch) page or just flip the "Available" toggle (in the invites drawer or on your Profile page). Flipping the "Available" toggle also removes you from the home page, as only available buddies are displayed.
+
+Have fun lunchin'~!
 
 ## Authors
-Jess: https://github.com/jesstice
-Sonia: https://github.com/soniasophia
-Valentine: https://github.com/Lainera/
+- Jess: https://github.com/jesstice
+- Sonia: https://github.com/soniasophia
+- Valentine: https://github.com/Lainera/
