@@ -8,8 +8,8 @@ import './styles.css';
 
 
 const FilterList = ({ interestsFilters, cuisineFilters, budgetFilters, dispatch }) => {
-  const interests = ['Sports', 'Music', 'Politics', 'Travel', 'Pop Culture', 'dance dance legislation', 'crab juice'];
-  const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgers & Fries'];
+  const interests = ['Sports', 'Music', 'Politics', 'Travel', 'Pop Culture', 'World News', 'Fashion', 'Fishing', 'Books', 'Science Fiction', 'Programming', 'Working Out', 'Conspiracy Theories'];
+  const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgers & Fries', 'Greek', 'Malaysian', 'Vietnamese', 'Indian', 'Mexican', 'Vegan', 'Vegetarian'];
   const budget = ['Under 10', '10 to 20', '20 and higher'];
 
   return (
