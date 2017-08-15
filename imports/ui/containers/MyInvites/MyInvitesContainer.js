@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Lunches } from '../../../api/lunches/index';
 import MyInvites from './MyInvites';
@@ -53,6 +54,7 @@ class MyInvitesContainer extends Component {
 
   updateAvailabilityStatus = () => {
     Meteor.call('users.updateAvailability');
+    <Redirect to={'/'} />
   }
 
   render() {
