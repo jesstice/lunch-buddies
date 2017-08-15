@@ -17,14 +17,14 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
   user = Meteor.user();
   user_id = Meteor.userId();
 
-  const lunchBuds = filteredLunch.names[0].map((name, index) => {
+  const lunchBuds = filteredLunch.names.map((name, index) => {
     return (
       <li key={index}>
-        <Link to={`/profile/${name._id}`}>
-          <Gravatar email={name.emails[0].address} className="gravatarImage" size={150} />
+        <Link to={`/profile/${name[0]._id}`}>
+          <Gravatar email={name[0].emails[0].address} className="gravatarImage" size={150} />
         </Link>
-          <p className="lunchBudName">{name.profile.fullName}</p>
-          <p>Interests: {name.profile.interests.join(', ')}</p>
+          <p className="lunchBudName">{name[0].profile.fullName}</p>
+          <p>Interests: {name[0].profile.interests.join(', ')}</p>
       </li>
     )
   });
