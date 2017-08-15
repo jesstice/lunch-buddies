@@ -76,7 +76,7 @@ LunchInvites.propTypes = {
       ),
       profile: PropTypes.shape({
         available: PropTypes.bool.isRequired,
-        budget: PropTypes.string.isRequired,
+        budget: PropTypes.arrayOf(PropTypes.string).isRequired,
         cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
         interests: PropTypes.arrayOf(PropTypes.string).isRequired,
         currentLunch: PropTypes.string,

@@ -28,7 +28,7 @@ return (
 Selector.propTypes = {
   arr: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
-  hint: PropTypes.string.isRequired,
+  hint: PropTypes.string,
   onChangeAction: PropTypes.func.isRequired,
   selectValues: PropTypes.array.isRequired
 };
