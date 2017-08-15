@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { connect } from 'react-redux';
 import Lunch from './Lunch';
@@ -35,7 +35,6 @@ class LunchContainer extends Component {
         if (error) {
           console.log("There was an error: " + error.reason);
         } else {
-          // <Redirect to={`/profile/${user._id}`} />
           this.props.history.push(`/profile/${user._id}`)
         }
       })
