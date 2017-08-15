@@ -16,7 +16,8 @@ class HomeContainer extends Component {
           cuisines = this.props.cuisineFilters;
           user_id = Meteor.userId();
           const unfiltered = this.props.users;
-          filtered = unfiltered.filter(user => user._id !== user_id);
+          not_me = unfiltered.filter(user => user._id !== user_id);
+          filtered = not_me.filter(user => user.profile.available);
     let users = filtered;
         if (interests.length) {
             users = users.filter(user => user.profile.interests.find(tag => interests.includes(tag)));
