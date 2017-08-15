@@ -107,6 +107,12 @@ class ProfileContainer extends Component {
 
   clickDeclineButton = (lunchId) => {
     this.props.dispatch(declineInvite(lunchId));
+  }
+
+  updateAvailabilityStatus = () => {
+    Meteor.call('users.updateAvailability');
+    <Redirect to={'/'} />
+  }
 
   render() {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
@@ -152,6 +158,7 @@ class ProfileContainer extends Component {
             currentUserId={match.params._id}
             acceptButton={this.clickAcceptButton}
             declineButton={this.clickDeclineButton}
+            avaiabilityState={this.updateAvailabilityStatus}
           />
           <InvitationModalContainer />
         </span>

@@ -17,7 +17,7 @@ import {
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
 
-const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData, handleLunch, acceptButton, declineButton }) => {
+const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData, handleLunch, acceptButton, declineButton, availabilityStatus }) => {
 const logged_in_user = Meteor.userId()
 const check = (currentUserId === logged_in_user);
   return (
@@ -61,6 +61,7 @@ const check = (currentUserId === logged_in_user);
              lunchData={lunchData}
              acceptButton={acceptButton}
              declineButton={declineButton}
+             availabilityStatus={availabilityStatus}
            />
          </Paper>
        </div>
