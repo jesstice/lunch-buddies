@@ -48,8 +48,8 @@ Meteor.startup(() => {
         phoneNumber: '035-789-035-30',
         available: true,
         budget: ['10 to 20'],
-        interests: ['some knorkators', 'dance dance legislation', 'Politics'],
-        cuisines: ['Italian', 'Burgerland'],
+        interests: ['Travel', 'World News', 'Politics', 'Programming'],
+        cuisines: ['Italian', 'Burgers & Fries'],
         currentLunch: null,
         pendingLunches: []
       }
@@ -62,8 +62,8 @@ Meteor.startup(() => {
         phoneNumber: '035-789-035-30',
         available: false,
         budget: ['10 to 20'],
-        interests: ['some knorkators', 'dance dance legislation'],
-        cuisines: ['Italian', 'Burgerland'],
+        interests: ['Fishing', 'Music', 'Programming'],
+        cuisines: ['Italian', 'Japanese'],
         currentLunch: null,
         pendingLunches: []
       }
@@ -76,8 +76,8 @@ Meteor.startup(() => {
         phoneNumber: '035-789-035-30',
         available: true,
         budget: ['under 10'],
-        interests: ['some knorkators', 'dance dance legislation'],
-        cuisines: ['Italian', 'Burgerland'],
+        interests: ['Pop Culture', 'Science Fiction'],
+        cuisines: ['Vegetarian', 'Mexican'],
         currentLunch: null,
         pendingLunches: []
       }
