@@ -8,8 +8,8 @@ const NewLunchSelectors = ({budget_selection, cuisine_selection, dispatch }) => 
   const budget = ['Under 10', '10 to 20', '20 and higher'];
   return (
     <div className="lunch-selectors">
-      <Selector arr={cuisine} selectValues={cuisine_selection} onChangeAction={selectCuisine} dispatch={dispatch} />
-      <Selector arr={budget} selectValues={budget_selection} onChangeAction={selectBudget} dispatch={dispatch} />
+      <Selector arr={cuisine} selectValues={cuisine_selection} onChangeAction={selectCuisine} dispatch={dispatch} hint="Filter for Cuisines" />
+      <Selector arr={budget} selectValues={budget_selection} onChangeAction={selectBudget} dispatch={dispatch} hint="Filter for Budget" />
     </div>
   )
 }

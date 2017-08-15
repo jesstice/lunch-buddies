@@ -14,9 +14,9 @@ const FilterList = ({ interestsFilters, cuisineFilters, budgetFilters, dispatch 
 
   return (
     <div className="filterList">
-      <Selector arr={interests} selectValues={interestsFilters} onChangeAction={filterByInterests} dispatch={dispatch} />
-      <Selector arr={cuisine} selectValues={cuisineFilters} onChangeAction={filterByCuisine} dispatch={dispatch} />
-      <Selector arr={budget} selectValues={budgetFilters} onChangeAction={filterByBudget} dispatch={dispatch} />
+      <Selector arr={interests} selectValues={interestsFilters} onChangeAction={filterByInterests} dispatch={dispatch} hint="Filter for Interests" />
+      <Selector arr={cuisine} selectValues={cuisineFilters} onChangeAction={filterByCuisine} dispatch={dispatch} hint="Filter for Cuisines" />
+      <Selector arr={budget} selectValues={budgetFilters} onChangeAction={filterByBudget} dispatch={dispatch} hint="Filter for Budget" />
     </div>
   );
 }

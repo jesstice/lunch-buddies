@@ -8,7 +8,7 @@ const Selector = ({ selectValues, dispatch, onChangeAction, arr }) => {
 return (
       <SelectField
         multiple={true}
-        hintText="Select as many as you like"
+        hintText={hint}
         value={selectValues}
         onChange={(event, index, values) => dispatch(onChangeAction(values, selectValues))}
       >
