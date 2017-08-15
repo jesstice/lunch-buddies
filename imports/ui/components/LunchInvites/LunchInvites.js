@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -64,5 +65,63 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
     </div>
   )
 }
+
+LunchInvites.propTypes = {
+  userData: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      emails: PropTypes.arrayOf(
+        PropTypes.shape({
+          address: PropTypes.string.isRequired
+        })
+      ),
+      profile: PropTypes.shape({
+        available: PropTypes.bool.isRequired,
+        budget: PropTypes.string.isRequired,
+        cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+        interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+        currentLunch: PropTypes.string,
+        fullName: PropTypes.string.isRequired,
+        pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+        phoneNumber: PropTypes.string.isRequired
+      }).isRequired
+    }),
+  lunchData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      buddies: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+          PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            emails: PropTypes.arrayOf(
+              PropTypes.shape({
+                address: PropTypes.string.isRequired
+              })
+            ),
+            profile: PropTypes.shape({
+              available: PropTypes.bool.isRequired,
+              budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+              cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+              interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+              currentLunch: PropTypes.string,
+              fullName: PropTypes.string.isRequired,
+              pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+              phoneNumber: PropTypes.string.isRequired
+            }).isRequired
+          })
+        )
+      ),
+      budget: PropTypes.arrayOf(
+        PropTypes.string
+      ).isRequired,
+      createdOn: PropTypes.string.isRequired,
+      cuisines: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      due: PropTypes.string.isRequired
+    })
+  ),
+  acceptButton: PropTypes.func.isRequired,
+  declineButton: PropTypes.func.isRequired,
+};
 
 export default LunchInvites;

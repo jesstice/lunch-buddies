@@ -76,4 +76,9 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
   )
 };
 
+Lunch.propTypes = {
+  filteredLunch: PropTypes.func.isRequired,
+  leaveCurrentLunch: PropTypes.func.isRequired
+};
+
 export default withRouter(Lunch);

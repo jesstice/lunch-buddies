@@ -61,6 +61,13 @@ class LunchContainer extends Component {
   }
 }
 
+LunchContainer.propTypes = {
+    userData: PropTypes.array.isRequired,
+    lunchData: PropTypes.array.isRequired,
+    lunchSub: PropTypes.array.isRequired,
+    usersSub: PropTypes.array.isRequired,
+};
+
 const ExtendedLunchContainer = createContainer(function () {
   const usersSub = Meteor.subscribe('users').ready();
   const lunchSub = Meteor.subscribe('lunches').ready();

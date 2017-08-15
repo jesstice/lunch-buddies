@@ -17,21 +17,28 @@ const BuddyList = ({ users, handleLunch }) => {
     </div>
   );
 };
-// testing the nesting
 
-// const buddiesList = createContainer(function() {
-//   Meteor.subscribe('users');
-//     return {
-//       users: Meteor.users.find({}, { fields: {"emails.address": 1, profile: 1} }).fetch() //can use find({title: “kek”}) to specify query;
-//   };
-// }, BuddyList);
+BuddyList.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      emails: PropTypes.arrayOf(
+        PropTypes.shape({
+          address: PropTypes.string.isRequired
+        })
+      ),
+      profile: PropTypes.shape({
+        available: PropTypes.bool.isRequired,
+        budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+        cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+        interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+        currentLunch: PropTypes.string,
+        fullName: PropTypes.string.isRequired,
+        pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+        phoneNumber: PropTypes.string.isRequired
+      }).isRequired
+    })),
+  handleLunch: PropTypes.func.isRequired
+};
 
-// function mapStateToProps(state) {
-//     return {
-//           interestsFilters: state.filters.interestsFilters,
-//           cuisineFilters: state.filters.cuisineFilters,
-//           budgetFilters: state.filters.budgetFilters
-//     }
-// }
-// export default connect(mapStateToProps)(buddiesList);
 export default BuddyList;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Badge from 'material-ui/Badge';
@@ -69,7 +69,13 @@ const HeaderBar = ({ handleLogout, numberOfInvites, dispatch, toggleOpenMyInvite
   } else {
     return null;
   }
-
 }
+
+HeaderBar.propTypes = {
+  handleLogout: PropTypes.func.isRequired,
+  numberOfInvites: PropTypes.array.isRequired,
+  toggleOpenMyInvites: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
 
 export default HeaderBar;

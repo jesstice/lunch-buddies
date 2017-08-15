@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import { connect } from 'react-redux';
@@ -22,6 +23,14 @@ return (
         ))}
       </SelectField>
   );
+};
+
+Selector.propTypes = {
+  arr: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  hint: PropTypes.string.isRequired,
+  onChangeAction: PropTypes.func.isRequired,
+  selectValues: PropTypes.array.isRequired
 };
 
 export default Selector;

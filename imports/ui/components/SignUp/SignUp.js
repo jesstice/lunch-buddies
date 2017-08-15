@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoginForm from 'grommet/components/LoginForm';
+import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -52,6 +52,33 @@ const SignUp = ({ handleSignUp, handleEmail, handlePassword, handleFullname, han
       </Paper>
     </div>
   )
+};
+
+SignUp.propTypes = {
+  handleSignUp: PropTypes.func.isRequired,
+  handleEmail: PropTypes.func.isRequired,
+  handlePassword: PropTypes.func.isRequired,
+  handleFullname: PropTypes.func.isRequired,
+  handlePhone: PropTypes.func.isRequired,
+  userData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      emails: PropTypes.arrayOf(
+        PropTypes.shape({
+          address: PropTypes.string.isRequired
+        })
+      ),
+      profile: PropTypes.shape({
+        available: PropTypes.bool.isRequired,
+        budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+        cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+        interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+        currentLunch: PropTypes.string,
+        fullName: PropTypes.string.isRequired,
+        pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+        phoneNumber: PropTypes.string.isRequired
+      }).isRequired
+    }))
 };
 
 export default SignUp;

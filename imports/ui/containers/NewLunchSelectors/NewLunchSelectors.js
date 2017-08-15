@@ -4,7 +4,7 @@ import { selectBudget, selectCuisine } from '../../../../client/redux/modules/lu
 import Selector from '../../components/Selector/';
 
 const NewLunchSelectors = ({budget_selection, cuisine_selection, dispatch }) => {
-  const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgers & Fries'];
+  const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgers & Fries', 'Greek', 'Malaysian', 'Vietnamese', 'Indian', 'Mexican', 'Vegan', 'Vegetarian'];
   const budget = ['Under 10', '10 to 20', '20 and higher'];
   return (
     <div className="lunch-selectors">

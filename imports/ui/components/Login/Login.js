@@ -50,4 +50,10 @@ const Login = ({ handleLogin, handleEmail, handlePassword, emailError, passwordE
     </div>
 );
 
+Login.propTypes = {
+    handleLogin: PropTypes.func.isRequired,
+    handleEmail: PropTypes.func.isRequired,
+    handlePassword: PropTypes.func.isRequired
+};
+
 export default Login;
