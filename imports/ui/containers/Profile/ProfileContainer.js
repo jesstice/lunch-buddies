@@ -89,7 +89,7 @@ class ProfileContainer extends Component {
   }
 
   acceptLunchInvite = () => {
-    user = Meteor.user();
+    user = this.props.currentUser;
     const lunchId = this.props.myLunchId;
 
     Meteor.call('users.acceptInvite', {user, lunchId})
@@ -103,6 +103,7 @@ class ProfileContainer extends Component {
 
   clickAcceptButton = (lunchId) => {
     this.props.dispatch(acceptInvite(lunchId));
+    this.updateAvailabilityStatus();
   }
 
   clickDeclineButton = (lunchId) => {
@@ -110,8 +111,9 @@ class ProfileContainer extends Component {
   }
 
   updateAvailabilityStatus = () => {
-    Meteor.call('users.updateAvailability');
-    <Redirect to={'/'} />
+    available = !this.props.currentUser.profile.available;
+
+    Meteor.call('users.setAvailableStatus', available);
   }
 
   render() {
@@ -158,7 +160,7 @@ class ProfileContainer extends Component {
             currentUserId={match.params._id}
             acceptButton={this.clickAcceptButton}
             declineButton={this.clickDeclineButton}
-            avaiabilityState={this.updateAvailabilityStatus}
+            availabilityStatus={this.updateAvailabilityStatus}
           />
           <InvitationModalContainer />
         </span>

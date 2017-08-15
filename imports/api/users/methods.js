@@ -63,10 +63,10 @@ export const acceptInvite = (lunchId) => {
 }
 
 // update availability status to true
-export const updateAvailability = () => {
+export const updateAvailability = (available) => {
   Meteor.users.update(Meteor.userId(), {
     $set: {
-      "profile.availability": true
+      "profile.available": available
     }
   })
 }

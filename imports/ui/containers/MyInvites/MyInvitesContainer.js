@@ -32,7 +32,7 @@ class MyInvitesContainer extends Component {
   }
 
   acceptLunchInvite = () => {
-    user = Meteor.user();
+    user = this.props.currentUser;
     const lunchId = this.props.myLunchId;
 
     Meteor.call('users.acceptInvite', {user, lunchId})
@@ -46,6 +46,7 @@ class MyInvitesContainer extends Component {
 
   clickAcceptButton = (lunchId) => {
     this.props.dispatch(acceptInvite(lunchId));
+    this.updateAvailabilityStatus();
   }
 
   clickDeclineButton = (lunchId) => {
@@ -53,8 +54,15 @@ class MyInvitesContainer extends Component {
   }
 
   updateAvailabilityStatus = () => {
-    Meteor.call('users.updateAvailability');
-    <Redirect to={'/'} />
+    available = !this.props.currentUser.profile.available;
+
+    Meteor.call('users.setAvailableStatus', available, (error) => {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        return <Redirect to={'/'} />;
+      }
+    });
   }
 
   render() {

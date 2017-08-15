@@ -39,15 +39,20 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
         <h2>Availability: </h2>
         <Toggle
           onToggle={() => availabilityStatus()}
-          toggled={ userData.profile.availability ? true : false }
+          toggled={ userData.profile.available ? true : false }
         />
       </div>
       <h2>Lunch Invitations!</h2>
       <ul>
         {userData.profile.pendingLunches.length === 0 ?
-          <li>
-            <p> Looks like you have no invites! Go invite a buddy to lunch!</p>
-          </li>
+          userData.profile.available ?
+            <li>
+              <p> Looks like you have no invites! Go invite a buddy to lunch!</p>
+            </li>
+            :
+            <li>
+              <p>Looks like you have lunch plans for today! Have fun!</p>
+            </li>
           :
           invites
         }
