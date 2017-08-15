@@ -6,7 +6,7 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Loader from '../../components/Loader/';
 
-const MyInvites = ({ openStatus, lunchData, userData, loading, acceptButton, declineButton, availabilityStatus }) => {
+const MyInvites = ({ openStatus, lunchData, userData, loading, acceptButton, declineButton, availabilityStatus, today }) => {
 
   return (
     <Drawer
@@ -28,6 +28,7 @@ const MyInvites = ({ openStatus, lunchData, userData, loading, acceptButton, dec
           acceptButton={acceptButton}
           declineButton={declineButton}
           availabilityStatus={availabilityStatus}
+          today={today}
         />
       }
     </Drawer>

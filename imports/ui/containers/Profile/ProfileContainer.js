@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { Lunches } from '../../../api/lunches/index';
 import { editProfile } from '../../../../client/redux/modules/profile';
 import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
@@ -121,6 +122,7 @@ class ProfileContainer extends Component {
     const { currentUser, match } = this.props;
     let userProfileData;
     let filteredLunchData;
+    const today = moment().format('YYYYMMDDHH');
 
     if (!loading) {
       filteredLunchData = this.filterLunchData(currentUser);
@@ -161,6 +163,7 @@ class ProfileContainer extends Component {
             acceptButton={this.clickAcceptButton}
             declineButton={this.clickDeclineButton}
             availabilityStatus={this.updateAvailabilityStatus}
+            today={today}
           />
           <InvitationModalContainer />
         </span>
@@ -184,15 +187,16 @@ function mapStateToProps(state) {
   };
 }
 
+
 const ExtendedProfileContainer = createContainer(() => {
   const usersSub = Meteor.subscribe('users');
   const loadingUsers = !usersSub.ready();
   const userData = Meteor.users.find().fetch();
-
+  
   const lunchSub = Meteor.subscribe('lunches');
   const loadingLunch = !lunchSub.ready();
   const lunchData = Lunches.find().fetch();
-
+  
   return {
     currentUser: Meteor.user(),
     userData,
@@ -200,5 +204,76 @@ const ExtendedProfileContainer = createContainer(() => {
     lunchData,
     loadingLunch,
   } }, ProfileContainer);
+
+ProfileContainer.propTypes = {
+  userData: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    emails: PropTypes.arrayOf(
+      PropTypes.shape({
+        address: PropTypes.string.isRequired
+      })
+    ),
+    profile: PropTypes.shape({
+      available: PropTypes.bool.isRequired,
+      budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+      cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+      interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+      currentLunch: PropTypes.string,
+      fullName: PropTypes.string.isRequired,
+      pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+      phoneNumber: PropTypes.string.isRequired
+    }).isRequired
+  })),
+  lunchData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      buddies: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+          PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            emails: PropTypes.arrayOf(
+              PropTypes.shape({
+                address: PropTypes.string.isRequired
+              })
+            ),
+            profile: PropTypes.shape({
+              available: PropTypes.bool.isRequired,
+              budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+              cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+              interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+              currentLunch: PropTypes.string,
+              fullName: PropTypes.string.isRequired,
+              pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+              phoneNumber: PropTypes.string.isRequired
+            }).isRequired
+          })
+        )
+      ),
+      budget: PropTypes.arrayOf(
+        PropTypes.string
+      ).isRequired,
+      createdOn: PropTypes.string.isRequired,
+      cuisines: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      due: PropTypes.string.isRequired
+    })
+  ),
+  updateEditStatus: PropTypes.func,
+  acceptButton: PropTypes.func,
+  declineButton: PropTypes.func,
+  availabilityStatus: PropTypes.func,
+  editStatus: PropTypes.bool,
+  dispatch: PropTypes.func,
+  editUserProfile: PropTypes.func,
+  handleFullname: PropTypes.func,
+  handleBudget: PropTypes.func,
+  handleCuisines: PropTypes.func,
+  handleInterests: PropTypes.func,
+  handlePhone: PropTypes.func,
+  handleLunch: PropTypes.func,
+  currentUserId: PropTypes.string,
+  today: PropTypes.string
+};
 
 export default connect(mapStateToProps)(ExtendedProfileContainer);

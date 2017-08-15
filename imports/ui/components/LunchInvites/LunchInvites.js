@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Loader from '../Loader/';
 import './styles.css';
 
-const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availabilityStatus }) => {
+const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availabilityStatus, today }) => {
 
   const invites = lunchData.map((lunch) => {
     return (
@@ -16,14 +16,18 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
           <p>Invite sent: {lunch.createdOn.toString()}</p>
         </div>
         <div className="inviteActions">
+          { lunch.createdOn > today ?
+            <RaisedButton
+              label="Accept"
+              primary
+              className="lunchButton"
+              onTouchTap={() => acceptButton(lunch._id)}
+            />
+            :
+            null
+          }
           <RaisedButton
-            label="Accept"
-            primary
-            className="lunchButton"
-            onTouchTap={() => acceptButton(lunch._id)}
-          />
-          <RaisedButton
-            label="Decline"
+            label={lunch.createdOn > today ? "Decline" : "Remove Invite" }
             secondary
             className="lunchButton"
             onTouchTap={() => declineButton(lunch._id)}

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
+import  moment  from 'moment';
 import { Lunches } from '../../../api/lunches/index';
 import MyInvites from './MyInvites';
 import Loader from '../../components/Loader/';
 import { acceptInvite, declineInvite } from '../../../../client/redux/modules/invites';
-
+import PropTypes from 'prop-types';
 class MyInvitesContainer extends Component {
 
   addNamesToLunch = (pendingLunches) => {
@@ -69,6 +70,7 @@ class MyInvitesContainer extends Component {
     const loading = this.props.loadingLunch && this.props.loadingUsers;
     const { currentUser } = this.props;
     let filteredLunchData;
+    const today = moment().format('YYYYMMDDHH');
     
     if (!loading) {
       filteredLunchData = this.filterLunchData(currentUser);;
@@ -91,6 +93,7 @@ class MyInvitesContainer extends Component {
         acceptButton={this.clickAcceptButton}
         declineButton={this.clickDeclineButton}
         availabilityStatus={this.updateAvailabilityStatus}
+        today={today}
       />
     )
   }
@@ -105,16 +108,15 @@ function mapStateToProps(state) {
   };
 }
 
-
 const ExtendedMyInvitesContainer = createContainer(() => {
   const usersSub = Meteor.subscribe('users');
   const loadingUsers = !usersSub.ready();
   const userData = Meteor.users.find().fetch();
-
+  
   const lunchSub = Meteor.subscribe('lunches');
   const loadingLunch = !lunchSub.ready();
   const lunchData = Lunches.find().fetch();
-
+  
   return {
     currentUser: Meteor.user(),
     userData,
@@ -122,5 +124,66 @@ const ExtendedMyInvitesContainer = createContainer(() => {
     lunchData,
     loadingLunch,
   } }, MyInvitesContainer);
+  
+MyInvitesContainer.propTypes = {
+  userData: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    emails: PropTypes.arrayOf(
+      PropTypes.shape({
+        address: PropTypes.string.isRequired
+      })
+    ),
+    profile: PropTypes.shape({
+      available: PropTypes.bool.isRequired,
+      budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+      cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+      interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+      currentLunch: PropTypes.string,
+      fullName: PropTypes.string.isRequired,
+      pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+      phoneNumber: PropTypes.string.isRequired
+    }).isRequired
+  })),
+  openStatus: PropTypes.bool.isRequired,
+  lunchData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      buddies: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+          PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            emails: PropTypes.arrayOf(
+              PropTypes.shape({
+                address: PropTypes.string.isRequired
+              })
+            ),
+            profile: PropTypes.shape({
+              available: PropTypes.bool.isRequired,
+              budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+              cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+              interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+              currentLunch: PropTypes.string,
+              fullName: PropTypes.string.isRequired,
+              pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+              phoneNumber: PropTypes.string.isRequired
+            }).isRequired
+          })
+        )
+      ),
+      budget: PropTypes.arrayOf(
+        PropTypes.string
+      ).isRequired,
+      createdOn: PropTypes.string.isRequired,
+      cuisines: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      due: PropTypes.string.isRequired
+    })
+  ),
+  loading: PropTypes.bool,
+  acceptButton: PropTypes.func,
+  declineButton: PropTypes.func,
+  availabilityStatus: PropTypes.func
+};
 
 export default connect(mapStateToProps)(ExtendedMyInvitesContainer);
