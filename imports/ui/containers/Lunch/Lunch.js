@@ -4,8 +4,9 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link, withRouter } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
-import './styles.css';
+import Moment from 'moment';
 
+import './styles.css';
 
 const styles = {
   button: {
@@ -23,8 +24,6 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
         <Link to={`/profile/${name[0]._id}`}>
           <Gravatar email={name[0].emails[0].address} className="gravatarImage" size={150} />
         </Link>
-          <p className="lunchBudName">{name[0].profile.fullName}</p>
-          <p>Interests: {name[0].profile.interests.join(', ')}</p>
           <p className="lunchBudName">{name[0].profile.fullName}</p>
           <p className="interests">Interests:</p>
           <p>{name[0].profile.interests.join(', ')}</p>
@@ -44,10 +43,6 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
               {lunchBuds}
             </ul>
           </div>
-          <div className="lunchCreationDate">
-            <h2>Lunch Creation Date:</h2>
-              <p>{Moment(filteredLunch.filteredLunch[0].createdOn).fromNow()}</p>
-            </div>
           <div className="lunchDetails">
             <h1 className="lunchInfo">Lunch Details</h1>
             <div className="lunchDetailsInner">
@@ -66,6 +61,10 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
                     <li key={index}>{cuisine}</li>
                   ))}
                 </ul>
+              </div>
+              <div className="lunchCreationDate">
+                <h2>Lunch Creation Date:</h2>
+                <p>{Moment(filteredLunch.filteredLunch[0].createdOn).fromNow()}</p>
               </div>
             </div>
           </div>
