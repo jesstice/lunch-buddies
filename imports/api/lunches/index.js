@@ -8,7 +8,6 @@ import {
 //create new collection for lunches
 export const Lunches = new Mongo.Collection('lunches');
 Meteor.methods({
-
   'lunches.createLunch'({user_id, options}) {
      if (lunchSchema.namedContext('validateLunch').validate(options)) {
       createLunch({user_id, options});

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InvitationalModal from '../../components/InvitationModal/';
 import { connect } from 'react-redux';
 import { flipCreateLunchModal } from '../../../../client/redux/modules/lunch';
+import PropTypes from 'prop-types';
 
 
 class InvitationalModalContainer extends Component {
@@ -75,3 +76,12 @@ function mapStateToProps(state) {
   }
 }
 export default connect(mapStateToProps)(InvitationalModalContainer);
+
+InvitationalModalContainer.propTypes = {
+  budget_selection: PropTypes.array.isRequired,
+  cuisine_selection: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  invitee_fullName: PropTypes.string,
+  invitee_id: PropTypes.string,
+  showLunch: PropTypes.bool.isRequired
+};

@@ -1,8 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import  moment  from 'moment';
-// import collections
- import { Lunches } from '../../api/lunches/';
+import { Lunches } from '../../api/lunches/';
+import { Tags } from '../../api/tags/';
+
+const interests = ['Sports', 'Music', 'Politics', 'Travel', 'Pop Culture', 'World News', 'Fashion', 'Fishing', 'Books', 'Science Fiction', 'Programming', 'Working Out', 'Conspiracy Theories'];
+const cuisine = ['Italian', 'Chinese', 'Japanese', 'Thai', 'Burgers & Fries', 'Greek', 'Malaysian', 'Vietnamese', 'Indian', 'Mexican', 'Vegan', 'Vegetarian'];
+const budget = ['Under 10', '10 to 20', '20 and higher'];
 
 Meteor.startup(() => {
   let user = {};
@@ -10,6 +14,11 @@ Meteor.startup(() => {
   let user2 = {};
   let user3 = {};
   let user4 = {};
+  const tags = {
+    interests: interests,
+    cuisine: cuisine,
+    budget: budget
+  }
 
   if( Meteor.users.find().count() === 0 ) {
     user = Accounts.createUser({
@@ -83,5 +92,7 @@ Meteor.startup(() => {
       }
     });
   }
-
+if(Tags.find().count() === 0) {
+  Tags.insert(tags)
+}
 });
