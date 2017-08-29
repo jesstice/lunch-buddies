@@ -24,5 +24,9 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "simpl-schema": "^0.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0"
   }
 }
