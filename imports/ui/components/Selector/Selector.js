@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import { connect } from 'react-redux';
-const Selector = ({ selectValues, dispatch, onChangeAction, arr, hint }) => {
+
+const Selector = ({ selectValues, onChangeAction, arr, hint, dispatch }) => {
 
 return (
       <SelectField
@@ -33,4 +34,4 @@ Selector.propTypes = {
   selectValues: PropTypes.array.isRequired
 };
 
-export default Selector;
+export default connect()(Selector);

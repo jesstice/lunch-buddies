@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -70,14 +69,5 @@ const InvitationModal = ({ handleLunchFlip, handleLunchCreation, handleInvitatio
     );
   }
 }
-
-InvitationModal.propTypes = {
-  budget_selection: PropTypes.array.isRequired,
-  cuisine_selection: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  invitee_fullName: PropTypes.string,
-  invitee_id: PropTypes.string,
-  showLunch: PropTypes.bool.isRequired
-};
 
 export default InvitationModal;
