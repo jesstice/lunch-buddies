@@ -44,7 +44,7 @@ class LunchContainer extends Component {
 
   render() {
 
-    if (this.props.usersSub && this.props.lunchSub) {
+    if (this.props.userData && this.props.lunchData) {
       filteredLunch = this.filterCurrentLunch();
       return (
         <Lunch
@@ -59,24 +59,19 @@ class LunchContainer extends Component {
 }
 
 LunchContainer.propTypes = {
-    userData: PropTypes.array.isRequired,
-    lunchData: PropTypes.array.isRequired,
-    lunchSub: PropTypes.array.isRequired,
-    usersSub: PropTypes.array.isRequired,
+    userData: PropTypes.array,
+    lunchData: PropTypes.array,
 };
 
 const ExtendedLunchContainer = createContainer(function () {
-  const usersSub = Meteor.subscribe('users').ready();
-  const lunchSub = Meteor.subscribe('lunches').ready();
-  Meteor.subscribe('users').ready();
-  Meteor.subscribe('lunches').ready();
-
+if(Meteor.subscribe('users').ready() && Meteor.subscribe('lunches').ready()) {
   return {
     userData: Meteor.users.find().fetch(),
     lunchData: Lunches.find().fetch(),
-    lunchSub: lunchSub,
-    usersSub: usersSub
   }
+} else {
+  return {}
+}
 }, LunchContainer);
 
 export default connect()(ExtendedLunchContainer);
