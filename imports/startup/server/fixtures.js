@@ -29,70 +29,57 @@ Meteor.startup(() => {
         phoneNumber: '035-0365-035-30',
         available: true,
         budget: ['10 to 20'],
-        interests: ['crab juice', 'dance dance legislation'],
+        interests: ['Travel', 'Politics'],
         cuisines: ['Italian', 'Chinese', 'Japanese', 'Burgerland'],
         currentLunch: null,
         pendingLunches: []
       }
     });
     user1 = Accounts.createUser({
-      email: 'beba@batman.com',
+      email: 'batman@example.com',
       password: '123456',
       profile: {
-        fullName: 'Crab Person',
+        fullName: 'Bat Man',
         phoneNumber: '035-789-035-30',
         available: false,
         budget: ['10 to 20'],
-        interests: ['some knorkators', 'dance dance legislation'],
-        cuisines: ['Italian', 'Burgerland'],
+        interests: ['Music', 'Pop Culture'],
+        cuisines: ['Italian', 'Greek'],
         currentLunch: null,
         pendingLunches: []
       }
     });
     user2 = Accounts.createUser({
-      email: 'crabpersonisadouche@batman.com',
+      email: 'crablady@example.com',
       password: '123456',
       profile: {
         fullName: 'Crab Lady',
         phoneNumber: '035-789-035-30',
         available: true,
         budget: ['10 to 20'],
-        interests: ['Travel', 'World News', 'Politics', 'Programming'],
+        interests: ['Books', 'World News', 'Politics', 'Programming'],
         cuisines: ['Italian', 'Burgers & Fries'],
         currentLunch: null,
         pendingLunches: []
       }
     });
     user3 = Accounts.createUser({
-      email: 'benAffleck@batman.com',
+      email: 'totoro@example.com',
       password: '123456',
       profile: {
-        fullName: 'Ben Affleck',
+        fullName: 'Totoro',
         phoneNumber: '035-789-035-30',
         available: false,
-        budget: ['10 to 20'],
+        budget: ['20 and higher'],
         interests: ['Fishing', 'Music', 'Programming'],
-        cuisines: ['Italian', 'Japanese'],
-        currentLunch: null,
-        pendingLunches: []
-      }
-    });
-    user4 = Accounts.createUser({
-      email: 'clientqualitycontrol@batman.com',
-      password: '123456',
-      profile: {
-        fullName: 'Alfred Sauce',
-        phoneNumber: '035-789-035-30',
-        available: true,
-        budget: ['under 10'],
-        interests: ['Pop Culture', 'Science Fiction'],
-        cuisines: ['Vegetarian', 'Mexican'],
+        cuisines: ['Indian', 'Vietnamese', 'Japanese'],
         currentLunch: null,
         pendingLunches: []
       }
     });
   }
-if(Tags.find().count() === 0) {
-  Tags.insert(tags)
-}
+
+  if (Tags.find().count() === 0) {
+    Tags.insert(tags)
+  }
 });
