@@ -15,8 +15,12 @@
     min-width: 320px;
 }
 
-.signup .formContainer {
-    padding: 1rem 4rem 3.25rem 4rem;
+.signup .filterList {
+    flex-wrap: wrap;
+}
+
+.signup .filterList .filterItem {
+    width: 100%!important;
 }
 
 .signup .logo {
