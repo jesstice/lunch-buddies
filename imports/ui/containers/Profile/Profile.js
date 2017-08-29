@@ -3,12 +3,9 @@ import SignUp from '../../components/SignUp/SignUp';
 import LunchInvites from '../../components/LunchInvites/LunchInvites';
 import BuddyListItem from '../../components/BuddyListItem/';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import Loader from '../../components/Loader/Loader';
 import EditableProfile from '../../components/EditableProfile/EditableProfile';
-
 import Paper from 'material-ui/Paper';
-
 import './styles.css';
 import {
   updateEmailField,
@@ -16,6 +13,7 @@ import {
   updateFullnameField,
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
+import { wipeFilterState } from '../../../../client/redux/modules/filters';
 
 const Profile = ({ updateEditStatus, editUserProfile, dispatch, editStatus, userData, handleEmail, handlePassword, handleFullname, handlePhone, currentUserId, lunchData, handleLunch, acceptButton, declineButton, availabilityStatus, today }) => {
 const logged_in_user = Meteor.userId()
@@ -38,14 +36,22 @@ const check = (currentUserId === logged_in_user);
        (editStatus ?
          <RaisedButton
            label={"Cancel"}
-           onTouchTap={() => dispatch(updateEditStatus())}
+           onTouchTap={() => {
+            dispatch(wipeFilterState())
+            dispatch(updateEditStatus())
+             }
+            }
            secondary
            className="profileButton"
          />
        : 
        <RaisedButton
            label={"Edit Profile"}
-           onTouchTap={() => dispatch(updateEditStatus())}
+           onTouchTap={() => {
+            dispatch(wipeFilterState())
+            dispatch(updateEditStatus())
+             }
+            }
            secondary
            className="profileButton"
          />)

@@ -69,7 +69,6 @@ class ProfileContainer extends Component {
   // Accept and decline invite methods
   addNamesToLunch = (pendingLunches) => {
     userData = this.props.userData;
-
     updatedPendingLunches = pendingLunches.map(lunch => {
       lunch.buddies = lunch.buddies.map((buddy) => {
         buddy = userData.filter(user => user._id === buddy)
@@ -83,7 +82,6 @@ class ProfileContainer extends Component {
   filterLunchData = (user) => {
     pendingIds = user.profile.pendingLunches;
     pendingLunches = this.props.lunchData;
-
     pendingLunches = pendingLunches.filter((lunch) => pendingIds.find(id => lunch._id === id));
     pendingLunches = this.addNamesToLunch(pendingLunches);
     return pendingLunches;
@@ -92,13 +90,11 @@ class ProfileContainer extends Component {
   acceptLunchInvite = () => {
     user = this.props.currentUser;
     const lunchId = this.props.myLunchId;
-
     Meteor.call('users.acceptInvite', {user, lunchId})
   }
 
   declineLunchInvite = () => {
     const lunchId = this.props.myLunchId;
-
     Meteor.call('users.removeInvite', lunchId)
   }
 
@@ -113,7 +109,6 @@ class ProfileContainer extends Component {
 
   updateAvailabilityStatus = () => {
     available = !this.props.currentUser.profile.available;
-
     Meteor.call('users.setAvailableStatus', available);
   }
 

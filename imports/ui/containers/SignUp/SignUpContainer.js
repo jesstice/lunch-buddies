@@ -9,7 +9,7 @@ import {
   updateFullnameField,
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
-
+import { wipeFilterState } from '../../../../client/redux/modules/filters';
 class SignUpContainer extends Component {
 
   handleSignUp = ({ updateEmailField, updatePasswordField, updateFullnameField, updatePhoneField, dispatch }) => {
@@ -75,7 +75,9 @@ class SignUpContainer extends Component {
   handlePhone = (event) => {
     this.props.dispatch(updatePhoneField(event.target.value));
   }
-
+  componentDidMount() {
+    this.props.dispatch(wipeFilterState());
+  }
   render() {
     return (
       <div>
