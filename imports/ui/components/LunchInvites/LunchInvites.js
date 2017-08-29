@@ -17,7 +17,7 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
           <p>Invite sent: {lunch.createdOn.toString()}</p>
         </div>
         <div className="inviteActions">
-          { lunch.createdOn > today ?
+          { lunch.due > today ?
             <RaisedButton
               label="Accept"
               primary
