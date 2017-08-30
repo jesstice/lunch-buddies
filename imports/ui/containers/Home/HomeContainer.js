@@ -16,10 +16,7 @@ class HomeContainer extends Component {
           budget = this.props.budgetFilters;
           cuisines = this.props.cuisineFilters;
           user_id = Meteor.userId();
-          const unfiltered = this.props.users;
-          not_me = unfiltered.filter(user => user._id !== user_id);
-          filtered = not_me.filter(user => user.profile.available);
-    let users = filtered;
+    let users = this.props.availables;
         if (interests.length) {
             users = users.filter(user => user.profile.interests.find(tag => interests.includes(tag)));
             //return users;
@@ -61,10 +58,12 @@ function mapStateToProps(state) {
 }
 
 const HomeWrap = createContainer(function() {
-  Meteor.subscribe('users');
+  Meteor.subscribe('availables');
+ // Meteor.subscribe('users');
     return {
-      users: Meteor.users.find({}, { fields: {"emails.address": 1, profile: 1} }).fetch() //can use find({title: “kek”}) to specify query;
-  };
+      //users: Meteor.users.find({}, { fields: {"emails.address": 1, profile: 1} }).fetch(), //can use find({title: “kek”}) to specify query;
+      availables: Meteor.users.find({_id: { $ne: Meteor.userId()}, "profile.available": true}, { fields: {"emails.address": 1, profile: 1} }).fetch()
+    };
 }, HomeContainer);
 
 export default connect(mapStateToProps)(HomeWrap);

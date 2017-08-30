@@ -14,7 +14,7 @@ const styles = {
   }
 }
 
-const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
+const Lunch = ({ filteredLunch, leaveCurrentLunch, mystuff }) => {
   user = Meteor.user();
   user_id = Meteor.userId();
 

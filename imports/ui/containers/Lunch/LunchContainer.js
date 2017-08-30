@@ -12,7 +12,7 @@ class LunchContainer extends Component {
   userData = this.props.userData;
   lunchData = this.props.lunchData;
   user = Meteor.user();
-
+  
   filterCurrentLunch = () => {
     allLunches = this.props.lunchData;
     user = Meteor.user();
