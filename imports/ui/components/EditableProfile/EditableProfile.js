@@ -27,11 +27,13 @@ const EditableProfile = ({ updateFullnameField, updatePhoneField, editUserProfil
               <div>
                 <FilterList />
               </div>
-                <div>
-                  <RaisedButton className="updateProfileButton" primary fullWidth type="submit">
-                    Update Profile
-                  </RaisedButton>
-                </div>
+              <div className="updateProfileButton">
+                <RaisedButton
+                  label="Update Profile"
+                  primary
+                  type="submit">
+                </RaisedButton>
+              </div>
             </form>
           </div>
         </div>

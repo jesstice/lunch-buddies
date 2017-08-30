@@ -3,7 +3,7 @@
   position: absolute;
   z-index: 999;
   top: 100px;
-  right: 100px;
+  right: 180px;
 }
 
 .profileContainer {
@@ -13,11 +13,18 @@
 .profileContainer .buddyListInfo {
   flex-wrap: wrap;
   padding: 1rem 2rem;
+  display: block;
 }
 
-.profileContainer .buddyName, .profileContainer .buddyNumber, .profileContainer .buddyBudget, .profileContainer .buddyInterests, .profileContainer .buddyCuisines {
-  flex-basis: 100%;
-  padding: 1rem 0;
+.profileContainer .buddyListDetails {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.profileContainer .buddyImage {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .profileContainer .buddyNumber {
@@ -47,7 +54,14 @@
 .profileContainer .filterList {
   display: flex;
   flex-direction: column;
+}
 
 .invitePaper {
   padding: 1rem 2rem;
+}
+
+.profileContainer .formContainer {
+  width: 50%;
+  margin: 0 auto;
+  padding: 1rem 0;
 }
