@@ -1,28 +1,32 @@
 .login {
-    align-items: center;
-    justify-content: center;
-    background: transparent;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
 }
 
 .login .cardContainer {
-    width: 420px;
-    max-width: 95%;
-    min-width: 320px;
-    margin: 0 auto;
-    margin-top: 10rem;
+  width: 420px;
+  max-width: 95%;
+  min-width: 320px;
+  margin: 0 auto;
+  margin-top: 10rem;
 }
 
 .login .formContainer {
-    padding: 1rem 4rem 3.25rem 4rem;
+  padding: 3.25rem;
 }
 
 .login .logo {
-    margin-bottom: 1rem;
-    margin-top: -97px;
-    position: relative;
-    z-index: 1000;
+  margin-bottom: 1rem;
+  margin-top: -97px;
+  position: relative;
+  z-index: 1000;
 }
 
 .loginButton, .signUpButton {
-    margin-top: 1rem;
+  margin-top: 1rem;
+}
+
+.login .textField {
+  width: 100%!important;
 }

@@ -8,6 +8,7 @@ const Selector = ({ selectValues, onChangeAction, arr, hint, dispatch }) => {
 
 return (
       <SelectField
+        className="filterItem"
         multiple={true}
         hintText={hint}
         value={selectValues}
