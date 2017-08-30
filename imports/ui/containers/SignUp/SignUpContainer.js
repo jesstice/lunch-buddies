@@ -10,6 +10,9 @@ import {
   updatePhoneField
 } from '../../../../client/redux/modules/forms';
 import { wipeFilterState } from '../../../../client/redux/modules/filters';
+import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
 class SignUpContainer extends Component {
 
   handleSignUp = ({ updateEmailField, updatePasswordField, updateFullnameField, updatePhoneField, dispatch }) => {
@@ -41,7 +44,12 @@ class SignUpContainer extends Component {
         if (error) {
           console.log("There was an error: " + error.reason);
         } else {
-          this.props.history.push('/')
+          Meteor.loginWithPassword(user.email, user.password, (err)=>{
+            if(err){console.log(err)}else{
+              this.props.dispatch(wipeFilterState());
+              this.props.history.push('/')
+            }
+          });
         }
       }
       )
@@ -82,7 +90,6 @@ class SignUpContainer extends Component {
     return (
       <div>
         <SignUp
-
           handleSignUp={(e) => {
             e.preventDefault();
             this.handleSignUp({
@@ -92,31 +99,24 @@ class SignUpContainer extends Component {
               phoneNumber: this.props.updatePhoneField
             });
           }}
-
           handleEmail={(e) => {
             this.handleEmail(e);
           }}
-
           handlePassword={(e) => {
             this.handlePassword(e);
           }}
-
           handleFullname={(e) => {
             this.handleFullname(e);
           }}
-
           handleBudget={(e) => {
             this.handleBudget(e);
           }}
-
           handleCuisines={(e) => {
             this.handleCuisines(e);
           }}
-
           handleInterests={(e) => {
             this.handleInterests(e);
           }}
-
           handlePhone={(e) => {
             this.handlePhone(e);
           }}
@@ -124,6 +124,7 @@ class SignUpContainer extends Component {
       </div>
     )
   }
+
 }
 
 const mapStateToProps = state => ({
@@ -136,4 +137,4 @@ const mapStateToProps = state => ({
   budgetFilters: state.filters.budgetFilters
 });
 
-export default connect(mapStateToProps)(SignUpContainer);
+export default withRouter(connect(mapStateToProps)(SignUpContainer));

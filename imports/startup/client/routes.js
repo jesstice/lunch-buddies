@@ -14,27 +14,18 @@ import Home from '../../ui/containers/Home/index';
 import Profile from '../../ui/containers/Profile/index';
 import Lunch from '../../ui/containers/Lunch/index';
 import NotFound from '../../ui/components/NotFound/index';
-// import Public from ...
 import Authenticated from '../../ui/components/Authenticated/';
 
 const Routes = () => {
+  const loggedIn = Meteor.userId();
   return (
     <Switch>
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/login" render={() => loggedIn ? (<Redirect to={`/profile/${loggedIn}`} />) : <Login />} />
+      <Route exact path="/signup" render={() => loggedIn ? (<Redirect to={`/profile/${loggedIn}`} />) : <SignUp />} />
       <Authenticated exact path="/" component={Home} />
       <Authenticated exact path="/profile/:_id" component={Profile} />
-      {/* <Route exact path="/profile" component={Profile} /> */}
       <Authenticated exact path="/mylunch" component={Lunch} />
       <Authenticated component={NotFound} />
-      {/* TO DO: replace when sign up configured
-          <Public exact path="/login" component={Login} />
-          <Public exact path="/signup" component={SignUp} />
-          <Authenticated exact path="/" component={Home} />
-          <Authenticated exact path="/profile/:_id" component={Profile} />
-          <Authenticated component={NotFound} />
-          <Authenticated exact path="/mylunch" component={Lunch} />
-          */}
     </Switch>
   );
 };
