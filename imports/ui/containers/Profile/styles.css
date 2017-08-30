@@ -65,3 +65,7 @@
   margin: 0 auto;
   padding: 1rem 0;
 }
+
+.profileContainer .filterItem {
+  width: 514px !important;
+}
