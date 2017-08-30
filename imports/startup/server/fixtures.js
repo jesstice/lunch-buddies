@@ -41,7 +41,7 @@ Meteor.startup(() => {
       profile: {
         fullName: 'Bat Man',
         phoneNumber: '035-789-035-30',
-        available: false,
+        available: true,
         budget: ['10 to 20'],
         interests: ['Music', 'Pop Culture'],
         cuisines: ['Italian', 'Greek'],
@@ -69,7 +69,7 @@ Meteor.startup(() => {
       profile: {
         fullName: 'Totoro',
         phoneNumber: '035-789-035-30',
-        available: false,
+        available: true,
         budget: ['20 and higher'],
         interests: ['Fishing', 'Music', 'Programming'],
         cuisines: ['Indian', 'Vietnamese', 'Japanese'],
