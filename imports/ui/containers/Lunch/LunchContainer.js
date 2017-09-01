@@ -29,9 +29,8 @@ assignBuddiesToLunch () {
     }
   }
 
-
   render() {
-    if (this.props.userData && this.props.mylunch) {
+    if (this.props.userData.length && this.props.mylunch.length) {
       filteredLunch = this.assignBuddiesToLunch();
       return (
         <Lunch
@@ -46,8 +45,33 @@ assignBuddiesToLunch () {
 }
 
 LunchContainer.propTypes = {
-    userData: PropTypes.array,
-    mylunch: PropTypes.array,
+    userData: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        emails: PropTypes.arrayOf(
+          PropTypes.shape({
+            address: PropTypes.string.isRequired
+          })
+        ),
+        profile: PropTypes.shape({
+          available: PropTypes.bool.isRequired,
+          budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+          cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+          interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+          currentLunch: PropTypes.string,
+          fullName: PropTypes.string.isRequired,
+          pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+          phoneNumber: PropTypes.string.isRequired
+        }).isRequired
+      })),
+    mylunch: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string,
+      buddies: PropTypes.arrayOf(PropTypes.string),
+      cuisines: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+      budget: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+      createdOn: PropTypes.date,
+      due: PropTypes.string
+    })).isRequired,
 };
 
 const ExtendedLunchContainer = createContainer(function () {
@@ -57,7 +81,7 @@ if(Meteor.subscribe('users').ready() && Meteor.subscribe('currentlunch').ready()
     mylunch: Lunches.find({_id: Meteor.user().profile.currentLunch}).fetch()
   }
 } else {
-  return {}
+  return {userData: [], mylunch: []}
 }
 }, LunchContainer);
 
