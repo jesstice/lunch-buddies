@@ -14,21 +14,19 @@ const styles = {
   }
 }
 
-const Lunch = ({ filteredLunch, leaveCurrentLunch, mystuff }) => {
-  user = Meteor.user();
-  user_id = Meteor.userId();
+const Lunch = ({ filteredLunch, leaveCurrentLunch }) => {
 
-  const lunchBuds = filteredLunch.names.map((name, index) => {
+  const lunchBuds = filteredLunch.buddies.map((buddy) => {
     return (
-      <li key={index}>
-        <Link to={`/profile/${name[0]._id}`}>
-          <Gravatar email={name[0].emails[0].address} className="gravatarImage" size={150} />
+      <li key={buddy._id}>
+        <Link to={`/profile/${buddy._id}`}>
+          <Gravatar email={buddy.emails[0].address} className="gravatarImage" size={150} />
         </Link>
-          <p className="lunchBudName">{name[0].profile.fullName}</p>
+          <p className="lunchBudName">{buddy.profile.fullName}</p>
           <p className="interests">Interests:</p>
-          <p>{name[0].profile.interests.join(', ')}</p>
+          <p>{buddy.profile.interests.join(', ')}</p>
           <p className="phoneNumber">Phone Number:</p>
-          <p>{name[0].profile.phoneNumber}</p>
+          <p>{buddy.profile.phoneNumber}</p>
       </li>
     )
   });
@@ -49,7 +47,7 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch, mystuff }) => {
               <div className="lunchBudget">
                 <h2>Budget:</h2>
                 <ul>
-                  {filteredLunch.filteredLunch[0].budget[0].map((budget, index) => (
+                  {filteredLunch.budget[0].map((budget, index) => (
                     <li key={index}>{budget}</li>
                   ))}
                 </ul>
@@ -57,14 +55,14 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch, mystuff }) => {
               <div className="lunchCuisines">
                 <h2>Cuisines:</h2>
                 <ul>
-                  {filteredLunch.filteredLunch[0].cuisines[0].map((cuisine, index) => (
+                  {filteredLunch.cuisines[0].map((cuisine, index) => (
                     <li key={index}>{cuisine}</li>
                   ))}
                 </ul>
               </div>
               <div className="lunchCreationDate">
                 <h2>Lunch Creation Date:</h2>
-                <p>{Moment(filteredLunch.filteredLunch[0].createdOn).fromNow()}</p>
+                <p>{Moment(filteredLunch.createdOn).fromNow()}</p>
               </div>
             </div>
           </div>
@@ -86,35 +84,31 @@ const Lunch = ({ filteredLunch, leaveCurrentLunch, mystuff }) => {
 
 Lunch.propTypes = {
   filteredLunch: PropTypes.shape({
-    filteredLunch: PropTypes.arrayOf(PropTypes.shape({
       _id: PropTypes.string,
-      buddies: PropTypes.arrayOf(PropTypes.string),
+      buddies: PropTypes.arrayOf(
+        PropTypes.shape({
+              _id: PropTypes.string.isRequired,
+              emails: PropTypes.arrayOf(
+                PropTypes.shape({
+                  address: PropTypes.string.isRequired
+                })
+              ),
+              profile: PropTypes.shape({
+                available: PropTypes.bool.isRequired,
+                budget: PropTypes.arrayOf(PropTypes.string).isRequired,
+                cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
+                interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+                currentLunch: PropTypes.string,
+                fullName: PropTypes.string.isRequired,
+                pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
+                phoneNumber: PropTypes.string.isRequired
+              }).isRequired
+        })),
       cuisines: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
       interests: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
       createdOn: PropTypes.date,
       due: PropTypes.string
-    })),
-    names: PropTypes.arrayOf(
-              PropTypes.arrayOf(
-                PropTypes.shape({
-                      _id: PropTypes.string.isRequired,
-                      emails: PropTypes.arrayOf(
-                        PropTypes.shape({
-                          address: PropTypes.string.isRequired
-                        })
-                      ),
-                      profile: PropTypes.shape({
-                        available: PropTypes.bool.isRequired,
-                        budget: PropTypes.arrayOf(PropTypes.string).isRequired,
-                        cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
-                        interests: PropTypes.arrayOf(PropTypes.string).isRequired,
-                        currentLunch: PropTypes.string,
-                        fullName: PropTypes.string.isRequired,
-                        pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
-                        phoneNumber: PropTypes.string.isRequired
-                      }).isRequired
-                })))
-  }).isRequired,
+    }).isRequired,
   leaveCurrentLunch: PropTypes.func.isRequired
 };
 

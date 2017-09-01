@@ -167,21 +167,3 @@ MyInvitesContainer.propTypes = {
 
 export default connect(mapStateToProps)(ExtendedMyInvitesContainer);
 
-// PropTypes.shape({
-//   _id: PropTypes.string.isRequired,
-//   emails: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       address: PropTypes.string.isRequired
-//     })
-//   ),
-//   profile: PropTypes.shape({
-//     available: PropTypes.bool.isRequired,
-//     budget: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     interests: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     currentLunch: PropTypes.string,
-//     fullName: PropTypes.string.isRequired,
-//     pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     phoneNumber: PropTypes.string.isRequired
-//   }).isRequired
-// })

@@ -9,26 +9,14 @@ import InvitationModal from '../../components/InvitationModal/';
 import Loader from '../../components/Loader/';
 
 class LunchContainer extends Component {
-  userData = this.props.userData;
-  lunchData = this.props.lunchData;
-  user = Meteor.user();
-  
-  filterCurrentLunch = () => {
-    allLunches = this.props.lunchData;
-    user = Meteor.user();
-    filteredLunch = allLunches.filter(lunch => user.profile.currentLunch === lunch._id);
-    names = filteredLunch[0].buddies.reduce((acc, curr) => {
-      lunchBuddies = this.props.userData.filter(user => user._id === curr)
-      acc.push(lunchBuddies);
-      return acc
-    }, [])
-    result = {
-      filteredLunch,
-      names
-    }
-    return result;
-  }
-
+user = Meteor.user();
+assignBuddiesToLunch () {
+  filteredLunch = this.props.mylunch[0]
+  return filteredLunch.buddies.reduce((acc, cur)=> {
+    acc.buddies.push(this.props.userData.find(user => cur === user._id));
+    return acc;
+  }, {...filteredLunch, buddies: []})
+}
   leaveCurrentLunch = () => {
     if (user.profile.currentLunch) {
       Meteor.call('users.removeLunch', (error) => {
@@ -43,9 +31,8 @@ class LunchContainer extends Component {
 
 
   render() {
-
-    if (this.props.userData && this.props.lunchData) {
-      filteredLunch = this.filterCurrentLunch();
+    if (this.props.userData && this.props.mylunch) {
+      filteredLunch = this.assignBuddiesToLunch();
       return (
         <Lunch
           filteredLunch={filteredLunch}
@@ -60,14 +47,14 @@ class LunchContainer extends Component {
 
 LunchContainer.propTypes = {
     userData: PropTypes.array,
-    lunchData: PropTypes.array,
+    mylunch: PropTypes.array,
 };
 
 const ExtendedLunchContainer = createContainer(function () {
-if(Meteor.subscribe('users').ready() && Meteor.subscribe('lunches').ready()) {
+if(Meteor.subscribe('users').ready() && Meteor.subscribe('currentlunch').ready()) {
   return {
     userData: Meteor.users.find().fetch(),
-    lunchData: Lunches.find().fetch(),
+    mylunch: Lunches.find({_id: Meteor.user().profile.currentLunch}).fetch()
   }
 } else {
   return {}
