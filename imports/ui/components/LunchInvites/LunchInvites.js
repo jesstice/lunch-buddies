@@ -12,7 +12,7 @@ const LunchInvites = ({ userData, lunchData, acceptButton, declineButton, availa
     return (
       <li className="singleInvite" key={lunch._id.toString()}>
         <div className="inviteInfo">
-          <p>{lunch.buddies[0].map(buddy => buddy.profile.fullName)} like to be your lunch buddy!</p>
+          <p>{lunch.buddies.map(buddy => buddy.profile.fullName)} like to be your lunch buddy!</p>
           <p>Budget: ${lunch.budget.toString()}</p>
           <p>Invite sent: {lunch.createdOn.toString()}</p>
         </div>
@@ -99,9 +99,9 @@ LunchInvites.propTypes = {
             ),
             profile: PropTypes.shape({
               available: PropTypes.bool.isRequired,
-              budget: PropTypes.arrayOf(PropTypes.string).isRequired,
-              cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
-              interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+              budget: PropTypes.arrayOf(PropTypes.arrayOf((PropTypes.string))).isRequired,
+              cuisines: PropTypes.arrayOf(PropTypes.arrayOf((PropTypes.string))).isRequired,
+              interests: PropTypes.arrayOf(PropTypes.arrayOf((PropTypes.string))).isRequired,
               currentLunch: PropTypes.string,
               fullName: PropTypes.string.isRequired,
               pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,

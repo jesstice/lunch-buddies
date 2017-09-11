@@ -12,7 +12,6 @@ class MyInvitesContainer extends Component {
 
   addNamesToLunch = (pendingLunches) => {
     userData = this.props.userData;
-
     updatedPendingLunches = pendingLunches.map(lunch => {
       lunch.buddies = lunch.buddies.map((buddy) => {
         buddy = userData.filter(user => user._id === buddy)
@@ -22,26 +21,20 @@ class MyInvitesContainer extends Component {
     });
     return updatedPendingLunches;
   }
-
-  filterLunchData = (user) => {
-    pendingIds = user.profile.pendingLunches;
-    pendingLunches = this.props.lunchData;
-
-    pendingLunches = pendingLunches.filter((lunch) => pendingIds.find(id => lunch._id === id));
-    pendingLunches = this.addNamesToLunch(pendingLunches);
-    return pendingLunches;
+  buddiesMap = (lunch) => {
+   return lunch.buddies.reduce((acc, cur) => {
+     acc.buddies.push(this.props.userData.find((buddy)=> buddy._id === cur))
+     return acc;
+    }, {...lunch, buddies: []})
   }
-
   acceptLunchInvite = () => {
-    user = this.props.currentUser;
+    user = Meteor.user();
     const lunchId = this.props.myLunchId;
-
     Meteor.call('users.acceptInvite', {user, lunchId})
   }
 
   declineLunchInvite = () => {
     const lunchId = this.props.myLunchId;
-
     Meteor.call('users.removeInvite', lunchId)
   }
 
@@ -55,7 +48,7 @@ class MyInvitesContainer extends Component {
   }
 
   updateAvailabilityStatus = () => {
-    available = !this.props.currentUser.profile.available;
+    available = !Meteor.user().profile.available;
 
     Meteor.call('users.setAvailableStatus', available, (error) => {
       if (error) {
@@ -67,35 +60,36 @@ class MyInvitesContainer extends Component {
   }
 
   render() {
-    const loading = this.props.loadingLunch && this.props.loadingUsers;
-    const { currentUser } = this.props;
+    const loading = !this.props.mylunches && !this.props.userData //&& this.props.mylunches;
     let filteredLunchData;
     const today = moment().format('YYYYMMDDHH');
-    
-    if (!loading) {
-      filteredLunchData = this.filterLunchData(currentUser);;
+    if (this.props.mylunches && this.props.userData) {
+      //filteredLunchData = this.addNamesToLunch(this.props.mylunches)
+      filteredLunchData = this.props.mylunches.map(lunch => this.buddiesMap(lunch));
+      //filteredLunchData = this.filterLunchData(Meteor.user());;
     }
-
     if (this.props.acceptInvite && this.props.myLunchId) {
       this.acceptLunchInvite();
     }
-
     if (this.props.declineInvite && this.props.myLunchId) {
       this.declineLunchInvite();
     }
-
-    return (
-      <MyInvites
-        openStatus={this.props.openStatus}
-        userData={currentUser}
-        lunchData={filteredLunchData}
-        loading={loading}
-        acceptButton={this.clickAcceptButton}
-        declineButton={this.clickDeclineButton}
-        availabilityStatus={this.updateAvailabilityStatus}
-        today={today}
-      />
-    )
+    // if(loading){
+    //   return <Loader />
+    // } else {
+      return (
+        <MyInvites
+          openStatus={this.props.openStatus}
+          userData={Meteor.user()}
+          lunchData={filteredLunchData}
+          loading={loading}
+          acceptButton={this.clickAcceptButton}
+          declineButton={this.clickDeclineButton}
+          availabilityStatus={this.updateAvailabilityStatus}
+          today={today}
+        />
+      )
+    
   }
 }
 
@@ -112,18 +106,22 @@ const ExtendedMyInvitesContainer = createContainer(() => {
   const usersSub = Meteor.subscribe('users');
   const loadingUsers = !usersSub.ready();
   const userData = Meteor.users.find().fetch();
-  
   const lunchSub = Meteor.subscribe('lunches');
   const loadingLunch = !lunchSub.ready();
   const lunchData = Lunches.find().fetch();
+  if(Meteor.subscribe('mylunches').ready()) {
+    return {
+      mylunches: Lunches.find({_id: {$in: Meteor.user().profile.pendingLunches}}).fetch(),
+      currentUser: Meteor.user(),
+      userData,
+      loadingUsers,
+      lunchData,
+      loadingLunch,
+    }
+   } else {
+      return {}
+    } }, MyInvitesContainer);
   
-  return {
-    currentUser: Meteor.user(),
-    userData,
-    loadingUsers,
-    lunchData,
-    loadingLunch,
-  } }, MyInvitesContainer);
   
 MyInvitesContainer.propTypes = {
   userData: PropTypes.arrayOf(PropTypes.shape({
@@ -167,21 +165,3 @@ MyInvitesContainer.propTypes = {
 
 export default connect(mapStateToProps)(ExtendedMyInvitesContainer);
 
-// PropTypes.shape({
-//   _id: PropTypes.string.isRequired,
-//   emails: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       address: PropTypes.string.isRequired
-//     })
-//   ),
-//   profile: PropTypes.shape({
-//     available: PropTypes.bool.isRequired,
-//     budget: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     cuisines: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     interests: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     currentLunch: PropTypes.string,
-//     fullName: PropTypes.string.isRequired,
-//     pendingLunches: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     phoneNumber: PropTypes.string.isRequired
-//   }).isRequired
-// })
